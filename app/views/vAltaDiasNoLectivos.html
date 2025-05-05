@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Administrador - Días no lectivos</title>
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark mb-4" style="background-color: #006EA4;">
+        <div class="container-fluid">
+            <img src="../../assets/logo.png" alt="Logo" style="height:48px; margin-right:10px;">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">INSCRIPCIONES</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">GESTIÓN DÍA A DÍA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">DATOS MENSUALES</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">TARIFAS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">DÍAS NO LECTIVOS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">FECHA CURSO</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Formulario de alta -->
+        <div class="card">
+            <div class="card-header bg-secondary text-white">
+                ALTA DÍA NO LECTIVO
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="dia" class="form-label">DÍA NO LECTIVO</label>
+                        <input type="date" class="form-control" id="dia">
+                    </div>
+                    <div class="mb-3">
+                        <label for="motivo" class="form-label">MOTIVO</label>
+                        <input type="text" class="form-control" id="motivo">
+                    </div>
+                    <div class="text-end">
+                        <button type="button" class="btn btn-secondary">CANCELAR</button>
+                        <button type="submit" class="btn btn-primary">GUARDAR</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <!-- Añade los iconos de Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</body>
+</html>
