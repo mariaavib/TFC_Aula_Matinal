@@ -5,13 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Administrador - Días no lectivos</title>
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark mb-4" style="background-color: #006EA4;">
+    <nav class="navbar navbar-expand-lg navbar-dark mb-4">
         <div class="container-fluid">
             <div class="d-flex align-items-center">
-                <img src="../../assets/logo.png" alt="Logo" style="height:48px; margin-right:10px;">
+                <img src="../assets/img/logoEscuela.png" alt="Logo Escuela" class="navbar-logo">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -29,11 +31,14 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">TARIFAS</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">DÍAS NO LECTIVOS</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">FECHA CURSO</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="inicioCursoDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                INICIO CURSO
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="inicioCursoDropdown">
+                                <li><a class="dropdown-item" href="vDiasNoLectivos.html">DÍAS NO LECTIVOS</a></li>
+                                <li><a class="dropdown-item" href="vFechaCurso.html">FECHA CURSO</a></li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
@@ -44,30 +49,28 @@
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <h4 class="text-center mb-4" style="color: #006EA4 !important;">
-                    MODIFICAR DÍA NO LECTIVO
-                    <hr style="border-color: #006EA4; border-width: 2px; opacity: 1;">
+                <h4 class="text-center mb-4 form-header">
+                    ALTA DÍA NO LECTIVO
+                    <hr>
                 </h4>
                 
                 <form class="mt-4">
                     <div class="mb-4">
-                        <label for="dia" class="form-label" style="color: #006EA4 !important;">DÍA NO LECTIVO</label>
-                        <input type="date" class="form-control bg-light" id="dia" value="2025-03-02">
+                        <label for="dia" class="form-label">DÍA NO LECTIVO</label>
+                        <input type="date" class="form-control bg-light" id="dia">
                     </div>
                     <div class="mb-4">
-                        <label for="motivo" class="form-label" style="color: #006EA4 !important;">MOTIVO</label>
-                        <input type="text" class="form-control bg-light" id="motivo" value="Carnavales">
+                        <label for="motivo" class="form-label">MOTIVO</label>
+                        <input type="text" class="form-control bg-light" id="motivo">
                     </div>
                     <div class="text-center mt-5">
-                        <a href="vDiasNoLectivos.html" type="button" class="btn text-white me-2" style="background-color: #5B9BD5;">CANCELAR</a>
-                        <a type="submit" class="btn text-white" style="background-color: #5B9BD5;">GUARDAR</a>
+                        <a href="vDiasNoLectivos.html" class="btn form-button me-2">CANCELAR</a>
+                        <a type="submit" class="btn form-button">GUARDAR</a>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <!-- Añade los iconos de Bootstrap -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <script src="../../js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
