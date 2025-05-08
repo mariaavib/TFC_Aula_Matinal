@@ -3,7 +3,7 @@
         private $conexion;
 
         public function __construct(){
-            require_once(CONFIG.'configdb.php');
+            require_once('db.php');
             $objConexion = new Db();
             $this->conexion = $objConexion->conexion;
         }
@@ -13,4 +13,13 @@
             $resultado = $this->conexion->query($sql);
             return $resultado;
         }  
+
+        public function altaDias($fecha, $motivo){
+            $sql = "INSERT INTO dias_no_lectivos (fecha, motivo) VALUES (?, ?)";
+            $stmt = $this->conexion->prepare($sql);
+            $stmt->bind_param("ss", $fecha, $motivo);
+            $resultado = $stmt->execute();
+            $stmt->close();
+            return $resultado;
+        }
     }

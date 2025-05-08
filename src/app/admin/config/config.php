@@ -1,10 +1,11 @@
 <?php
     //RUTAS
-    define('RUTA_CONTROLADOR', "controllers/c");
-    define('RUTA_VISTAS', "views/");
-    define('RUTA_MODELOS', "models/m");
-    define('CONFIG', "config/");
+    define('RUTA_ADMIN', "app/admin/");
+    define('RUTA_CONTROLADOR', RUTA_ADMIN . "controllers/c"); 
+    define('RUTA_VISTAS', RUTA_ADMIN . "views/");
+    define('RUTA_MODELOS', RUTA_ADMIN . "models/m");
+    define('CONFIG', RUTA_ADMIN . "config/");
     
-    define('CONTR_DEF', "");
-    define('METODO_DEF', "");
+    define('CONTR_DEF', 'DiasNoLectivos');
+    define('METODO_DEF', 'listar');
 ?>

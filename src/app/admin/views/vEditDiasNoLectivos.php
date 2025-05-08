@@ -4,16 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Administrador - Días no lectivos</title>
-    <link href="../../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../assets/css/style.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- En el head -->
+    <link href="/tfc/TFC_Aula_Matinal/src/app/admin/assets/css/style.css" rel="stylesheet">
 </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark mb-4">
         <div class="container-fluid">
             <div class="d-flex align-items-center">
-                <img src="../assets/img/logoEscuela.png" alt="Logo Escuela" class="navbar-logo">
+                <!-- En el navbar -->
+                <img src="/tfc/TFC_Aula_Matinal/src/app/admin/assets/img/logoEscuela.png" alt="Logo Escuela" class="navbar-logo">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -35,9 +37,10 @@
                             <a class="nav-link dropdown-toggle" href="#" id="inicioCursoDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 INICIO CURSO
                             </a>
+                            <!-- En el menú dropdown -->
                             <ul class="dropdown-menu" aria-labelledby="inicioCursoDropdown">
-                                <li><a class="dropdown-item" href="vDiasNoLectivos.html">DÍAS NO LECTIVOS</a></li>
-                                <li><a class="dropdown-item" href="vFechaCurso.html">FECHA CURSO</a></li>
+                                <li><a class="dropdown-item" href="/tfc/TFC_Aula_Matinal/src/app/admin/views/vDiasNoLectivos.php">DÍAS NO LECTIVOS</a></li>
+                                <li><a class="dropdown-item" href="/tfc/TFC_Aula_Matinal/src/app/admin/views/vFechaCurso.php">FECHA CURSO</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -62,14 +65,15 @@
                         <label for="motivo" class="form-label">MOTIVO</label>
                         <input type="text" class="form-control bg-light" id="motivo" value="Carnavales">
                     </div>
+                    <!-- En el formulario -->
                     <div class="text-center mt-5">
-                        <a href="vDiasNoLectivos.html" class="btn form-button me-2">CANCELAR</a>
+                        <a href="/tfc/TFC_Aula_Matinal/src/app/admin/views/vDiasNoLectivos.php" class="btn form-button me-2">CANCELAR</a>
                         <a type="submit" class="btn form-button">GUARDAR</a>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <script src="../../js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
