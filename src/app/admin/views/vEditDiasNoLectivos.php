@@ -32,7 +32,7 @@
                     </div>
                     <!-- En el formulario -->
                     <div class="text-center mt-5">
-                        <a href="/tfc/TFC_Aula_Matinal/src/app/admin/views/vDiasNoLectivos.php" class="btn form-button me-2">CANCELAR</a>
+                        <a href="../views/vDiasNoLectivos.php" class="btn form-button me-2">CANCELAR</a>
                         <a type="submit" class="btn form-button">GUARDAR</a>
                     </div>
                 </form>

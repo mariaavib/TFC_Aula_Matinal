@@ -21,11 +21,9 @@
                     $resultado = $this->objModelo->altaDias($fecha, $motivo);
                     
                     if($resultado) {
-                        header('Location: /tfc/TFC_Aula_Matinal/src/index.php?c=DiasNoLectivos&m=listar');
-                        exit;
+                        header('Location: index.php?c=DiasNoLectivos&m=listar');
                     }
                 }
                 $this->vista = 'vDiasNoLectivos';
-                return [];
             }
     }

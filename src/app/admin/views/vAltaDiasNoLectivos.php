@@ -30,7 +30,7 @@
                         <input type="text" class="form-control bg-light" id="motivo" name="motivo">
                     </div>
                     <div class="text-center mt-5">
-                        <a href="/tfc/TFC_Aula_Matinal/src/app/admin/views/vDiasNoLectivos.php" class="btn form-button me-2">CANCELAR</a>
+                        <a href="./vDiasNoLectivos.php" class="btn form-button me-2">CANCELAR</a>
                         <button type="submit" class="btn form-button">GUARDAR</button>
                     </div>
                 </form>

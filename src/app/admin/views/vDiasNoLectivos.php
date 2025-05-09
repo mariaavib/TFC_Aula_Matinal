@@ -6,7 +6,7 @@
         <title>Panel Administrador - Días no lectivos</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-        <link href="/tfc/TFC_Aula_Matinal/src/app/admin/assets/css/style.css" rel="stylesheet">
+        <link href="../assets/css/style.css" rel="stylesheet">
     </head>
     <body>   
         <?php
@@ -19,7 +19,7 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <a href="/tfc/TFC_Aula_Matinal/src/app/admin/views/vAltaDiasNoLectivos.php" class="btn rounded-circle d-flex align-items-center justify-content-center add-button">
+                        <a href="./vAltaDiasNoLectivos.php" class="btn rounded-circle d-flex align-items-center justify-content-center add-button">
                             <i class="bi bi-plus"></i>
                         </a>
                     </div>

@@ -1,5 +1,5 @@
 <?php
-    class Db{
+    class Conexion{
         private $servidor;
         private $usuario;
         private $passw;

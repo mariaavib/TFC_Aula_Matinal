@@ -3,8 +3,8 @@
         private $conexion;
 
         public function __construct(){
-            require_once('db.php');
-            $objConexion = new Db();
+            require_once('conexion.php');
+            $objConexion = new Conexion();
             $this->conexion = $objConexion->conexion;
         }
 
