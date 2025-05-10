@@ -6,7 +6,7 @@
     <title>Panel Administrador - Días no lectivos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link href="/tfc/TFC_Aula_Matinal/src/app/admin/assets/css/style.css" rel="stylesheet">
+    <link href="../../assets/css/style.css" rel="stylesheet">
 </head>
 <body>
     <?php
@@ -19,6 +19,7 @@
                     MODIFICAR DÍA NO LECTIVO
                     <hr>
                 </h4>
+                <div class="alert alert-danger text-center errorMensaje" style="display:none;"></div>
                 <?php 
                     // Muestra el error si está definido
                     if (isset($datos['error'])) {
@@ -46,5 +47,6 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="../../js/views/vModificarDia.js"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <?php
-    class Db{
+    class Conexion{
         private $servidor;
         private $usuario;
         private $passw;
@@ -7,7 +7,7 @@
         public $conexion;
 
         function __construct(){
-            require_once(CONFIG.'configdb.php');
+            require_once(CONFIG.'/configdb.php');
 
             $this->servidor = SERVIDOR;
             $this->usuario = USUARIO;
