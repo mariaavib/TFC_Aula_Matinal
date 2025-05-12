@@ -1,0 +1,27 @@
+# Activar el modo de reescritura de URLs (mod_rewrite)
+RewriteEngine On
+
+# Establecer el directorio raíz como base
+RewriteBase /
+
+# Habilitar temporalmente la visualización de errores para depuración
+php_flag display_errors On
+php_value error_reporting E_ALL
+
+# Establecer archivo predeterminado si no se especifica
+DirectoryIndex index.php index.html
+
+# Aumentar límites de PHP para operaciones con base de datos
+php_value memory_limit 256M
+php_value max_execution_time 300
+php_value post_max_size 64M
+php_value upload_max_filesize 64M
+
+# Proteger archivos sensibles
+<Files .env>
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Configurar manejo de errores personalizado
+ErrorDocument 500 /error500.php

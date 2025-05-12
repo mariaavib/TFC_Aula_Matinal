@@ -6,12 +6,29 @@
         <title>Panel Administrador - Días no lectivos</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-        <link href="../assets/css/style.css" rel="stylesheet">
+        <link href="../../assets/css/style.css" rel="stylesheet">
     </head>
     <body>   
         <?php
             require_once('layouts/headerAdmin.php');
         ?>
+        <div class="modal" tabindex="-1" id="modalBorrado">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Borrar</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>¿Estás seguro que quieres borrarlo?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <a href="#" type="button" class="btn btn-primary" id="btnConfirmarBorrado">Confirmar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="container dias-no-lectivos-container">
             <div class="d-flex flex-column align-items-center mb-4">
                 <div class="section-header">
@@ -42,7 +59,7 @@
                                         <a href="../admin/index.php?c=DiasNoLectivos&m=formEdit&id='.$valor['idDia'].'" class="btn btn-sm me-2 action-button">
                                             <i class="bi bi-pencil"></i>
                                         </a>
-                                        <a href="../admin/index.php?c=DiasNoLectivos&m=eliminar&id='.$valor['idDia'].'" class="btn btn-sm action-button">
+                                        <a class="btn btn-sm action-button" data-bs-toggle="modal" data-bs-target="#modalBorrado" data-id="' . $valor['idDia'] . '">
                                             <i class="bi bi-trash"></i>
                                         </a>
                                     </td>
@@ -55,5 +72,17 @@
         </div>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            const modalBorrado = document.getElementById('modalBorrado');
+            const btnConfirmar = document.getElementById('btnConfirmarBorrado');
+
+            modalBorrado.addEventListener('show.bs.modal', function (event) {
+                const boton = event.relatedTarget;
+                const idDia = boton.getAttribute('data-id');
+
+                
+                btnConfirmar.href = `../admin/index.php?c=DiasNoLectivos&m=eliminar&id=${idDia}`;
+            });
+        </script>
     </body>
 </html>

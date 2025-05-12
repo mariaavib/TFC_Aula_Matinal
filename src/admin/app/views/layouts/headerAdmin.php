@@ -6,14 +6,14 @@
     <title>Panel Administrador - Días no lectivos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link href="/tfc/TFC_Aula_Matinal/src/app/admin/assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
 </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark mb-4">
         <div class="container-fluid">
             <div class="d-flex align-items-center">
-                <img src="/tfc/TFC_Aula_Matinal/src/app/admin/assets/img/logoEscuela.png" alt="Logo Escuela" class="navbar-logo">
+                <img src="assets/img/logoEscuela.png" alt="Logo Escuela" class="navbar-logo">
                 </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
