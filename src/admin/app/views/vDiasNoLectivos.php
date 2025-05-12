@@ -6,7 +6,7 @@
         <title>Panel Administrador - Días no lectivos</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-        <link href="../../assets/css/style.css" rel="stylesheet">
+        <link href="assets/css/style.css" rel="stylesheet">
     </head>
     <body>   
         <?php
@@ -24,7 +24,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <a href="#" type="button" class="btn btn-primary" id="btnConfirmarBorrado">Confirmar</a>
+                        <a href="#" class="btn btn-danger" id="btnConfirmarBorrado">Confirmar</a>
                     </div>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                                     <td class="border-bottom">' . $valor['fecha'] . '</td>
                                     <td class="border-bottom">' . $valor['motivo'] . '</td>
                                     <td class="border-bottom">
-                                        <a href="../admin/index.php?c=DiasNoLectivos&m=formEdit&id='.$valor['idDia'].'" class="btn btn-sm me-2 action-button">
+                                        <a href="index.php?c=DiasNoLectivos&m=formEdit&id='.$valor['idDia'].'" class="btn btn-sm me-2 action-button">
                                             <i class="bi bi-pencil"></i>
                                         </a>
                                         <a class="btn btn-sm action-button" data-bs-toggle="modal" data-bs-target="#modalBorrado" data-id="' . $valor['idDia'] . '">
@@ -70,19 +70,18 @@
                 </table>
             </div>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         <script>
-            const modalBorrado = document.getElementById('modalBorrado');
+            const modalElement = document.getElementById('modalBorrado');
             const btnConfirmar = document.getElementById('btnConfirmarBorrado');
 
-            modalBorrado.addEventListener('show.bs.modal', function (event) {
-                const boton = event.relatedTarget;
-                const idDia = boton.getAttribute('data-id');
-
+            modalElement.addEventListener('show.bs.modal', function (event) {
+                const triggerButton = event.relatedTarget;
+                const idDia = triggerButton.getAttribute('data-id');
                 
-                btnConfirmar.href = `../admin/index.php?c=DiasNoLectivos&m=eliminar&id=${idDia}`;
+                btnConfirmar.href = `index.php?c=DiasNoLectivos&m=eliminar&id=${idDia}`;
             });
         </script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>

@@ -6,7 +6,7 @@
     <title>Panel Administrador - Días no lectivos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link href="../../assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
 </head>
 <body>
     <?php
@@ -26,7 +26,7 @@
                         echo '<div class="alert alert-danger text-center">' . $datos['error'] . '</div>';
                     }
                 ?>
-                <form class="mt-4" method="POST" action="../admin/index.php?c=DiasNoLectivos&m=editar">
+                <form class="mt-4" method="POST" action="index.php?c=DiasNoLectivos&m=editar">
                     <div class="mb-4">
                         <label for="dia" class="form-label">DÍA NO LECTIVO</label>
                         <input type="date" class="form-control bg-light" id="dia" name="fecha" 
