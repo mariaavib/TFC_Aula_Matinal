@@ -1,0 +1,115 @@
+/* Variables de colores */
+:root {
+    --azul-principal: #006EA4;
+    --azul-secundario: #5B9BD5;
+    --azul-claro: #7AAFC9;
+    --gris-tabla: #D9D9D9;
+    --blanco: #ffffff;
+}
+
+/* Estilos de la barra de navegación */
+.navbar {
+    background-color: var(--azul-principal);
+    margin-bottom: 1.5rem;
+}
+
+.navbar-logo {
+    height: 48px;
+    margin-right: 10px;
+}
+
+/* Estilos del menú desplegable */
+.dropdown-menu {
+    background-color: var(--azul-secundario);
+}
+
+.dropdown-item {
+    color: var(--blanco) ;
+}
+
+.dropdown-item:hover {
+    background-color: var(--azul-principal) ;
+    color: var(--blanco) ;
+}
+
+/* Estilos del contenedor */
+.dias-no-lectivos-container {
+    max-width: 900px;
+}
+
+/* Estilos del encabezado */
+.section-header {
+    background: var(--azul-claro);
+    border: 1px solid var(--azul-principal);
+    width: 250px;
+    font-weight: bold;
+    color: var(--blanco);
+    text-align: center;
+    padding: 8px 0;
+    border-radius: 6px;
+    margin-bottom: 16px;
+}
+
+/* Estilos del botón añadir */
+.add-button {
+    background: var(--azul-principal);
+    color: var(--blanco);
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+}
+
+/* Estilos de la tabla */
+.table th {
+    background-color: var(--gris-tabla);
+    border-left: none;
+    border-right: none;
+}
+
+.table td {
+    background-color: var(--azul-claro);
+    color: var(--blanco);
+    border-left: none;
+    border-right: none;
+}
+
+/* Botones de acción */
+.action-button {
+    background: var(--azul-principal);
+    color: var(--blanco);
+}
+
+.action-button:hover {
+    background: var(--azul-secundario);
+    color: var(--blanco);
+}
+
+/* Estilos del formulario */
+.form-header {
+    color: var(--azul-principal);
+}
+
+.form-header hr {
+    border-color: var(--azul-principal);
+    border-width: 2px;
+    opacity: 1;
+}
+
+.form-label {
+    color: var(--azul-principal);
+}
+
+.form-button {
+    background-color: var(--azul-secundario);
+    color: var(--blanco);
+}
+
+.form-button:hover {
+    background-color: var(--azul-principal);
+    color: var(--blanco);
+}
+
+.add-button:hover {
+    background: var(--azul-secundario);
+    color: var(--blanco);
+}
