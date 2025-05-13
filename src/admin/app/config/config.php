@@ -8,3 +8,5 @@ define('CONFIG', __DIR__);
 // Nombres por defecto
 define('CONTR_DEF', 'DiasNoLectivos');
 define('METODO_DEF', 'listar');
+
+?>
