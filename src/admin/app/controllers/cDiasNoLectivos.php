@@ -37,37 +37,56 @@
 
             public function formEdit(){
                 $this->vista = 'vEditDiasNoLectivos';
+                $datos = [];
 
                 if (isset($_GET['id'])) {
                     $id = $_GET['id'];
                     $datos = $this->objModelo->obtenerPorId($id);
-                    //var_dump($datos);
-                    return $datos;
+                    
+                    if(isset($_GET['error'])) {
+                        $datos['error'] = ($_GET['error'] == 1) ? 
+                            'Error al actualizar el registro.' : 
+                            'Todos los campos son obligatorios.';
+                    }
                 }
 
-                return [];
+                return $datos;
             }
 
             public function editar(){
-                if(isset($_POST['id']) && !empty($_POST['fecha']) && !empty($_POST['motivo'])) {
-                    $id = $_POST['id'];
-                    $fecha = $_POST['fecha'];
-                    $motivo = $_POST['motivo'];
+                $this->vista = 'vEditDiasNoLectivos';
 
-                    $resultado = $this->objModelo->updateDias($id, $fecha, $motivo);
-
-                    if($resultado) {
-                        $this->vista = 'vDiasNoLectivos';
-                        return $this->listar();
-                    } 
-                }else{
-                    $this->vista = 'vEditDiasNoLectivos';
+                if(!isset($_POST['id']) || !isset($_POST['fecha']) || !isset($_POST['motivo'])) {
+                    $this->vista = 'vDiasNoLectivos';
+                    return $this->listar();
+                }
+            
+                $id = $_POST['id'];
+                $fecha = $_POST['fecha'];
+                $motivo = $_POST['motivo'];
+            
+                if(empty($fecha) || empty($motivo)) {
                     return [
                         'error' => 'Todos los campos son obligatorios.',
-                        'fecha' => $_POST['fecha'],
-                        'motivo' => $_POST['motivo']
+                        'fecha' => $fecha,
+                        'motivo' => $motivo,
+                        'idDia' => $id
                     ];
-                } 
+                }
+            
+                $resultado = $this->objModelo->updateDias($id, $fecha, $motivo);
+                
+                if($resultado) {
+                    $this->vista = 'vDiasNoLectivos';
+                    return $this->listar();
+                } else {
+                    return [
+                        'error' => 'Error al actualizar el registro.',
+                        'fecha' => $fecha,
+                        'motivo' => $motivo,
+                        'idDia' => $id
+                    ];
+                }
             }
 
             public function eliminar(){

@@ -1,19 +1,28 @@
 export class MModificarDia {
     async enviarFormulario(formData) {
         try {
-            const response = await fetch('../../index.php?c=DiasNoLectivos&m=editar', {
+            const response = await fetch('index.php?c=DiasNoLectivos&m=editar', {
                 method: 'POST',
                 body: formData
             });
 
-            const resultado = await response.text();
+            if (response.redirected) {
+                window.location.href = response.url;
+                return;
+            }
 
-            if (resultado === 'correcto') {
-                window.location.href = "../../index.php?c=DiasNoLectivos&m=listar";
+            const contentType = response.headers.get("content-type");
+            if (contentType && contentType.indexOf("application/json") !== -1) {
+                const resultado = await response.json();
+                if (resultado.error) {
+                    const errorDiv = document.querySelector('.errorMensaje');
+                    errorDiv.innerText = resultado.error;
+                    errorDiv.style.display = 'block';
+                } else {
+                    window.location.href = "index.php?c=DiasNoLectivos&m=listar";
+                }
             } else {
-                const errorDiv = document.querySelector('.errorMensaje');
-                errorDiv.innerText = resultado;
-                errorDiv.style.display = 'block';
+                window.location.href = "index.php?c=DiasNoLectivos&m=listar";
             }
 
         } catch (error) {
