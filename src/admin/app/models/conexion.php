@@ -23,6 +23,7 @@
             $this->conexion -> set_charset("utf8");
             $controlador = new mysqli_driver();
             $controlador -> report_mode = MYSQLI_REPORT_OFF;
+            
         }
     }
 ?>
