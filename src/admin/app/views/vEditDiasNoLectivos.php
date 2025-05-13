@@ -21,7 +21,6 @@
                 </h4>
                 <div class="alert alert-danger text-center errorMensaje" style="display:none;"></div>
                 <?php 
-                    // Muestra el error si está definido
                     if (isset($datos['error'])) {
                         echo '<div class="alert alert-danger text-center">' . $datos['error'] . '</div>';
                     }
