@@ -42,6 +42,7 @@
             $resultado = $stmt->execute();
             $stmt->close();
             return $resultado; 
+            
         }
 
         public function eliminarDias($id){

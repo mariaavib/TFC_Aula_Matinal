@@ -1,0 +1,61 @@
+/* Variables de colores (asegúrate de que esto esté al inicio del archivo) */
+:root {
+    --azul-principal: #006EA4;
+    --azul-secundario: #5B9BD5;
+    --azul-claro: #7AAFC9;
+    --gris-tabla: #D9D9D9;
+    --blanco: #ffffff;
+}
+
+.navbar {
+    background-color: #006699;
+}
+
+.navbar-logo {
+    height: 50px;
+    margin-right: 20px;
+}
+
+.form-check-input {
+    width: 20px;
+    height: 20px;
+    border-color: var(--azul-principal) !important;
+}
+
+.bg-info{
+    background-color: #0056b3;
+}
+
+.table {
+    border: 1px solid #dee2e6;
+}
+
+.table th {
+    background-color: #f8f9fa;
+}
+
+.table thead {
+    background-color: var(--azul-claro);
+}
+
+.btn-outline-light:hover {
+    background-color: #0056b3;
+}
+
+.bg-custom-secondary {
+    background-color: var(--azul-secundario);
+}
+
+.bg-custom-secondary-mod {
+    background-color: var(--azul-principal);
+}
+
+.bg-custom-secondary:hover {
+    background-color: var(--azul-principal);
+}
+.bg-custom-light {
+    background-color: var(--azul-principal)!important;
+    color: var(--blanco)!important;
+    border: none;
+}
+
