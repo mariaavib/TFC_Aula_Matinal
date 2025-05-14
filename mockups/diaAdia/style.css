@@ -1,4 +1,4 @@
-/* Variables de colores */
+/* Variables de colores (asegúrate de que esto esté al inicio del archivo) */
 :root {
     --azul-principal: #006EA4;
     --azul-secundario: #5B9BD5;
@@ -19,6 +19,7 @@
 .form-check-input {
     width: 20px;
     height: 20px;
+    border-color: var(--azul-principal) !important;
 }
 
 .bg-info{
@@ -45,15 +46,16 @@
     background-color: var(--azul-secundario);
 }
 
-.bg-custom-light {
-    background-color: var(--azul-claro);
-    color: var(--blanco);
+.bg-custom-secondary-mod {
+    background-color: var(--azul-principal);
 }
 
-.fecha-header {
-    background-color: var(--azul-secundario);
-    color: var(--blanco);
-    padding: 0.5rem;
-    border-radius: 6px;
-    margin-bottom: 1rem;
+.bg-custom-secondary:hover {
+    background-color: var(--azul-principal);
 }
+.bg-custom-light {
+    background-color: var(--azul-principal)!important;
+    color: var(--blanco)!important;
+    border: none;
+}
+
