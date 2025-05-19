@@ -34,14 +34,14 @@
     </nav>
     <div class="container mt-3">
         <div class="row justify-content-center">
-            <div class="col-md-6 text-center">
-                <div class="text-center mb-2">
+            <div class="col-md-8 mt-4">
+                <div class="text-center">
                     <h4 class="d-inline-block bg-custom-secondary-mod text-white px-4 py-2 rounded w-auto">SELECCIONE FECHA</h4>
                 </div>      
                 <div class="row justify-content-center">
-                    <form action="index.php?c=ControlAsistencia&m=obtenerAsistenciaFecha" method="POST">
-                        <div class="col-md-3">
-                            <select class="form-select mb-3" id="dia" name="dia" required>
+                    <form class="row g-4 align-items-center justify-content-center" action="index.php?c=ControlAsistencia&m=obtenerAsistenciaFecha" method="POST">
+                        <div class="col-md-2">
+                            <select class="form-select form-select-lg" id="dia" name="dia" required>
                                 <option value="">DÍA</option>
                                 <?php 
                                     for($i = 1; $i <= 31; $i++) {
@@ -51,7 +51,7 @@
                             </select>
                         </div>
                         <div class="col-md-3">
-                            <select class="form-select mb-3" id="mes" name="mes" required>
+                            <select class="form-select form-select-lg" id="mes" name="mes" required>
                                 <option value="">MES</option>
                                 <?php
                                     $meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 
@@ -62,8 +62,8 @@
                                 ?>
                             </select>
                         </div>
-                        <div class="col-md-3">
-                            <select class="form-select mb-3" id="anio" name="anio" required>
+                        <div class="col-md-2">
+                            <select class="form-select form-select-lg" id="anio" name="anio" required>
                                 <option value="">AÑO</option>
                                 <?php
                                     $anioActual = date('Y');
@@ -73,8 +73,8 @@
                                 ?>
                             </select>
                         </div>
-                        <div class="col-12">
-                            <button type="button" id="btnBuscar" class="btn bg-custom-secondary text-white">ACEPTAR</button>
+                        <div class="col-auto">
+                            <button type="button" id="btnBuscar" class="btn btn-lg bg-custom-secondary text-white">ACEPTAR</button>
                         </div>
                     </form>
                 </div>
