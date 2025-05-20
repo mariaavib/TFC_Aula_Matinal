@@ -1,14 +1,13 @@
-/* Variables de colores (asegúrate de que esto esté al inicio del archivo) */
 :root {
     --azul-principal: #006EA4;
     --azul-secundario: #5B9BD5;
     --azul-claro: #7AAFC9;
     --gris-tabla: #D9D9D9;
     --blanco: #ffffff;
-    --verde-detalles: #198754;  /* Nuevo color para el botón de detalles */
+    --verde-detalles: #198754;
 }
 
-/* Estilos de navegación */
+/* NAVBAR */
 .navbar {
     background-color: #006699;
 }
@@ -26,7 +25,7 @@
     padding: 8px 15px;
 }
 
-/* Estilos de formularios y botones */
+/* FORMULARIOS y BOTONES */
 .form-check-input {
     width: 20px;
     height: 20px;
@@ -37,7 +36,7 @@
     background-color: #0056b3;
 }
 
-/* Estilos de fondos personalizados */
+/* BACKGROUNDS PERSONALIZADOS */
 .bg-info {
     background-color: #0056b3;
 }
@@ -60,7 +59,7 @@
     border: none;
 }
 
-/* Estilos de tabla */
+/* TABLAS */
 .table {
     border: 1px solid #dee2e6;
 }
@@ -87,85 +86,70 @@
     min-width: 60px;
 }
 
-/* Estilos para los selects de fecha */
+/* SELECT FECHAS */
 .form-select {
     font-size: 0.9rem;
     padding: 0.5rem;
 }
 
-/* Media Queries */
-/* Tablet */
+/* RESPONSIVE TABLET */
 @media (max-width: 991px) and (min-width: 768px) {
     .navbar-nav .nav-item {
         padding: 5px 0;
     }
-    
     .navbar-nav .nav-link {
         padding-left: 20px;
     }
-
     .form-select {
         font-size: 1rem;
         padding: 0.75rem;
         margin-bottom: 1rem !important;
         width: 120px;
     }
-
     .col-md-3 {
         min-width: 120px;
         margin: 0 10px;
     }
-
     .col-md-8, .col-md-6 {
         width: 90%;
         max-width: 90%;
     }
 }
 
-/* Móvil */
+/* RESPONSIVE MÓVIL */
 @media (max-width: 767px) {
     .navbar-nav .nav-item {
         padding: 5px 0;
     }
-    
     .navbar-nav .nav-link {
         padding-left: 20px;
     }
-
     .form-select {
         font-size: 1.1rem;
         padding: 0.75rem;
-        margin-bottom: 1rem !important;
         width: 200px;
         margin: 0 auto 1rem auto;
     }
-
     .col-md-3 {
         width: 100%;
         display: flex;
         justify-content: center;
     }
-
     .col-md-8, .col-md-6 {
         width: 100%;
         max-width: 100%;
         padding: 0 10px;
     }
-
     .table-asistencia {
         width: 100%;
         font-size: 0.9rem;
     }
-
     .columna-nombre {
         min-width: 150px;
-        max-width: none;
     }
-
     .columna-asiste {
         min-width: 80px;
     }
-
     .table-responsive {
         overflow-x: auto;
         margin: 0 -10px;
@@ -173,26 +157,24 @@
     }
 }
 
-/* Estilos para el buscador */
+/* BUSCADOR */
 .input-group {
     max-width: 300px;
     margin-left: auto;
 }
 
-/* Estilo para el botón de ver detalles */
+/* BOTÓN DETALLES */
 .btn-detalles {
     background-color: var(--azul-secundario);
     color: var(--blanco);
     border: none;
     transition: all 0.3s ease;
 }
-
 .btn-detalles:hover {
     background-color: var(--azul-principal);
-    color: var(--blanco);
 }
 
-/* Estilos del Calendario */
+/* FULLCALENDAR */
 #calendar {
     margin: 20px auto;
     padding: 20px;
@@ -202,92 +184,159 @@
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-.fc-toolbar-title {
-    color: var(--azul-principal);
-    font-weight: bold;
-}
-
-.fc-button-primary {
-    background-color: var(--azul-principal) !important;
-    border-color: var(--azul-principal) !important;
-}
-
-.fc-button-primary:hover {
-    background-color: var(--azul-secundario) !important;
-    border-color: var(--azul-secundario) !important;
-}
-
-.fc-day-today {
-    background-color: var(--azul-claro) !important;
-    opacity: 0.3;
-}
-
-.fc-col-header-cell {
-    background-color: var(--azul-principal) !important;
-    color: var(--blanco) !important;
-}
-
-.fc-daygrid-day-number {
-    color: var(--azul-principal);
-}
-
-/* Estilos responsive para el calendario */
-@media (max-width: 991px) {
-    #calendar {
-        padding: 10px;
-    }
-
-    .fc-toolbar {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .fc-toolbar-title {
-        font-size: 1.2em !important;
-    }
-
-    .fc-button {
-        padding: 6px 12px !important;
-    }
-}
-
-@media (max-width: 767px) {
-    #calendar {
-        padding: 5px;
-        margin: 10px auto;
-    }
-
-    .fc-toolbar-title {
-        font-size: 1em !important;
-    }
-
-    .fc-button {
-        padding: 4px 8px !important;
-        font-size: 0.9em !important;
-    }
-
-    .fc-daygrid-day-number {
-        font-size: 0.9em;
-    }
-
-    .fc-col-header-cell-cushion {
-        font-size: 0.9em;
-    }
-}
-
+/* Barra superior calendario */
 .fc-header-toolbar {
     background-color: var(--blanco);
     padding: 15px;
     border-radius: 8px;
-    margin-bottom: 15px !important;
+    margin-bottom: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Título */
+.fc .fc-toolbar-title {
+    font-size: 1.6em;
+    font-weight: bold;
+    color: var(--azul-principal);
+}
+
+/* Botones generales */
+.fc .fc-button {
+    background-color: var(--azul-secundario);
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    color: var(--blanco);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+
+.fc .fc-button:hover {
+    background-color: var(--azul-secundario);
+    transform: scale(1.05);
+}
+
+.fc .fc-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(91, 155, 213, 0.5);
+}
+
+.fc .fc-button-group {
+    display: flex;
+    gap: 10px;
+}
+
+/* Botón HOY */
+.fc .fc-today-button {
+    background-color: var(--verde-detalles);
+    padding: 10px 20px;
+}
+
+.fc .fc-today-button:hover {
+    background-color: #145c39;
+}
+
+/* Cabecera días de la semana */
+.fc-theme-standard .fc-col-header-cell {
+    background-color: var(--azul-claro) !important;
+}
+
+.fc .fc-col-header-cell-cushion {
+    color: var(--blanco) !important;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Botones de navegación */
+.fc .fc-button-primary {
+    background-color: var(--azul-principal) !important;
+    border-color: var(--azul-principal) !important;
+}
+
+.fc .fc-button-primary:hover {
+    background-color: var(--azul-secundario) !important;
+    border-color: var(--azul-secundario) !important;
+}
+
+/* Botón Hoy */
+.fc .fc-today-button {
+    background-color: var(--verde-detalles) !important;
+    border-color: var(--verde-detalles) !important;
+}
+
+.fc .fc-today-button:hover {
+    background-color: #145c39 !important;
+    border-color: #145c39 !important;
+}
+
+.fc .fc-daygrid-day-number {
+    font-size: 0.9em;
+    padding: 5px;
+}
+
+.fc-event {
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    background-color: var(--azul-secundario);
+    color: var(--blanco);
+    font-size: 0.85rem;
 }
 
 .fc-daygrid-day:hover {
     background-color: var(--gris-tabla);
 }
 
-.fc-event {
-    cursor: pointer;
-    padding: 5px;
-    border-radius: 3px;
+/* RESPONSIVE CALENDAR */
+@media (max-width: 991px) {
+    #calendar {
+        padding: 10px;
+        margin: 10px;
+    }
+    
+    .fc .fc-toolbar {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 10px !important;
+    }
+
+    .fc .fc-toolbar-chunk:nth-child(2) {
+        order: -1 !important;
+    }
+
+    .fc .fc-toolbar-chunk:last-child {
+        display: flex !important;
+        gap: 8px !important;
+        margin-top: 5px !important;
+    }
+
+    .fc .fc-today-button,
+    .fc .fc-dayGridMonth-button {
+        padding: 6px 12px !important;
+        font-size: 0.9rem !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .fc .fc-toolbar-chunk:last-child {
+        flex-direction: row !important;
+        justify-content: center !important;
+        width: 100% !important;
+    }
+
+    .fc .fc-today-button,
+    .fc .fc-dayGridMonth-button {
+        min-width: 80px !important;
+        margin: 0 4px !important;
+    }
+
+    .fc .fc-button-group {
+        margin-bottom: 8px !important;
+    }
 }

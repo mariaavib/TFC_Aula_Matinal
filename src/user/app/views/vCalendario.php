@@ -36,8 +36,8 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="index.php?c=Alumnos&m=consultar">CONSULTAR ALUMNOS</a>
                             </li>
-                            <li class="nav-item active">
-                                <a class="nav-link" href="index.php?c=DiasNoLectivos&m=verCalendario">DIAS NO LECTIVOS</a>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="index.php?c=DiasNoLectivos&m=verCalendario">DIAS NO LECTIVOS</a>
                             </li>
                         </ul>
                     </div>
@@ -45,9 +45,13 @@
             </div>
         </nav>
     <div class="container mt-4">
-        <h4 class="text-center mb-4 d-inline-block bg-custom-secondary-mod text-white px-4 py-2 rounded w-auto">
-            Calendario Escolar
-        </h4>
+        <div class="row justify-content-center mb-4">
+            <div class="col-auto">
+                <h4 class="bg-custom-secondary-mod text-white px-4 py-2 rounded">
+                    Calendario Escolar
+                </h4>
+            </div>
+        </div>
         <div id='calendar'></div>
     </div>
     <script src="js/diasNoLectivos.js"></script>
