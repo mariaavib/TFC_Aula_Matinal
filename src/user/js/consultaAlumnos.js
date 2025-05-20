@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <strong>Teléfono:</strong> ${alumno.telefono}
                         </div>
                         <div class="mb-3">
-                            <strong>Nombre del Padre:</strong> ${alumno.nombrePadre || 'No especificado'}
+                            <strong>Nombre del Padre:</strong> ${alumno.nombrePadre || 'Por definir'}
                         </div>
                     `;
                     modalDetalles.show();

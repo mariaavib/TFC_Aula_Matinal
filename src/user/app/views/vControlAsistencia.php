@@ -30,6 +30,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="index.php?c=Alumnos&m=consultar">CONSULTAR ALUMNOS</a>
                         </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="index.php?c=DiasNoLectivos&m=verCalendario">DIAS NO LECTIVOS</a>
+                        </li>
                     </ul>
                 </div>
             </div>
