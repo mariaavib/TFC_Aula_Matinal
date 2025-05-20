@@ -5,6 +5,7 @@
     --azul-claro: #7AAFC9;
     --gris-tabla: #D9D9D9;
     --blanco: #ffffff;
+    --verde-detalles: #198754;  /* Nuevo color para el botón de detalles */
 }
 
 /* Estilos de navegación */
@@ -170,4 +171,23 @@
         margin: 0 -10px;
         padding: 0 10px;
     }
+}
+
+/* Estilos para el buscador */
+.input-group {
+    max-width: 300px;
+    margin-left: auto;
+}
+
+/* Estilo para el botón de ver detalles */
+.btn-detalles {
+    background-color: var(--azul-secundario);
+    color: var(--blanco);
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-detalles:hover {
+    background-color: var(--azul-principal);
+    color: var(--blanco);
 }

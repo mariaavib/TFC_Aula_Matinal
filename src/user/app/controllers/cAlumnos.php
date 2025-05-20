@@ -27,5 +27,31 @@
                     return ['error' => 'Error al insertar el alumno'];
                 }
             }
+
+            public function consultar() {
+                $this->vista = 'vConsultaAlumnos';
+                $datos['alumnos'] = $this->objModelo->obtenerAlumnos();
+                return $datos;
+            }
+
+            public function obtenerDetalles() {
+                header('Content-Type: application/json');
+                
+                $idAlumno = isset($_GET['id']) ? $_GET['id'] : 0;
+                $alumno = $this->objModelo->obtenerDetallesAlumno($idAlumno);
+                
+                if ($alumno) {
+                    echo json_encode([
+                        'success' => true,
+                        'alumno' => $alumno
+                    ]);
+                } else {
+                    echo json_encode([
+                        'success' => false,
+                        'message' => 'Alumno no encontrado'
+                    ]);
+                }
+                exit;
+            }
     }
 ?>

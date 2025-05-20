@@ -27,6 +27,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="index.php?c=ControlAsistencia&m=modificar">MODIFICAR ASISTENCIA</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php?c=Alumnos&m=consultar">CONSULTAR ALUMNOS</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -39,6 +42,7 @@
                     NUEVO ALUMNO
                     <hr>
                 </h4>
+                <div class="alert alert-danger" style="display: none;"></div>
                 <form action="index.php?c=Alumnos&m=insertar" method="POST">
                     <div class="card mb-4">
                         <div class="card-header text-white" style="background-color: #006EA4;">
@@ -64,5 +68,6 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/altaAlumno.js"></script>
 </body>
 </html>

@@ -27,6 +27,9 @@
                             <li class="nav-item">
                                 <a class="nav-link active" href="index.php?c=ControlAsistencia&m=modificar">MODIFICAR ASISTENCIA</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php?c=Alumnos&m=consultar">CONSULTAR ALUMNOS</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -128,7 +131,7 @@
     </div>
     <input type="hidden" id="fechaSeleccionada" value="<?php echo isset($_GET['anio']) ? $_GET['anio'].'-'.$_GET['mes'].'-'.$_GET['dia'] : ''; ?>">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/modificarAsistencia.js"></script>
+    <script src="js/modificarAsistencia.js"></script>
 </body>
 </html>
 
