@@ -29,7 +29,7 @@
 .form-check-input {
     width: 20px;
     height: 20px;
-    border-color: var(--azul-principal) !important;
+    border-color: var(--azul-principal);
 }
 
 .btn-outline-light:hover {
@@ -91,72 +91,6 @@
     font-size: 0.9rem;
     padding: 0.5rem;
 }
-
-/* RESPONSIVE TABLET */
-@media (max-width: 991px) and (min-width: 768px) {
-    .navbar-nav .nav-item {
-        padding: 5px 0;
-    }
-    .navbar-nav .nav-link {
-        padding-left: 20px;
-    }
-    .form-select {
-        font-size: 1rem;
-        padding: 0.75rem;
-        margin-bottom: 1rem !important;
-        width: 120px;
-    }
-    .col-md-3 {
-        min-width: 120px;
-        margin: 0 10px;
-    }
-    .col-md-8, .col-md-6 {
-        width: 90%;
-        max-width: 90%;
-    }
-}
-
-/* RESPONSIVE MÓVIL */
-@media (max-width: 767px) {
-    .navbar-nav .nav-item {
-        padding: 5px 0;
-    }
-    .navbar-nav .nav-link {
-        padding-left: 20px;
-    }
-    .form-select {
-        font-size: 1.1rem;
-        padding: 0.75rem;
-        width: 200px;
-        margin: 0 auto 1rem auto;
-    }
-    .col-md-3 {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-    }
-    .col-md-8, .col-md-6 {
-        width: 100%;
-        max-width: 100%;
-        padding: 0 10px;
-    }
-    .table-asistencia {
-        width: 100%;
-        font-size: 0.9rem;
-    }
-    .columna-nombre {
-        min-width: 150px;
-    }
-    .columna-asiste {
-        min-width: 80px;
-    }
-    .table-responsive {
-        overflow-x: auto;
-        margin: 0 -10px;
-        padding: 0 10px;
-    }
-}
-
 /* BUSCADOR */
 .input-group {
     max-width: 300px;
@@ -254,25 +188,21 @@
 
 /* Botones de navegación */
 .fc .fc-button-primary {
-    background-color: var(--azul-principal) !important;
-    border-color: var(--azul-principal) !important;
+    background-color: var(--azul-principal);
+    border-color: var(--azul-principal);
 }
 
 .fc .fc-button-primary:hover {
-    background-color: var(--azul-secundario) !important;
-    border-color: var(--azul-secundario) !important;
+    background-color: var(--azul-secundario);
+    border-color: var(--azul-secundario);
 }
 
 /* Botón Hoy */
 .fc .fc-today-button {
-    background-color: var(--verde-detalles) !important;
-    border-color: var(--verde-detalles) !important;
+    background-color: var(--verde-detalles)!important;
+    border-color: var(--verde-detalles)!important;
 }
 
-.fc .fc-today-button:hover {
-    background-color: #145c39 !important;
-    border-color: #145c39 !important;
-}
 
 .fc .fc-daygrid-day-number {
     font-size: 0.9em;
@@ -283,60 +213,166 @@
     cursor: pointer;
     padding: 5px;
     border-radius: 4px;
-    background-color: var(--azul-secundario);
+    background-color: var(--azul-principal)!important;
+    border-color: var(--azul-principal)!important;
     color: var(--blanco);
     font-size: 0.85rem;
 }
 
-.fc-daygrid-day:hover {
-    background-color: var(--gris-tabla);
-}
-
-/* RESPONSIVE CALENDAR */
+/* MEDIA QUERIES */
 @media (max-width: 991px) {
+    /* Calendario */
     #calendar {
         padding: 10px;
         margin: 10px;
     }
     
     .fc .fc-toolbar {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 10px !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
     }
 
     .fc .fc-toolbar-chunk:nth-child(2) {
-        order: -1 !important;
+        order: -1;
     }
 
-    .fc .fc-toolbar-chunk:last-child {
-        display: flex !important;
-        gap: 8px !important;
-        margin-top: 5px !important;
-    }
-
-    .fc .fc-today-button,
-    .fc .fc-dayGridMonth-button {
-        padding: 6px 12px !important;
-        font-size: 0.9rem !important;
+    .fc .fc-today-button {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+        margin-top: 5px;
     }
 }
 
-@media (max-width: 767px) {
-    .fc .fc-toolbar-chunk:last-child {
-        flex-direction: row !important;
-        justify-content: center !important;
-        width: 100% !important;
+/* TABLET ESPECÍFICO */
+@media (max-width: 991px) and (min-width: 768px) {
+    /* Navegación */
+    .navbar-nav .nav-item {
+        padding: 5px 0;
+    }
+    
+    .navbar-nav .nav-link {
+        padding: 8px 10px;
+        font-size: 0.9rem;
     }
 
-    .fc .fc-today-button,
-    .fc .fc-dayGridMonth-button {
-        min-width: 80px !important;
-        margin: 0 4px !important;
+    /* Formularios y selects */
+    .form-select-lg {
+        height: 45px;
+        padding: 0.5rem;
+        font-size: 0.9rem;
+        width: 100%;
+        margin-bottom: 0;
+    }
+
+    .col-md-2 {
+        width: auto;
+        min-width: 100px;
+        flex: 0 0 auto;
+    }
+
+    .col-md-3 {
+        width: auto;
+        min-width: 140px;
+        flex: 0 0 auto;
+    }
+
+    .row.g-4.align-items-center {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    /* Botones */
+    .btn-lg.bg-custom-secondary {
+        height: 45px;
+        padding: 0.5rem 2rem;
+        margin: 0 0 0 5px;
+    }
+
+    /* Contenedores y tablas */
+    .col-md-8 {
+        width: 95%;
+        max-width: 95%;
+        margin: 0 auto;
+    }
+
+    .table-asistencia {
+        width: 90%;
+    }
+
+    .columna-nombre {
+        min-width: 160px;
+        max-width: 160px;
+    }
+
+    .columna-asiste {
+        min-width: 70px;
+    }
+}
+
+/* RESPONSIVE MÓVIL */
+@media (max-width: 767px) {
+    /* Barra de navegación móvil */
+    .navbar-nav .nav-item {
+        padding: 5px 0;
+    }
+    
+    .navbar-nav .nav-link {
+        padding-left: 20px;
+    }
+
+    /* Formularios móvil */
+    .form-select {
+        font-size: 1.1rem;
+        padding: 0.75rem;
+        width: 200px;
+        margin: 0 auto 1rem auto;
+    }
+
+    /* Contenedores móvil */
+    .col-md-8, .col-md-6 {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 10px;
+    }
+
+    /* Tablas */
+    .table-asistencia {
+        width: 100%;
+        font-size: 0.9rem;
+    }
+
+    .columna-nombre {
+        min-width: 150px;
+    }
+
+    .columna-asiste {
+        min-width: 80px;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+        margin: 0 -10px;
+        padding: 0 10px;
+    }
+
+    /* Calendario */
+    .fc .fc-toolbar-chunk:first-child {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .fc .fc-today-button {
+        min-width: 80px;
+        margin: 0 4px;
     }
 
     .fc .fc-button-group {
-        margin-bottom: 8px !important;
+        margin-bottom: 8px;
     }
 }
+
