@@ -19,6 +19,7 @@
                     ALTA DÍA NO LECTIVO
                     <hr>
                 </h4>
+                <div class="alert alert-danger" style="display: none;"></div>
                 <?php 
                     if (isset($datos['error'])) {
                         echo '<div class="alert alert-danger text-center">' . $datos['error'] . '</div>';
@@ -42,5 +43,6 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="js/views/vAltaDiasNoLectivos.js"></script>
 </body>
 </html>

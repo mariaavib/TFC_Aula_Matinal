@@ -9,7 +9,6 @@
     <link href="assets/css/style.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark mb-4">
         <div class="container-fluid">
             <div class="d-flex align-items-center">
@@ -37,8 +36,8 @@
                                 INICIO CURSO
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="inicioCursoDropdown">
-                                <li><a class="dropdown-item" href="/tfc/TFC_Aula_Matinal/src/app/admin/views/vDiasNoLectivos.php">DÍAS NO LECTIVOS</a></li>
-                                <li><a class="dropdown-item" href="/tfc/TFC_Aula_Matinal/src/app/admin/views/vFechaCurso.php">FECHA CURSO</a></li>
+                                <li><a class="dropdown-item" href="index.php?c=DiasNoLectivos&m=listar">DÍAS NO LECTIVOS</a></li>
+                                <li><a class="dropdown-item" href="">FECHA CURSO</a></li>
                             </ul>
                         </li>
                     </ul>
