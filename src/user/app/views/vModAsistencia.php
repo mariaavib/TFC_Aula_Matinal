@@ -1,3 +1,13 @@
+<?php
+    /**
+     * Vista del panel de control de asistencia para modificar asistencia
+     *
+     * Muestra 3 selects para seleccionar la fecha y un botón para buscar
+     *
+     * Muestra la tabla de asistencia del dia seleccionado 
+     *
+     */
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -62,7 +72,7 @@
                                 <?php
                                     $meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 
                                             'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
-                                    foreach($meses as $i => $mes) {
+                                    foreach($meses as $i => $mes){
                                         echo "<option value='".($i+1)."'>$mes</option>";
                                     }
                                 ?>
@@ -73,7 +83,7 @@
                                 <option value="">AÑO</option>
                                 <?php
                                     $anioActual = date('Y');
-                                    for($i = $anioActual; $i <= $anioActual + 1; $i++) {
+                                    for($i = $anioActual; $i <= $anioActual + 1; $i++){
                                         echo "<option value='$i'>$i</option>";
                                     }
                                 ?>
@@ -89,9 +99,9 @@
                 <div class="text-center mb-4">
                     <h4 class="d-inline-block bg-custom-secondary-mod text-white px-4 py-2 rounded w-auto">
                         <?php 
-                        if(isset($datos['fecha'])) {
-                            echo htmlspecialchars($datos['fecha']);
-                        }
+                            if(isset($datos['fecha'])){
+                                echo htmlspecialchars($datos['fecha']);
+                            }
                         ?>
                     </h4>
                 </div>
@@ -108,8 +118,8 @@
                                     </thead>
                                     <tbody>
                                         <?php 
-                                            if(isset($datos['alumnos']) && is_array($datos['alumnos'])) { 
-                                                foreach($datos['alumnos'] as $alumno) { 
+                                            if(isset($datos['alumnos']) && is_array($datos['alumnos'])){ 
+                                                foreach($datos['alumnos'] as $alumno){ 
                                                     echo "<tr>
                                                         <td class='py-1 pe-0 columna-nombre'>" . 
                                                             htmlspecialchars($alumno['nombreAlumno']) . 

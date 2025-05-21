@@ -1,15 +1,21 @@
+<?php
+    /**
+     * Vista del panel de control de asistencia para ver los dias festivos
+     *
+     * Muestra un calendario por meses y salen los dias festivos, el calendario se genera con la libreria fullcalendar
+     * 
+     */
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Monitor Días No Lectivos</title>
-    
-    <!-- Bootstrap y otros estilos -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link href="assets/css/style.css" rel="stylesheet">
-    <!-- FullCalendar Bundle -->
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.js'></script>
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales/es.js'></script>
     <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.css' rel='stylesheet'>

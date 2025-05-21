@@ -1,3 +1,12 @@
+<?php
+    /**
+     * Vista del panel de control de asistencia para consultar los alumnos
+     *
+     * Muestra una tabla con los nombres de los alumnos y un botón para ver los detalles de cada alumno
+     * 
+     */
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>

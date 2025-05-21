@@ -1,3 +1,11 @@
+/**
+ * Configura la búsqueda en la tabla de alumnos y la visualización
+ * de detalles en un modal al hacer clic en los botones correspondientes.
+ *
+ * Filtra las filas de la tabla según el texto introducido en el buscador.
+ * Muestra un modal con los detalles del alumno al hacer clic en "ver detalles".
+ */
+
 document.addEventListener('DOMContentLoaded', function() {
     // Funcionalidad del buscador
     const buscador = document.getElementById('buscadorAlumnos');

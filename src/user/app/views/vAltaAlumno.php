@@ -1,3 +1,11 @@
+<?php
+    /**
+     * Vista del panel de control de asistencia para dar de alta a un alumno
+     *
+     * Muestra un formulario para dar de alta a un nuevo alumno
+     * 
+     */
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>

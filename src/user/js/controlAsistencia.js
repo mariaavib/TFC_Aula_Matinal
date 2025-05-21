@@ -1,11 +1,17 @@
+/**
+ * Controla la asistencia de los alumnos mediante checkbox
+ * 
+ * Cuando se merca el checckbox se envia la asistencia al servidor a través del fetch
+ * Necesita que el checkbox tenga el atributo data-id con el id del alumno
+ */
 document.addEventListener('DOMContentLoaded', function() {
-    // Control de asistencia
     const checkboxes = document.querySelectorAll('.control-asistencia');
     checkboxes.forEach(checkbox => {
         checkbox.addEventListener('change', function() {
             const idAlumno = this.dataset.id;
-            const asiste = this.checked;
-            const originalState = this.checked;
+            const asiste = this.checked ? 1 : 0;
+            
+            this.disabled = true;
             
             fetch('index.php?c=ControlAsistencia&m=registrarAsistencia', {
                 method: 'POST',
@@ -16,16 +22,17 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(response => response.json())
             .then(data => {
+                console.log('Respuesta:', data); 
                 if (!data.success) {
-                    // If there's an error, revert the checkbox
                     this.checked = !this.checked;
-                    alert('Error al actualizar la asistencia');
                 }
             })
             .catch(error => {
-                // If there's an error, revert the checkbox
-                this.checked = originalState;
-                alert('Error de conexión');
+                console.error('Error:', error);
+                this.checked = !this.checked;
+            })
+            .finally(() => {
+                this.disabled = false;
             });
         });
     });

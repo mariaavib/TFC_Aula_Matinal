@@ -1,3 +1,9 @@
+/**
+ * Valida el formulario de alta de alumno.
+ * 
+ * Verifica que los campos obligatorios no estén vacíos y que el número de teléfono tenga 9 dígitos.
+ * Si hay algún error, muestra un mensaje de error y evita que se envíe el formulario.
+ */
 document.addEventListener("DOMContentLoaded", function () {
     const formularioAltaAlumno = document.querySelector("form");
     const mensajeError = document.querySelector(".alert");
