@@ -1,3 +1,10 @@
+/**
+ * Clase CModificarDia
+ * 
+ * Controlador encargado de gestionar la modificación de un día no lectivo.
+ * Se comunica con el modelo MModificarDia y valida los datos del formulario antes de enviarlos.
+ * 
+ */
 import { MModificarDia } from '../models/mModificarDia.js';
 
 export class CModificarDia {
@@ -7,6 +14,13 @@ export class CModificarDia {
         this.modelo = new MModificarDia();
     }
 
+    /**
+     * Valida los campos del formulario.
+     *
+     * @param {string} fecha - Fecha del día no lectivo.
+     * @param {string} motivo - Motivo del día no lectivo.
+     * @returns {string[]} Lista de errores encontrados.
+     */
     validarCampos(fecha, motivo) {
         let errores = [];
     
@@ -23,6 +37,11 @@ export class CModificarDia {
     
         return errores;
     }
+    /**
+     * Procesa el formulario, valida los datos y, si son correctos, envía la información al modelo.
+     *
+     * @param {FormData} formulario - Objeto FormData con los datos del formulario.
+     */
 
     procesar(formulario) {
         const fecha = formulario.get('fecha');

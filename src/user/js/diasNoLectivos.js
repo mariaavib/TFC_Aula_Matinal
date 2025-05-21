@@ -2,7 +2,7 @@
  * Inicializa y muestra el calendario con los días no lectivos.
  * Obtiene los días no lectivos del controlador DiasNoLectivos y los muestra en el calendario.
  */
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function(){
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl,{
         locale: 'es',

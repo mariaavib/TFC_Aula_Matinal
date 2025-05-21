@@ -1,3 +1,9 @@
+/**
+ * Controlador CAltaDiasNoLectivos
+ *
+ * Clase encargada de gestionar la lógica de validación y envío del formulario 
+ * para registrar días no lectivos.
+ */
 import { MAltaDiasNoLectivos } from '../models/mAltaDiasNoLectivos.js';
 export class CAltaDiasNoLectivos {
     modelo;
@@ -5,7 +11,13 @@ export class CAltaDiasNoLectivos {
     constructor() {
         this.modelo = new MAltaDiasNoLectivos();
     }
-
+    /**
+     * Valida los campos del formulario.
+     *
+     * @param {string} fecha - Fecha del día no lectivo.
+     * @param {string} motivo - Motivo del día no lectivo.
+     * @returns {string[]} Lista de mensajes de error, si los hay.
+     */
     validarCampos(fecha, motivo) {
         let errores = [];
     
@@ -21,7 +33,11 @@ export class CAltaDiasNoLectivos {
         }
         return errores;
     }
-
+    /**
+     * Procesa el formulario, valida los campos y envía los datos si son correctos.
+     *
+     * @param {FormData} formulario - Datos del formulario a procesar.
+     */
     procesar(formulario) {
         const fecha = formulario.get('fecha');
         const motivo = formulario.get('motivo');

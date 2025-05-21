@@ -7,7 +7,6 @@
  */
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Funcionalidad del buscador
     const buscador = document.getElementById('buscadorAlumnos');
     if (buscador) {
         buscador.addEventListener('input', function() {
