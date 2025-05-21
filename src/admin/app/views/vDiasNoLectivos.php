@@ -44,15 +44,15 @@
                 <table class="table mb-0">
                     <thead>
                         <tr>
-                            <th class="border-bottom">Día</th>
-                            <th class="border-bottom">Motivo</th>
-                            <th class="border-bottom">Acciones</th>
+                            <th class="border-bottom text-center">Día</th>
+                            <th class="border-bottom text-center">Motivo</th>
+                            <th class="border-bottom text-center">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php 
                             foreach ($datos as $valor)  {
-                                echo '<tr class="align-middle">
+                                echo '<tr class="align-middle text-center">
                                     <td class="border-bottom">' . $valor['fecha'] . '</td>
                                     <td class="border-bottom">' . $valor['motivo'] . '</td>
                                     <td class="border-bottom">

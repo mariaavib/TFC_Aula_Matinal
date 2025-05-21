@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultar Datos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <?php
+        include_once('layouts/headerAdmin.php');
+    ?>
+
+        <div class="container mt-3">
+        <div class="mb-3">
+            <a href="index.php?c=GestionInscripciones&m=alumnosinscritos" class="btn" style="background-color: #006EA4; color: white;">
+                <i class="bi bi-arrow-left"></i> VOLVER
+            </a>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h4 class="text-center mb-4 form-header">
+                    CONSULTAR DATOS DE INSCRIPCIÓN
+                    <hr>
+                </h4>
+
+                <!-- Datos del tutor -->
+                <div class="card mb-4">
+                    <div class="card-header text-white" style="background-color: #006EA4;">
+                        <h5 class="mb-0">DATOS DEL PADRE/MADRE/TUTOR</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <p class="form-label fw-bold mb-1">NOMBRE Y APELLIDOS</p>
+                            <?php echo "<p class='ps-2'>{$datos['nombrePadre']}</p>" ?>
+                            
+                        </div>
+                        <div class="mb-3">
+                            <p class="form-label fw-bold mb-1">DNI</p>
+                            <?php echo "<p class='ps-2'>{$datos['DNI']}</p>" ?>
+                        </div>
+                        <div class="mb-3">
+                            <p class="form-label fw-bold mb-1">TELÉFONO</p>
+                            <?php echo "<p class='ps-2'>{$datos['telefono']}</p>" ?>
+                        </div>
+                        <div class="mb-3">
+                            <p class="form-label fw-bold mb-1">CORREO</p>
+                            <?php echo "<p class='ps-2'>{$datos['correo']}</p>" ?>
+                        </div>
+                        <div class="mb-3">
+                            <p class="form-label fw-bold mb-1">IBAN</p>
+                            <?php echo "<p class='ps-2'>{$datos['IBAN']}</p>" ?>
+                        </div>
+                        <div class="mb-3">
+                            <p class="form-label fw-bold mb-1">TITULAR DE LA CUENTA</p>
+                            <?php echo "<p class='ps-2'>{$datos['titularCuenta']}</p>" ?>
+                        </div>
+                        <div class="mb-3">
+                            <p class="form-label fw-bold mb-1">FECHA MANDATO</p>
+                            <?php echo "<p class='ps-2'>{$datos['fechaMandato']}</p>" ?>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Datos del alumno -->
+                <div class="card mb-4">
+                    <div class="card-header text-white" style="background-color: #006EA4;">
+                        <h5 class="mb-0">DATOS DEL ALUMNO</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <p class="form-label fw-bold mb-1">NOMBRE Y APELLIDOS</p>
+                            <?php echo "<p class='ps-2'>{$datos['nombreAlumno']}</p>" ?>
+                        </div>
+                        <div class="mb-3">
+                            <p class="form-label fw-bold mb-1">CLASE</p>
+                            <?php echo "<p class='ps-2'>{$datos['clase']}</p>" ?>
+
+                        </div>
+                    </div>
+                </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
