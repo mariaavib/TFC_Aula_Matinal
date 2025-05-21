@@ -64,6 +64,7 @@
                         $diasSemana = ['DOMINGO', 'LUNES', 'MARTES', 'MIÉRCOLES', 'JUEVES', 'VIERNES', 'SÁBADO'];
                         $meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
 
+                        date_default_timezone_set('Europe/Madrid');
                         $fecha = new DateTime();
                         echo $diasSemana[$fecha->format('w')] . ' ' . $fecha->format('d') . ' DE ' . $meses[$fecha->format('n') - 1] . ' ' . $fecha->format('Y');
 
