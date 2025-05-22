@@ -4,14 +4,14 @@
 
 document.addEventListener('DOMContentLoaded', function(){
     const btnBuscar = document.getElementById('btnBuscar');
-    const checkboxes = document.querySelectorAll('.form-check-input');
+    const checkbox = document.querySelectorAll('.form-check-input');
 
     if (btnBuscar) {
         btnBuscar.addEventListener('click', buscarAsistencias);
     }
 
-    if (checkboxes) {
-        checkboxes.forEach(checkbox =>{
+    if (checkbox) {
+        checkbox.forEach(checkbox =>{
             checkbox.addEventListener('change', modificarAsistencia);
         });
     }

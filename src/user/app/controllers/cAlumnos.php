@@ -51,8 +51,11 @@
              */
             public function obtenerDetalles() {
                 header('Content-Type: application/json');
-                
-                $idAlumno = isset($_GET['id']) ? $_GET['id'] : 0;
+                if(isset($_GET['id'])){
+                    $idAlumno = $_GET['id'];
+                }else{
+                    $idAlumno = 0;
+                }
                 $alumno = $this->objModelo->obtenerDetallesAlumno($idAlumno);
                 
                 if ($alumno) {
