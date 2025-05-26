@@ -14,24 +14,43 @@
             $objConexion = new Conexion();
             $this->conexion = $objConexion->conexion;
         }
+
+        /**
+         * Metodo para obtener todas las clases disponibles.
+         *
+         * @return array Lista de clases.
+         * 
+         */
+        public function obtenerClases() {
+            $sql = "SELECT idClase, clase FROM clases ORDER BY clase";
+            $resultado = $this->conexion->query($sql);
+            if (!$resultado) {
+                return [];
+            }
+            return $resultado->fetch_all(MYSQLI_ASSOC);
+        }
+    
         /**
          * Metodo para insertar un nuevo alumno en la base de datos.
-         * Primero inserta en la tabla inscripciones y luego en la tabla alumno.
-         * 
+         *
          * @param string $nombreAlumno Nombre del alumno.
-         * @param string $telefono Teléfono del alumno.
-         * @param string $fechaMandato Fecha de en la que se hace la inscripción.
+         * @param string $apellidosAlumno Apellidos del alumno.
+         * @param string $nombrePadre Nombre del padre del alumno.
+         * @param string $apellidosPadre Apellidos del padre del alumno.
+         * @param string $telefono Telefono del padre del alumno.
+         * @param int $idClase ID de la clase a la que pertenece el alumno.
+         * @return bool true si la insercion fue exitosa, false en caso contrario.
          */
-        public function insertarAlumno($nombreAlumno, $telefono, $fechaMandato){
-            $sql = "INSERT INTO inscripciones (telefono, fechaMandato, completada) VALUES (?, ?, 0)";
+        public function insertarAlumno($nombreAlumno, $apellidosAlumno, $nombrePadre, $apellidosPadre, $telefono, $idClase) {
+            $sql = "INSERT INTO inscripciones (nombrePadre, apellidosPadre, telefono, completada) VALUES (?, ?, ?, 0)";
             $stmt = $this->conexion->prepare($sql);
-            $stmt->bind_param("ss", $telefono, $fechaMandato);
+            $stmt->bind_param("sss", $nombrePadre, $apellidosPadre, $telefono);
             $stmt->execute();
-            $idInscripcion = $this->conexion->insert_id; //devuelve el id de la ultima insercion
-
-            $sql = "INSERT INTO alumno (nombreAlumno, idInscripcion) VALUES (?, ?)";
+            $idInscripcion = $this->conexion->insert_id; // Obtener el ID de la inscripción recién insertada
+    
+            $sql = "INSERT INTO alumno (nombreAlumno, apellidosAlumno, idInscripcion, idClase) VALUES (?, ?, ?, ?)";
             $stmt = $this->conexion->prepare($sql);
-            $stmt->bind_param("si", $nombreAlumno, $idInscripcion);
+            $stmt->bind_param("ssii", $nombreAlumno, $apellidosAlumno, $idInscripcion, $idClase);
             return $stmt->execute();
         }
         /**
@@ -61,12 +80,12 @@
          * @return array Detalles del alumno.
          */
         public function obtenerDetallesAlumno($idAlumno){
-            $sql = "SELECT inscripciones.nombrePadre, inscripciones.telefono, 
-                           alumno.nombreAlumno
+            $sql = "SELECT inscripciones.nombrePadre, inscripciones.telefono, inscripciones.apellidosPadre,
+                           alumno.nombreAlumno, clases.clase
                     FROM inscripciones 
                     INNER JOIN alumno ON inscripciones.idInscripcion = alumno.idInscripcion 
-                    WHERE alumno.idAlumno = ?";
-            
+                    INNER JOIN clases ON alumno.idClase = clases.idClase
+                    WHERE alumno.idAlumno = ? ";
             $stmt = $this->conexion->prepare($sql);
             $stmt->bind_param("i", $idAlumno);
             $stmt->execute();

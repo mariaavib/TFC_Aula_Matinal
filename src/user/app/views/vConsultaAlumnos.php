@@ -6,7 +6,6 @@
      * 
      */
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -68,7 +67,7 @@
                                     <thead class="bg-light">
                                         <tr>
                                             <th>NOMBRE ALUMNO</th>
-                                            <th>TELÉFONO TUTOR</th>
+                                            <th>TELÉFONO PADRE/MADRE O TUTOR</th>
                                             <th>ACCIONES</th>
                                         </tr>
                                     </thead>

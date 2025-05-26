@@ -90,20 +90,23 @@
              */
             public function obtenerAsistenciaFecha(){
                 $this->vista = 'vModAsistencia';
-                if (isset($_GET['dia']) && isset($_GET['mes']) && isset($_GET['anio'])) {
-                    $dia = $_GET['dia'];
-                    $mes = $_GET['mes'];
-                    $anio = $_GET['anio'];
-                    $fecha = "$anio-$mes-$dia";
+                if (isset($_POST['fecha']) && !empty($_POST['fecha'])) {
+                    $fecha = $_POST['fecha'];
+            
+                    //Convertir la fecha al formato deseado (DD DE MES YYYY)
+                    $fechaFormateada = date('d \d\e F Y', strtotime($fecha));
+                    $fechaFormateada = mb_strtoupper($fechaFormateada);
             
                     $alumnos = $this->objModelo->listarAlumnos();
                     $asistencias = $this->objModelo->asistenciaFecha($fecha);
-                    foreach ($alumnos as &$alumno) {
-                        $alumno['asiste'] = in_array($alumno['idAlumno'], $asistencias);
-                    }
-                   
-                    return ['alumnos' => $alumnos, 'fecha' => $fecha];
+                    
+                    return [
+                        'alumnos' => $alumnos, 
+                        'asistencias' => $asistencias,
+                        'fecha' => $fechaFormateada
+                    ];
                 }
+                return [];
             }
             /**
              * Modifica la asistencia de un alumno para una fecha específica

@@ -41,17 +41,22 @@ document.addEventListener('DOMContentLoaded', function() {
                             <strong>Nombre del Alumno:</strong> ${alumno.nombreAlumno}
                         </div>
                         <div class="mb-3">
-                            <strong>Teléfono:</strong> ${alumno.telefono}
+                            <strong>Clase:</strong> ${alumno.clase}
                         </div>
                         <div class="mb-3">
-                            <strong>Nombre del Padre:</strong> ${alumno.nombrePadre || 'Por determinar'}
+                            <strong>Nombre del Padre:</strong>  ${ (alumno.nombrePadre || 'Por determinar') + ' ' + (alumno.apellidosPadre || '') }
                         </div>
+                        <div class="mb-3">
+                            <strong>Teléfono:</strong> ${alumno.telefono}
+                        </div>
+                        
                     `;
                     modalDetalles.show();
                 }
             } catch (error) {
                 console.error('Error:', error);
             }
+            
         });
     });
 });
