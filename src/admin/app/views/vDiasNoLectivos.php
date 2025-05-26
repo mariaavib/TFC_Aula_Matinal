@@ -73,7 +73,6 @@
         <script>
             const modalElement = document.getElementById('modalBorrado');
             const btnConfirmar = document.getElementById('btnConfirmarBorrado');
-
             modalElement.addEventListener('show.bs.modal', function (event) {
                 const triggerButton = event.relatedTarget;
                 const idDia = triggerButton.getAttribute('data-id');
