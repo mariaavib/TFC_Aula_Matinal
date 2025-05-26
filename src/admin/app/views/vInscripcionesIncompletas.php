@@ -43,7 +43,7 @@
                         echo "<td>{$dato['nombreAlumno']}</td>";
                         echo "<td>{$dato['telefono']}</td>";
                         echo '<td>';
-                        echo "<a href='index.php?c=GestionInscripciones&m=modificacion&id={$dato['idInscripcion']}' class='btn btn-sm action-button'>
+                        echo "<a href='index.php?c=GestionInscripciones&m=modificacion&id={$dato['idInscripcion']}&origen=incompletas' class='btn btn-sm action-button'>
                                 <i class='bi bi-pencil'></i>
                             </a>";
                         echo '</td>';

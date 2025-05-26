@@ -39,10 +39,6 @@
                             
                         </div>
                         <div class="mb-3">
-                            <p class="form-label fw-bold mb-1">DNI</p>
-                            <?php echo "<p class='ps-2'>{$datos['DNI']}</p>" ?>
-                        </div>
-                        <div class="mb-3">
                             <p class="form-label fw-bold mb-1">TELÉFONO</p>
                             <?php echo "<p class='ps-2'>{$datos['telefono']}</p>" ?>
                         </div>
@@ -50,18 +46,7 @@
                             <p class="form-label fw-bold mb-1">CORREO</p>
                             <?php echo "<p class='ps-2'>{$datos['correo']}</p>" ?>
                         </div>
-                        <div class="mb-3">
-                            <p class="form-label fw-bold mb-1">IBAN</p>
-                            <?php echo "<p class='ps-2'>{$datos['IBAN']}</p>" ?>
-                        </div>
-                        <div class="mb-3">
-                            <p class="form-label fw-bold mb-1">TITULAR DE LA CUENTA</p>
-                            <?php echo "<p class='ps-2'>{$datos['titularCuenta']}</p>" ?>
-                        </div>
-                        <div class="mb-3">
-                            <p class="form-label fw-bold mb-1">FECHA MANDATO</p>
-                            <?php echo "<p class='ps-2'>{$datos['fechaMandato']}</p>" ?>
-                        </div>
+                        
                     </div>
                 </div>
 

@@ -51,7 +51,7 @@
                         echo "<a href='index.php?c=GestionInscripciones&m=consultardatos&id={$dato['idInscripcion']}' class='btn btn-sm action-button me-2'>
                                 <i class='bi bi-info-circle'></i>
                             </a>";
-                        echo "<a href='index.php?c=GestionInscripciones&m=modificacion&id={$dato['idInscripcion']}' class='btn btn-sm action-button'>
+                        echo "<a href='index.php?c=GestionInscripciones&m=modificacion&id={$dato['idInscripcion']}&origen=inscritos' class='btn btn-sm action-button'>
                                 <i class='bi bi-pencil'></i>
                             </a>";
                         echo '</td>';

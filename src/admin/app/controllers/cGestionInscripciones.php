@@ -67,7 +67,31 @@ class CGestionInscripciones{
     }
 
     public function modificarInscripcion(){
-        
+        print_r($_POST);
+        if(isset($_POST)){
+            $datos = array(
+                'nombre_Padre' => $_POST['nombre_tutor'],
+                'apellidos_Padre' => $_POST['apellidos_tutor'],
+                'DNI' => $_POST['dni'],
+                'IBAN' => $_POST['iban'],
+                'titular' => $_POST['titular'],
+                'fechamandato' => $_POST['fechamandato'],
+                'correo' => $_POST['correo'],
+                'nombreAlumno' => $_POST['nombreAlumno'],
+                'idclase' => $_POST['clase'],
+                'idInscripcion' => $_POST['idInscripcion']
+            );        
+            
+        if ($_POST['accion'] === 'completar') {
+            $datos['completada'] = 1;
+        } else if ($_POST['accion'] === 'guardar_pendiente') {
+            $datos['completada'] = 0;
+        } else if ($_POST['accion'] === 'guardar') {
+            $datos['completada'] = 1;
+        }
+        }
+
+
     }
 
     public function inscripcionesincompletas(){

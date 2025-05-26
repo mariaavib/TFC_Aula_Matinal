@@ -18,12 +18,14 @@ CREATE TABLE clases (
 -- Tabla: INSCRIPCIONES
 CREATE TABLE inscripciones (
     idInscripcion SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
-    nombrePadre VARCHAR(100),
-    DNI CHAR(8),
+    nombrePadre VARCHAR(50),
+    apellidosPadre VARCHAR(100),
+    DNI CHAR(9),
     IBAN CHAR(34),
     titularCuenta VARCHAR(100),
     fechaMandato DATE NOT NULL,
     telefono CHAR(9) NOT NULL,
+    correo VARCHAR(100) NOT NULL,
     completada BIT NOT NULL,
     PRIMARY KEY (idInscripcion)
 ) ENGINE=InnoDB;
@@ -31,12 +33,13 @@ CREATE TABLE inscripciones (
 -- Tabla: ALUMNO
 CREATE TABLE alumno (
     idAlumno SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
-    nombreAlumno VARCHAR(100) NOT NULL,
+    nombreAlumno VARCHAR(50) NOT NULL,
+    apellidosAlumno VARCHAR(100) NOT NULL,
     idClase TINYINT UNSIGNED NOT NULL,
     idInscripcion SMALLINT UNSIGNED NOT NULL,
     PRIMARY KEY (idAlumno),
-    CONSTRAINT fk_clase FOREIGN KEY (idClase) REFERENCES Clases(idClase) ON DELETE RESTRICT ON UPDATE CASCADE,
-    CONSTRAINT fk_inscripcion FOREIGN KEY (idInscripcion) REFERENCES Inscripciones(idInscripcion) ON DELETE CASCADE ON UPDATE CASCADE
+    CONSTRAINT fk_clase FOREIGN KEY (idClase) REFERENCES clases(idClase) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_inscripcion FOREIGN KEY (idInscripcion) REFERENCES inscripciones(idInscripcion) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB;
 
 -- Inserciones de clases de Educación Infantil

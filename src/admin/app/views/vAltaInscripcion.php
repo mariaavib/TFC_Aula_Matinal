@@ -34,8 +34,12 @@
                         </div>
                         <div class="card-body" style="background-color:  #bcd7e4;">
                             <div class="mb-3">
-                                <label class="form-label">NOMBRE Y APELLIDOS</label>
-                                <input type="text" name="nombre_apellidos_tutor" class="form-control bg-light" placeholder="Nombre y apellidos del tutor">
+                                <label class="form-label">NOMBRE</label>
+                                <input type="text" name="nombre_tutor" class="form-control bg-light" placeholder="Nombre del tutor">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">APELLIDOS</label>
+                                <input type="text" name="apellidos_tutor" class="form-control bg-light" placeholder="Apellidos del tutor">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">DNI</label>
@@ -46,8 +50,8 @@
                                 <input type="text" name="telefono" class="form-control bg-light" placeholder="Teléfono del tutor">
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">EMAIL</label>
-                                <input type="email" name="email" class="form-control bg-light" placeholder="Email del tutor">
+                                <label class="form-label">CORREO</label>
+                                <input type="email" name="correo" class="form-control bg-light" placeholder="Email del tutor">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">IBAN</label>
@@ -71,8 +75,12 @@
                         </div>
                         <div class="card-body" style="background-color: #bcd7e4;">
                             <div class="mb-3">
-                                <label class="form-label">NOMBRE Y APELLIDOS</label>
-                                <input type="text" name="nombre_apellidos_alumno" class="form-control bg-light" placeholder="Nombre y apellidos del alumno">
+                                <label class="form-label">NOMBRE</label>
+                                <input type="text" name="nombre_alumno" class="form-control bg-light" placeholder="Nombre del alumno">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">APELLIDOS</label>
+                                <input type="text" name="apellidos_alumno" class="form-control bg-light" placeholder="Apellidos del alumno">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">CLASE</label>
