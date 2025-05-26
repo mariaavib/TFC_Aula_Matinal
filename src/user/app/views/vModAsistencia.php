@@ -54,14 +54,16 @@
                 <div class="text-center">
                     <h4 class="d-inline-block bg-custom-secondary-mod text-white px-4 py-2 rounded w-auto">SELECCIONE FECHA</h4>
                 </div>      
-                    <form class="row g-4 align-items-center justify-content-center" action="index.php?c=ControlAsistencia&m=obtenerAsistenciaFecha" method="POST">
-                        <div class="col-md-4">
-                            <input type="date" class="form-control" id="fecha" name="fecha">
+                    <form class="row g-4 align-items-center justify-content-center" id="formFecha" action="index.php?c=ControlAsistencia&m=obtenerAsistenciaFecha" method="POST">
+                       <div class="col-md-4">
+                            <input type="date" class="form-control" id="fecha" name="fecha" 
+                                   value="<?php echo isset($datos['fechaSeleccionada']) ? $datos['fechaSeleccionada'] : ''; ?>">
                         </div>
                         <div class="col-md-2">
                             <button type="submit" id="btnBuscar" class="btn bg-custom-secondary text-white">ACEPTAR</button>
                         </div>
                     </form>
+                    <div id="mensajeError" class="alert alert-danger mt-3" style="display: none;"></div>
                 </div>
             </div>
             <div class="col-md-8 mt-5 mx-auto">
@@ -111,9 +113,10 @@
             </div>
         </div>
     </div>
-    <input type="hidden" id="fechaSeleccionada" value="<?php echo isset($_GET['anio']) ? $_GET['anio'].'-'.$_GET['mes'].'-'.$_GET['dia'] : ''; ?>">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/modificarAsistencia.js"></script>
-</body>
+    
+    <script src="js/validacionFecha.js"></script>
+        <script src="js/modificarAsistencia.js"></script>
+    </body>
 </html>
 

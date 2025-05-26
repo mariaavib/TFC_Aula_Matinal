@@ -57,29 +57,12 @@
                 exit;
             }
             /**
-             * Modifica la asistencia de un alumno
-             *
-             * Recibe los datos del alumno y la asistencia desde el formulario.
-             *
+             * Vista para modificar la asistencia de los alumnos
              */
             public function modificar() {
                 $this->vista = 'vModAsistencia';
                 $datos = [];
 
-                if(isset($_GET['dia']) && isset($_GET['mes']) && isset($_GET['anio'])) {
-                    $dia = $_GET['dia'];
-                    $mes = $_GET['mes'];
-                    $anio = $_GET['anio'];
-                    $fecha = "$anio-$mes-$dia";
-
-                    $datos['alumnos'] = $this->objModelo->listarAlumnos();
-                    $datos['asistencias'] = $this->objModelo->asistenciaFecha($fecha);
-                    
-                    $meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 
-                             'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
-                    $datos['fecha'] = "$dia DE " . $meses[$mes - 1] . " $anio"; // se resta 1 porque los meses en PHP van de 0 a 11
-                }
-                
                 return $datos;
             }
             /**
@@ -103,7 +86,8 @@
                     return [
                         'alumnos' => $alumnos, 
                         'asistencias' => $asistencias,
-                        'fecha' => $fechaFormateada
+                        'fecha' => $fechaFormateada,
+                        'fechaSeleccionada' => $fecha  
                     ];
                 }
                 return [];
@@ -115,14 +99,42 @@
              *
              */
             public function modificarAsistencia(){
-                $idAlumno = $_POST['idAlumno'];
-                $fecha = $_POST['fecha'];
-                $asiste = $_POST['asiste'];
-                
-                $resultado = $this->objModelo->modificarAsistencia($idAlumno, $fecha, $asiste);
-                
                 header('Content-Type: application/json');
-                echo json_encode(['success' => $resultado]);
+                
+                $idAlumno = $_POST['idAlumno'] ?? null;
+                $fecha = $_POST['fecha'] ?? null;
+                $asiste = $_POST['asiste'] ?? null;
+            
+                // Debug
+                error_log("Datos recibidos - ID: $idAlumno, Fecha: $fecha, Asiste: $asiste");
+            
+                if ($idAlumno === null || $fecha === null || $asiste === null) {
+                    echo json_encode(['success' => false, 'error' => 'Datos incompletos']);
+                    exit;
+                }
+            
+                try {
+                    $resultado = $this->objModelo->modificarAsistencia($idAlumno, $fecha, $asiste);
+                    echo json_encode(['success' => $resultado]);
+                } catch (Exception $e) {
+                    echo json_encode(['success' => false, 'error' => $e->getMessage()]);
+                }
                 exit;
+            }
+            
+            /**
+             * Verifica si un día es no lectivo
+             *
+             * Recibe la fecha desde el formulario. 
+             * 
+             */
+            public function verificarDiaNoLectivo() {
+                header('Content-Type: application/json');
+                $fecha = isset($_GET['fecha']) ? $_GET['fecha'] : '';
+            
+                $resultado = $this->objModelo->esDiaNoLectivo($fecha);
+            
+                echo json_encode($resultado);
+                exit;  
             }
     }
