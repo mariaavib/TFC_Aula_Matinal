@@ -6,11 +6,11 @@ document.addEventListener('DOMContentLoaded', function(){
     const btnBuscar = document.getElementById('btnBuscar');
     const checkbox = document.querySelectorAll('.form-check-input');
 
-    if (btnBuscar) {
+    if(btnBuscar){
         btnBuscar.addEventListener('click', buscarAsistencias);
     }
 
-    if (checkbox) {
+    if(checkbox){
         checkbox.forEach(checkbox =>{
             checkbox.addEventListener('change', modificarAsistencia);
         });

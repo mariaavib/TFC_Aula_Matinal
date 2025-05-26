@@ -59,7 +59,7 @@
                                         <a href="index.php?c=DiasNoLectivos&m=formEdit&id='.$valor['idDia'].'" class="btn btn-sm me-2 action-button">
                                             <i class="bi bi-pencil"></i>
                                         </a>
-                                        <a class="btn btn-sm action-button" data-bs-toggle="modal" data-bs-target="#modalBorrado" data-id="' . $valor['idDia'] . '">
+                                        <a class="btn btn-sm action-button" data-bs-toggle="modal" data-bs-target="#modalBorrado" data-id="'.$valor['idDia'].'">
                                             <i class="bi bi-trash"></i>
                                         </a>
                                     </td>

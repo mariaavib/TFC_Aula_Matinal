@@ -77,7 +77,7 @@
                     
                     $meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 
                              'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
-                    $datos['fecha'] = "$dia DE " . $meses[$mes - 1] . " $anio";
+                    $datos['fecha'] = "$dia DE " . $meses[$mes - 1] . " $anio"; // se resta 1 porque los meses en PHP van de 0 a 11
                 }
                 
                 return $datos;

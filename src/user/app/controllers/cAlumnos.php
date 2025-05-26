@@ -50,6 +50,9 @@
              * Obtiene los detalles de un alumno y los devuelve en formato JSON
              */
             public function obtenerDetalles() {
+                /**
+                 * Obtiene los detalles de un alumno y los devuelve en formato JSON
+                 */
                 header('Content-Type: application/json');
                 if(isset($_GET['id'])){
                     $idAlumno = $_GET['id'];
@@ -59,11 +62,17 @@
                 $alumno = $this->objModelo->obtenerDetallesAlumno($idAlumno);
                 
                 if ($alumno) {
+                    /**
+                     * Si el alumno existe, se devuelve en formato JSON
+                     */
                     echo json_encode([
                         'success' => true,
                         'alumno' => $alumno
                     ]);
                 } else {
+                    /**
+                     * Si el alumno no existe, se devuelve un mensaje de error en formato JSON
+                     */
                     echo json_encode([
                         'success' => false,
                         'message' => 'Alumno no encontrado'

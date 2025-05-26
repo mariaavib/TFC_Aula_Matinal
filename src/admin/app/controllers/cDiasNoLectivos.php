@@ -51,9 +51,11 @@
                     $datos = $this->objModelo->obtenerPorId($id);
                     
                     if(isset($_GET['error'])) {
-                        $datos['error'] = ($_GET['error'] == 1) ? 
-                            'Error al actualizar el registro.' : 
-                            'Todos los campos son obligatorios.';
+                        if ($_GET['error'] == 1){
+                            $datos['error'] = 'Error al actualizar el registro.';
+                        }else{
+                            $datos['error'] = 'Todos los campos son obligatorios.';
+                        }
                     }
                 }
 
