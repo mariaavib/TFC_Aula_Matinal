@@ -33,8 +33,20 @@
 
                 $erroresValidacion = [];
 
-                if (empty($inicioCurso) && empty($finCurso)) {
-                    $erroresValidacion[] = "No se pueden dejar campos vacíos.";
+                // Primero, verificar si los campos están vacíos
+                if (empty($inicioCurso)) {
+                    $erroresValidacion[] = "La 'Fecha de Inicio' no puede estar vacía.";
+                }
+                if (empty($finCurso)) {
+                    $erroresValidacion[] = "La 'Fecha de Fin' no puede estar vacía.";
+                }
+
+                // Si hay errores de campos vacíos, retornar inmediatamente
+                if (!empty($erroresValidacion)) {
+                    $this->vista = 'vFechaCurso';
+                    $datos = $this->objModelo->listarFechaCurso(); // Cargar datos existentes para la vista
+                    $datos['errores'] = $erroresValidacion;
+                    return $datos;
                 }
 
                 if (!empty($inicioCurso) && !empty($finCurso)) {
@@ -64,7 +76,7 @@
 
                 //$resultado devuelve true o false según el resultado de la inserción/modificación en la bbdd
                 if ($resultado) {
-                    $datos['mensaje_exito'] = "Fechas del Curso guardadas correctamente.";
+                    $datos['mensaje_exito'] = "Fechas del curso guardadas correctamente.";
                 } else {
                     $datos['errores_guardado'] = ["Hubo un problema al guardar las fechas del curso."];
                 }
