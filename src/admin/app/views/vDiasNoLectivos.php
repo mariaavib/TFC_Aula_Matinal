@@ -2,6 +2,7 @@
     <html lang="es">
     <head>
         <title>Panel Administrador - Días no lectivos</title>
+        <link rel="icon" href="assets/img/favicon-img.png" type="image/x-icon">
     </head>
     <body>   
         <?php
