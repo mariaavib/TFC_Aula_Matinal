@@ -25,11 +25,11 @@ export class CAltaDiasNoLectivos {
             errores.push("El campo fecha es obligatorio.");
         }
         if (!motivo || motivo.trim() === "") {
-            errores.push("El motivo es obligatorio.");
+            errores.push("El campo motivo es obligatorio.");
         } else if (motivo.length < 3) {
-            errores.push("El motivo debe tener mas de 3 caracteres.");
+            errores.push("El campo motivo debe tener mas de 3 caracteres.");
         } else if (motivo.length > 100) {
-            errores.push("El motivo no puede tener más de 100 caracteres.");
+            errores.push("El campo motivo no puede tener más de 100 caracteres.");
         }
         return errores;
     }
