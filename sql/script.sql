@@ -39,4 +39,3 @@ CREATE TABLE asistencia(
     CONSTRAINT pk_idAsistencia PRIMARY KEY(idAsistencia),
     CONSTRAINT fk_idAlumno FOREIGN KEY(idAlumno) REFERENCES alumno(idAlumno)
 );
-

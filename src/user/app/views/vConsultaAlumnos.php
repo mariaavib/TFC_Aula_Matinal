@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 <?php
     /**
      * Vista del panel de control de asistencia para consultar los alumnos
@@ -8,7 +6,6 @@
      * 
      */
 ?>
->>>>>>> b4d2b36cb88c356ef6feddce79abd2a29cdcaa71
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -70,11 +67,9 @@
                                     <thead class="bg-light">
                                         <tr>
                                             <th>NOMBRE ALUMNO</th>
-<<<<<<< HEAD
                                             <th>TELÉFONO TUTOR</th>
-=======
                                             <th>TELÉFONO PADRE/MADRE O TUTOR</th>
->>>>>>> b4d2b36cb88c356ef6feddce79abd2a29cdcaa71
+                                            <th>TELÉFONO TUTOR</th>
                                             <th>ACCIONES</th>
                                         </tr>
                                     </thead>

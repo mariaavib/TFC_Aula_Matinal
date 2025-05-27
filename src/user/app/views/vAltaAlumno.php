@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 <?php
     /**
      * Vista del panel de control de asistencia para dar de alta a un alumno
@@ -8,7 +6,6 @@
      * 
      */
 ?>
->>>>>>> b4d2b36cb88c356ef6feddce79abd2a29cdcaa71
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -64,7 +61,6 @@
                         </div>
                         <div class="card-body" style="background-color:  #bcd7e4;">
                             <div class="mb-3">
-<<<<<<< HEAD
                                 <label class="form-label">NOMBRE Y APELLIDOS</label>
                                 <input type="text" name="nombreAlumno" class="form-control bg-light">
                             </div>
@@ -72,7 +68,6 @@
                                 <label class="form-label">TELÉFONO PADRE/MADRE O TUTOR LEGAL</label>
                                 <input type="text" name="telefono" class="form-control bg-light">
                             </div>
-=======
                                 <label class="form-label">NOMBRE DEL ALUMNO</label>
                                 <input type="text" name="nombreAlumno" class="form-control bg-light">
                             </div>
@@ -103,7 +98,6 @@
                                     ?>
                                 </select>
                             </div>
->>>>>>> b4d2b36cb88c356ef6feddce79abd2a29cdcaa71
                         </div>
                     </div>
                     <div class="text-center mt-4 mb-4">
