@@ -68,53 +68,51 @@
                 </div>
             </div>
             <div class="col-md-8 mt-5 mx-auto">
-                <div class="text-center mb-4">
-                    <h4 class="d-inline-block bg-custom-secondary-mod text-white px-4 py-2 rounded w-auto">
-                        <?php 
-                            if(isset($datos['fecha'])){
-                                echo $datos['fecha'];
-                            }
-                        ?>
-                    </h4>
-                </div>
-                <div class="container p-0">
-                    <div class="row justify-content-center m-0">
-                        <div class="col-md-8 col-sm-12 p-0">
-                            <div class="table-responsive">
-                                <table class="table table-sm table-asistencia mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th class="bg-custom-light pe-0 columna-nombre">NOMBRE DEL ALUMNO</th>
-                                            <th class="bg-custom-light text-center ps-2 columna-asiste">ASISTE</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php 
-                                            if (isset($datos['alumnos']) && is_array($datos['alumnos'])) { 
-                                                foreach ($datos['alumnos'] as $alumno) { 
-                                                    $seleccionado = '';
-                                                    if (isset($datos['asistencias']) && in_array($alumno['idAlumno'], $datos['asistencias'])) {
-                                                        $seleccionado = 'checked'; 
-                                                    }
+                <?php if(isset($datos['fecha']) && !empty($datos['fecha'])): ?>
+                    <div class="text-center mb-4">
+                        <h4 class="d-inline-block bg-custom-secondary-mod text-white px-4 py-2 rounded w-auto">
+                            <?php echo $datos['fecha']; ?>
+                        </h4>
+                    </div>
+                    <div class="container p-0">
+                        <div class="row justify-content-center m-0">
+                            <div class="col-md-8 col-sm-12 p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-sm table-asistencia mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th class="bg-custom-light pe-0 columna-nombre">NOMBRE DEL ALUMNO</th>
+                                                <th class="bg-custom-light text-center ps-2 columna-asiste">ASISTE</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php 
+                                                if (isset($datos['alumnos']) && is_array($datos['alumnos'])) { 
+                                                    foreach ($datos['alumnos'] as $alumno) { 
+                                                        $seleccionado = '';
+                                                        if (isset($datos['asistencias']) && in_array($alumno['idAlumno'], $datos['asistencias'])) {
+                                                            $seleccionado = 'checked'; 
+                                                        }
 
-                                                    echo "<tr>
-                                                            <td class='py-1 pe-0 columna-nombre'>" . 
-                                                                htmlspecialchars($alumno['nombreAlumno']) . 
-                                                            "</td>
-                                                            <td>
-                                                                <input type='checkbox' class='form-check-input' data-id='" . 
-                                                                    htmlspecialchars($alumno['idAlumno']) . "' $seleccionado>
-                                                            </td>
-                                                        </tr>";
+                                                        echo "<tr>
+                                                                <td class='py-1 pe-0 columna-nombre'>" . 
+                                                                    htmlspecialchars($alumno['nombreAlumno']) . 
+                                                                "</td>
+                                                                <td>
+                                                                    <input type='checkbox' class='form-check-input' data-id='" . 
+                                                                        htmlspecialchars($alumno['idAlumno']) . "' $seleccionado>
+                                                                </td>
+                                                            </tr>";
+                                                    }
                                                 }
-                                            }
-                                        ?>
-                                    </tbody>
-                                </table>
+                                            ?>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>
