@@ -1,3 +1,14 @@
+<<<<<<< HEAD
+=======
+<?php
+    /**
+     * Vista del panel de control de asistencia para consultar los alumnos
+     *
+     * Muestra una tabla con los nombres de los alumnos y un botón para ver los detalles de cada alumno
+     * 
+     */
+?>
+>>>>>>> b4d2b36cb88c356ef6feddce79abd2a29cdcaa71
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -59,7 +70,11 @@
                                     <thead class="bg-light">
                                         <tr>
                                             <th>NOMBRE ALUMNO</th>
+<<<<<<< HEAD
                                             <th>TELÉFONO TUTOR</th>
+=======
+                                            <th>TELÉFONO PADRE/MADRE O TUTOR</th>
+>>>>>>> b4d2b36cb88c356ef6feddce79abd2a29cdcaa71
                                             <th>ACCIONES</th>
                                         </tr>
                                     </thead>

@@ -36,12 +36,12 @@
                 </div>
             </div>
             <div class="mb-3">
-                <a href="../admin/index.php?c=DiasNoLectivos&m=alta" class="btn rounded-circle d-flex align-items-center justify-content-center add-button">
+                <a href="../admin/index.php?c=DiasNoLectivos&m=alta" class="btn d-flex align-items-center justify-content-center add-button">
                     <i class="bi bi-plus"></i>
                 </a>
             </div>
             <div class="table-responsive">
-                <table class="table mb-0">
+                <table class="table mb-0 text-center">
                     <thead>
                         <tr>
                             <th class="border-bottom">Día</th>
@@ -59,7 +59,7 @@
                                         <a href="index.php?c=DiasNoLectivos&m=formEdit&id='.$valor['idDia'].'" class="btn btn-sm me-2 action-button">
                                             <i class="bi bi-pencil"></i>
                                         </a>
-                                        <a class="btn btn-sm action-button" data-bs-toggle="modal" data-bs-target="#modalBorrado" data-id="' . $valor['idDia'] . '">
+                                        <a class="btn btn-sm action-button" data-bs-toggle="modal" data-bs-target="#modalBorrado" data-id="'.$valor['idDia'].'">
                                             <i class="bi bi-trash"></i>
                                         </a>
                                     </td>

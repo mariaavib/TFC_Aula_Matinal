@@ -1,4 +1,11 @@
 <?php
+    /**
+     * Controlador cDiasNoLectivos
+     * 
+     * Controla la gestión de dias no lectivos, permitiendo mostrar la vista de los días no lectivos,
+     * mostrar el formulario de alta de días no lectivos, insertar un nuevo día no lectivo,
+     * mostrar el formulario de edición de días no lectivos, editar un día no lectivo y eliminar un día no lectivo.
+     */
     class CDiasNoLectivos{
             private $objModelo;
             public $vista;    
@@ -44,9 +51,11 @@
                     $datos = $this->objModelo->obtenerPorId($id);
                     
                     if(isset($_GET['error'])) {
-                        $datos['error'] = ($_GET['error'] == 1) ? 
-                            'Error al actualizar el registro.' : 
-                            'Todos los campos son obligatorios.';
+                        if ($_GET['error'] == 1){
+                            $datos['error'] = 'Error al actualizar el registro.';
+                        }else{
+                            $datos['error'] = 'Todos los campos son obligatorios.';
+                        }
                     }
                 }
 

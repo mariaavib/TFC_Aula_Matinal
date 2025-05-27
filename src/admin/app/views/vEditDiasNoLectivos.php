@@ -9,9 +9,7 @@
     <link href="assets/css/style.css" rel="stylesheet">
 </head>
 <body>
-    <?php
-        require_once('layouts/headerAdmin.php');
-    ?>
+    <?php require_once('layouts/headerAdmin.php'); ?>
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
@@ -29,13 +27,13 @@
                     <div class="mb-4">
                         <label for="dia" class="form-label">DÍA NO LECTIVO</label>
                         <input type="date" class="form-control bg-light" id="dia" name="fecha" 
-                               value="<?php echo isset($datos['fecha']) ? $datos['fecha'] : ''; ?>">
-                        <input type="hidden" name="id" value="<?php echo isset($datos['idDia']) ? $datos['idDia'] : ''; ?>">
+                                value="<?php echo $datos['fecha'] ?? ''; ?>">  <!-- se muestra la fecha del día no lectivo si existe si no vacio -->
+                        <input type="hidden" name="id" value="<?php echo $datos['idDia'] ?? ''; ?>">
                     </div>
                     <div class="mb-4">
                         <label for="motivo" class="form-label">MOTIVO</label>
                         <input type="text" class="form-control bg-light" id="motivo" name="motivo" 
-                               value="<?php echo isset($datos['motivo']) ? $datos['motivo'] : ''; ?>">
+                               value="<?php echo $datos['motivo'] ?? ''; ?>">
                     </div>
                     <div class="text-center mt-5">
                         <a href="../admin/index.php?c=DiasNoLectivos&m=listar" class="btn form-button me-2">CANCELAR</a>

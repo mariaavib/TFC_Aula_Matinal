@@ -1,3 +1,14 @@
+<<<<<<< HEAD
+=======
+<?php
+    /**
+     * Vista del panel de control de asistencia para dar de alta a un alumno
+     *
+     * Muestra un formulario para dar de alta a un nuevo alumno
+     * 
+     */
+?>
+>>>>>>> b4d2b36cb88c356ef6feddce79abd2a29cdcaa71
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -53,6 +64,7 @@
                         </div>
                         <div class="card-body" style="background-color:  #bcd7e4;">
                             <div class="mb-3">
+<<<<<<< HEAD
                                 <label class="form-label">NOMBRE Y APELLIDOS</label>
                                 <input type="text" name="nombreAlumno" class="form-control bg-light">
                             </div>
@@ -60,6 +72,38 @@
                                 <label class="form-label">TELÉFONO PADRE/MADRE O TUTOR LEGAL</label>
                                 <input type="text" name="telefono" class="form-control bg-light">
                             </div>
+=======
+                                <label class="form-label">NOMBRE DEL ALUMNO</label>
+                                <input type="text" name="nombreAlumno" class="form-control bg-light">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">APELLIDOS DEL ALUMNO</label>
+                                <input type="text" name="apellidosAlumno" class="form-control bg-light">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">NOMBRE PADRE/MADRE O TUTOR LEGAL</label>
+                                <input type="text" name="nombrePadre" class="form-control bg-light">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">APELLIDOS PADRE/MADRE O TUTOR LEGAL</label>
+                                <input type="text" name="apellidosPadre" class="form-control bg-light">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">TELÉFONO PADRE/MADRE O TUTOR LEGAL</label>
+                                <input type="text" name="telefono" class="form-control bg-light">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">CLASE</label>
+                                <select name="idClase" class="form-control bg-light">
+                                    <option value="" disabled selected>Seleccione una clase</option>
+                                    <?php
+                                        foreach ($datos['clases'] as $clase) {
+                                            echo '<option value="' . $clase['idClase'] . '">' . $clase['clase'] . '</option>';
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+>>>>>>> b4d2b36cb88c356ef6feddce79abd2a29cdcaa71
                         </div>
                     </div>
                     <div class="text-center mt-4 mb-4">
