@@ -160,9 +160,6 @@
             echo json_encode(['success' => true]);
             exit;
         }
-        
-        
-        
         /**
          * Verifica si una fecha es no lectiva y devuelve información detallada.
          *

@@ -21,33 +21,33 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark mb-4">
-            <div class="container-fluid">
-                <div class="d-flex align-items-center">
-                    <img src="assets/img/logoEscuela.png" alt="Logo Escuela" class="navbar-logo">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="index.php?c=ControlAsistencia&m=gestionar">CONTROL ASISTENCIA</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="index.php?c=Alumnos&m=alta">ALTA ALUMNO</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" href="index.php?c=ControlAsistencia&m=modificar">MODIFICAR ASISTENCIA</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="index.php?c=Alumnos&m=consultar">CONSULTAR ALUMNOS</a>
-                            </li>
-                            <li class="nav-item active">
-                                <a class="nav-link" href="index.php?c=DiasNoLectivos&m=verCalendario">DIAS NO LECTIVOS</a>
-                            </li>
-                        </ul>
-                    </div>
+        <div class="container-fluid">
+            <div class="d-flex align-items-center">
+                <img src="assets/img/logoEscuela.png" alt="Logo Escuela" class="navbar-logo">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?c=ControlAsistencia&m=gestionar">CONTROL ASISTENCIA</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?c=Alumnos&m=alta">ALTA ALUMNO</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="index.php?c=ControlAsistencia&m=modificar">MODIFICAR ASISTENCIA</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php?c=Alumnos&m=consultar">CONSULTAR ALUMNOS</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="index.php?c=DiasNoLectivos&m=verCalendario">DIAS NO LECTIVOS</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
+        </div>
     </nav>
     <div class="container mt-3">
         <div class="row justify-content-center">

@@ -56,7 +56,7 @@
                     }
                 
                     if ($idAlumno !== null && $asiste !== null) {
-                        $resultado = $this->objModelo->registrarAsistencia($idAlumno, $asiste === 1);
+                        $resultado = $this->objModelo->registrarAsistencia($idAlumno, $asiste == 1);
                         echo json_encode(['success' => $resultado]);
                         exit;
                     }

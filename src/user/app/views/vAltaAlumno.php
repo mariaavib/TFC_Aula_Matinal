@@ -92,7 +92,7 @@
                                     <option value="" disabled selected>Seleccione una clase</option>
                                     <?php
                                         foreach ($datos['clases'] as $clase) {
-                                            echo '<option value="' . $clase['idClase'] . '">' . $clase['clase'] . '</option>';
+                                            echo '<option value="'.$clase['idClase'].'">'.$clase['clase'].'</option>';
                                         }
                                     ?>
                                 </select>
