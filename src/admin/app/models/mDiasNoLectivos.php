@@ -1,4 +1,9 @@
 <?php
+    /**
+     * Modelo mDiasNoLectivos
+     * 
+     * Permite listrar, obetener por id, dar de alta, modificar y eliminar un dia no lectivo
+     */
     class MDiasNoLectivos{
         private $conexion;
 

@@ -1,19 +1,27 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const btnBuscar = document.getElementById('btnBuscar');
-    const checkboxes = document.querySelectorAll('.form-check-input');
+/**
+ * Gestiona la busqueda de asistencias y la modificación de las mismas.
+ */
 
-    if (btnBuscar) {
+document.addEventListener('DOMContentLoaded', function(){
+    const btnBuscar = document.getElementById('btnBuscar');
+    const checkbox = document.querySelectorAll('.form-check-input');
+
+    if(btnBuscar){
         btnBuscar.addEventListener('click', buscarAsistencias);
     }
 
-    if (checkboxes) {
-        checkboxes.forEach(checkbox => {
+    if(checkbox){
+        checkbox.forEach(checkbox =>{
             checkbox.addEventListener('change', modificarAsistencia);
         });
     }
 });
 
-function buscarAsistencias() {
+/**
+ * Valida la fecha seleccionada y muestra las asistencias correspondientes.
+ * 
+ */
+function buscarAsistencias(){
     const dia = document.getElementById('dia').value;
     const mes = document.getElementById('mes').value;
     const anio = document.getElementById('anio').value;
@@ -26,7 +34,10 @@ function buscarAsistencias() {
     window.location.href = `index.php?c=ControlAsistencia&m=modificar&dia=${dia}&mes=${mes}&anio=${anio}`;
 }
 
-function modificarAsistencia() {
+/**
+ * Modifica la asistencia de un alumno en una fecha específica.
+ */
+function modificarAsistencia(){
     const idAlumno = this.dataset.id;
     const fecha = document.getElementById('fechaSeleccionada').value;
     const asiste = this.checked ? 1 : 0;

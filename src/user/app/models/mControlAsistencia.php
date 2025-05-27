@@ -1,4 +1,15 @@
 <?php
+<<<<<<< HEAD
+=======
+/**
+ * Clase MControlAsistencia
+ * 
+ * Clase que gestiona la lógica de la aplicación relacionada con el control de asistencia.
+ * Tiene métodos para verificar si es un día lectivo, listar alumnos, registrar asistencia,
+ * obtener asistencia de hoy y de una fecha específica, y modificar la asistencia de un alumno.
+ * 
+ */
+>>>>>>> b4d2b36cb88c356ef6feddce79abd2a29cdcaa71
     class MControlAsistencia{
         private $conexion;
 
@@ -7,7 +18,16 @@
             $objConexion = new Conexion();
             $this->conexion = $objConexion->conexion;
         }
+<<<<<<< HEAD
 
+=======
+        /**
+         * Verifica si es un día lectivo.
+         *
+         * @param string $fecha La fecha a verificar en formato 'YYYY-MM-DD'.
+         * @return bool True si es un día lectivo, False en caso contrario.
+         */
+>>>>>>> b4d2b36cb88c356ef6feddce79abd2a29cdcaa71
         public function esDiaLectivo($fecha){
             //Verificar si es fin de semana
             $diaSemana = date('N', strtotime($fecha));
@@ -26,9 +46,19 @@
 
             return $fila['total'] == 0;
         }
+<<<<<<< HEAD
 
         public function listarAlumnos(){
             if (!$this->esDiaLectivo(date('Y-m-d'))) {
+=======
+        /**
+         * Obtiene la lista de alumnos inscritos.
+         *
+         * @return array Un array con los datos de los alumnos inscritos.
+         */
+        public function listarAlumnos(){
+            if (!$this->esDiaLectivo(date('Y-m-d'))){
+>>>>>>> b4d2b36cb88c356ef6feddce79abd2a29cdcaa71
                 return [];
             }
             $sql = "SELECT alumno.idAlumno, alumno.nombreAlumno  
@@ -43,16 +73,35 @@
             }
             return $alumnos;
         }
+<<<<<<< HEAD
 
+=======
+        /**
+         * Registra la asistencia de un alumno.
+         *
+         * @param int $idAlumno El ID del alumno.
+         * @param bool $asiste True si el alumno asiste, False si no asiste.
+         * @return bool True si se registró la asistencia correctamente, False en caso contrario.   
+         */
+>>>>>>> b4d2b36cb88c356ef6feddce79abd2a29cdcaa71
         public function registrarAsistencia($idAlumno, $asiste){
             if(!$this->esDiaLectivo(date('Y-m-d'))){
                 return false;
             }
+<<<<<<< HEAD
             $fecha = date('Y-m-d');
 
             if($asiste){
                 $sql = "INSERT INTO asistencia (fecha, pagado, idAlumno) VALUES (?, 0, ?)";
             }else{
+=======
+            
+            $fecha = date('Y-m-d');
+            
+            if($asiste) {
+                $sql = "INSERT INTO asistencia (fecha, pagado, idAlumno) VALUES (?, 0, ?)";
+            } else {
+>>>>>>> b4d2b36cb88c356ef6feddce79abd2a29cdcaa71
                 $sql = "DELETE FROM asistencia WHERE fecha = ? AND idAlumno = ?";
             }
             $stmt = $this->conexion->prepare($sql);
@@ -60,8 +109,18 @@
             $resultado = $stmt->execute();
             $stmt->close();
             
+<<<<<<< HEAD
             return ['success' => $resultado];
         }
+=======
+            return $resultado;
+        }
+        /**
+         * Obtiene la lista de alumnos que asistieron hoy.
+         * 
+         * @return array Un array con los ID de los alumnos que asistieron hoy.
+         */
+>>>>>>> b4d2b36cb88c356ef6feddce79abd2a29cdcaa71
 
         public function asistenciaHoy(){
             $fecha = date('Y-m-d');
@@ -71,13 +130,26 @@
             $stmt->execute();
             $resultado = $stmt->get_result();
             $asistencias = [];
+<<<<<<< HEAD
             while ($fila = $resultado->fetch_assoc()) {
+=======
+            while ($fila = $resultado->fetch_assoc()){
+>>>>>>> b4d2b36cb88c356ef6feddce79abd2a29cdcaa71
                 $asistencias[] = $fila['idAlumno'];
             }
             $stmt->close();
             return $asistencias;
         }
+<<<<<<< HEAD
 
+=======
+        /**
+         * Obtiene la lista de alumnos que asistieron en una fecha específica.
+         * 
+         * @param string $fecha La fecha en formato 'YYYY-MM-DD'.
+         * @return array Un array con los ID de los alumnos que asistieron en la fecha especificada.
+         */
+>>>>>>> b4d2b36cb88c356ef6feddce79abd2a29cdcaa71
         public function asistenciaFecha($fecha){
             $sql = "SELECT idAlumno FROM asistencia WHERE fecha = ?";
             $stmt = $this->conexion->prepare($sql);
@@ -91,7 +163,17 @@
             $stmt->close();
             return $asistencias;
         }
+<<<<<<< HEAD
 
+=======
+        /**
+         * Modifica la asistencia de un alumno en una fecha específica.
+         * 
+         * @param int $idAlumno El ID del alumno.
+         * @param string $fecha La fecha en formato 'YYYY-MM-DD'.
+         * @param bool $asiste True si el alumno asiste, False si no asiste.
+         */
+>>>>>>> b4d2b36cb88c356ef6feddce79abd2a29cdcaa71
         public function modificarAsistencia($idAlumno, $fecha,$asiste){
             if($asiste){
                 $sql = "INSERT INTO asistencia (fecha, pagado, idAlumno) VALUES (?, 0,?)";
@@ -105,5 +187,10 @@
 
             return $resultado;
         }
+<<<<<<< HEAD
         
     }
+=======
+    }
+?>
+>>>>>>> b4d2b36cb88c356ef6feddce79abd2a29cdcaa71

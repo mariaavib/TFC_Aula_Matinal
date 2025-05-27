@@ -1,3 +1,16 @@
+<<<<<<< HEAD
+=======
+<?php
+    /**
+     * Vista del panel de control de asistencia para modificar asistencia
+     *
+     * Muestra 3 selects para seleccionar la fecha y un botón para buscar
+     *
+     * Muestra la tabla de asistencia del dia seleccionado 
+     *
+     */
+?>
+>>>>>>> b4d2b36cb88c356ef6feddce79abd2a29cdcaa71
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -44,6 +57,7 @@
                 <div class="text-center">
                     <h4 class="d-inline-block bg-custom-secondary-mod text-white px-4 py-2 rounded w-auto">SELECCIONE FECHA</h4>
                 </div>      
+<<<<<<< HEAD
                 <div class="row justify-content-center">
                     <form class="row g-4 align-items-center justify-content-center" action="index.php?c=ControlAsistencia&m=obtenerAsistenciaFecha" method="POST">
                         <div class="col-md-2">
@@ -81,10 +95,19 @@
                         </div>
                         <div class="col-auto">
                             <button type="button" id="btnBuscar" class="btn btn-lg bg-custom-secondary text-white">ACEPTAR</button>
+=======
+                    <form class="row g-4 align-items-center justify-content-center" action="index.php?c=ControlAsistencia&m=obtenerAsistenciaFecha" method="POST">
+                        <div class="col-md-4">
+                            <input type="date" class="form-control" id="fecha" name="fecha">
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" id="btnBuscar" class="btn bg-custom-secondary text-white">ACEPTAR</button>
+>>>>>>> b4d2b36cb88c356ef6feddce79abd2a29cdcaa71
                         </div>
                     </form>
                 </div>
             </div>
+<<<<<<< HEAD
             <div class="col-md-8 mt-5">
                 <div class="text-center mb-4">
                     <h4 class="d-inline-block bg-custom-secondary-mod text-white px-4 py-2 rounded w-auto">
@@ -100,6 +123,23 @@
                         <div class="col-md-8 col-sm-12">
                             <div class="table-responsive">
                                 <table class="table table-sm table-asistencia">
+=======
+            <div class="col-md-8 mt-5 mx-auto">
+                <div class="text-center mb-4">
+                    <h4 class="d-inline-block bg-custom-secondary-mod text-white px-4 py-2 rounded w-auto">
+                        <?php 
+                            if(isset($datos['fecha'])){
+                                echo $datos['fecha'];
+                            }
+                        ?>
+                    </h4>
+                </div>
+                <div class="container p-0">
+                    <div class="row justify-content-center m-0">
+                        <div class="col-md-8 col-sm-12 p-0">
+                            <div class="table-responsive">
+                                <table class="table table-sm table-asistencia mb-0">
+>>>>>>> b4d2b36cb88c356ef6feddce79abd2a29cdcaa71
                                     <thead>
                                         <tr>
                                             <th class="bg-custom-light pe-0 columna-nombre">NOMBRE DEL ALUMNO</th>
@@ -108,8 +148,13 @@
                                     </thead>
                                     <tbody>
                                         <?php 
+<<<<<<< HEAD
                                             if(isset($datos['alumnos']) && is_array($datos['alumnos'])) { 
                                                 foreach($datos['alumnos'] as $alumno) { 
+=======
+                                            if(isset($datos['alumnos']) && is_array($datos['alumnos'])){ 
+                                                foreach($datos['alumnos'] as $alumno){ 
+>>>>>>> b4d2b36cb88c356ef6feddce79abd2a29cdcaa71
                                                     echo "<tr>
                                                         <td class='py-1 pe-0 columna-nombre'>" . 
                                                             htmlspecialchars($alumno['nombreAlumno']) . 
