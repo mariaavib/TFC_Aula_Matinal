@@ -11,7 +11,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Monitor Control Asistencia</title>
+    <title>Panel Monitor - Control Asistencia</title>
+    <link rel="icon" href="assets/img/favicon-img.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link href="assets/css/style.css" rel="stylesheet">
@@ -54,6 +55,11 @@
                     <hr>
                 </h4>
                 <div class="alert alert-danger" style="display: none;"></div>
+                <?php 
+                    if (isset($datos['error'])) {
+                        echo '<div class="alert alert-danger">'.$datos['error'].'</div>';
+                    }
+                ?>
                 <form action="index.php?c=Alumnos&m=insertar" method="POST">
                     <div class="card mb-4">
                         <div class="card-header text-white" style="background-color: #006EA4;">
@@ -93,7 +99,7 @@
                                     <option value="" disabled selected>Seleccione una clase</option>
                                     <?php
                                         foreach ($datos['clases'] as $clase) {
-                                            echo '<option value="' . $clase['idClase'] . '">' . $clase['clase'] . '</option>';
+                                            echo '<option value="'.$clase['idClase'].'">'.$clase['clase'].'</option>';
                                         }
                                     ?>
                                 </select>

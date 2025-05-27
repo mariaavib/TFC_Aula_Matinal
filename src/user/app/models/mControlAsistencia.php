@@ -132,18 +132,72 @@
          * @param string $fecha La fecha en formato 'YYYY-MM-DD'.
          * @param bool $asiste True si el alumno asiste, False si no asiste.
          */
-        public function modificarAsistencia($idAlumno, $fecha,$asiste){
+        public function modificarAsistencia($idAlumno, $fecha, $asiste){
             if($asiste){
-                $sql = "INSERT INTO asistencia (fecha, pagado, idAlumno) VALUES (?, 0,?)";
-            }else{
-                $sql = "DELETE FROM asistencia WHERE fecha =? AND idAlumno =?";
+                $sql = "INSERT INTO asistencia (fecha, pagado, idAlumno) VALUES (?, 0, ?)";
+            } else {
+                $sql = "DELETE FROM asistencia WHERE fecha = ? AND idAlumno = ?";
             }
+        
             $stmt = $this->conexion->prepare($sql);
-            $stmt->bind_param('si', $fecha, $idAlumno);
+            if(!$stmt){
+                echo json_encode(['success' => false, 'error' => "Error en la preparación: " . $this->conexion->error]);
+                exit;
+            }
+        
+            if (!$stmt->bind_param('si', $fecha, $idAlumno)) {
+                echo json_encode(['success' => false, 'error' => "Error en bind_param: " . $stmt->error]);
+                exit;
+            }
+        
             $resultado = $stmt->execute();
+            if(!$resultado){
+                echo json_encode(['success' => false, 'error' => "Error en la ejecución: " . $stmt->error]);
+                exit;
+            }
+        
             $stmt->close();
-
+            echo json_encode(['success' => true]);
+            exit;
+        }
+        /**
+         * Verifica si una fecha es no lectiva y devuelve información detallada.
+         *
+         * @param string $fecha La fecha a verificar en formato 'YYYY-MM-DD'.
+         * @return array Retorna un array con el estado y mensaje
+         */
+        public function esDiaNoLectivo($fecha){
+            $resultado = ['esNoLectivo' => false, 'mensaje' => ''];
+        
+            // Verificar si es fin de semana
+            $diaSemana = date('N', strtotime($fecha));
+            if($diaSemana >= 6){
+                $resultado['esNoLectivo'] = true;
+                $resultado['mensaje'] = 'No se puede seleccionar un fin de semana';
+                return $resultado;
+            }
+        
+            // Verificar si es día no lectivo en la base de datos
+            $sql = "SELECT motivo FROM dias_no_lectivos WHERE fecha = ?";
+            $stmt = $this->conexion->prepare($sql);
+        
+            if (!$stmt) {
+                die("Error en prepare(): " . $this->conexion->error);
+            }
+        
+            $stmt->bind_param('s', $fecha);
+            $stmt->execute();
+            $resultadoDB = $stmt->get_result();
+        
+            if($resultadoDB->num_rows > 0){
+                $fila = $resultadoDB->fetch_assoc();
+                $resultado['esNoLectivo'] = true;
+                $resultado['mensaje'] = 'Esta fecha es un día no lectivo: '.$fila['motivo'];
+            }
+        
+            $stmt->close();
             return $resultado;
         }
+        
     }
 ?>

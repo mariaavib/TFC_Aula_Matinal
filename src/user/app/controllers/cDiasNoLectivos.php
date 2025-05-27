@@ -30,4 +30,6 @@ class CDiasNoLectivos {
         $this->vista = 'vCalendario';
         return [];
     }
+
+    
 }

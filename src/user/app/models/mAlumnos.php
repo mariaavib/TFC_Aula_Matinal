@@ -61,7 +61,7 @@
          * @return array Lista de alumnos.
          */
         public function obtenerAlumnos(){
-            $sql = "SELECT alumno.idAlumno, alumno.nombreAlumno, 
+            $sql = "SELECT alumno.idAlumno, alumno.nombreAlumno,  alumno.apellidosAlumno,
                            inscripciones.telefono 
                     FROM alumno 
                     INNER JOIN inscripciones ON alumno.idInscripcion = inscripciones.idInscripcion 
@@ -71,7 +71,7 @@
             if (!$resultado){
                 return [];
             }
-            return $resultado->fetch_all(MYSQLI_ASSOC);
+            return $resultado->fetch_all(MYSQLI_ASSOC); 
         }
         /**
          * Metodo para obtener detalles de un alumno especifico.
@@ -81,7 +81,7 @@
          */
         public function obtenerDetallesAlumno($idAlumno){
             $sql = "SELECT inscripciones.nombrePadre, inscripciones.telefono, inscripciones.apellidosPadre,
-                           alumno.nombreAlumno, clases.clase
+                           alumno.nombreAlumno, alumno.apellidosAlumno,clases.clase
                     FROM inscripciones 
                     INNER JOIN alumno ON inscripciones.idInscripcion = alumno.idInscripcion 
                     INNER JOIN clases ON alumno.idClase = clases.idClase
