@@ -54,6 +54,11 @@
                     <hr>
                 </h4>
                 <div class="alert alert-danger" style="display: none;"></div>
+                <?php 
+                    if (isset($datos['error'])) {
+                        echo '<div class="alert alert-danger">'.$datos['error'].'</div>';
+                    }
+                ?>
                 <form action="index.php?c=Alumnos&m=insertar" method="POST">
                     <div class="card mb-4">
                         <div class="card-header text-white" style="background-color: #006EA4;">

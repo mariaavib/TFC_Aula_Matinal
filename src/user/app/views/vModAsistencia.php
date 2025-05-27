@@ -89,18 +89,22 @@
                                     </thead>
                                     <tbody>
                                         <?php 
-                                            if(isset($datos['alumnos']) && is_array($datos['alumnos'])){ 
-                                                foreach($datos['alumnos'] as $alumno){ 
+                                            if (isset($datos['alumnos']) && is_array($datos['alumnos'])) { 
+                                                foreach ($datos['alumnos'] as $alumno) { 
+                                                    $seleccionado = '';
+                                                    if (isset($datos['asistencias']) && in_array($alumno['idAlumno'], $datos['asistencias'])) {
+                                                        $seleccionado = 'checked'; 
+                                                    }
+
                                                     echo "<tr>
-                                                        <td class='py-1 pe-0 columna-nombre'>" . 
-                                                            htmlspecialchars($alumno['nombreAlumno']) . 
-                                                        "</td>
-                                                        <td class='text-center py-1 ps-2 columna-asiste'>
-                                                            <input type='checkbox' class='form-check-input' 
-                                                                data-id='" . htmlspecialchars($alumno['idAlumno']) . "'
-                                                                " . ((isset($datos['asistencias']) && in_array($alumno['idAlumno'], $datos['asistencias'])) ? 'checked' : '') . ">
-                                                        </td>
-                                                    </tr>";
+                                                            <td class='py-1 pe-0 columna-nombre'>" . 
+                                                                htmlspecialchars($alumno['nombreAlumno']) . 
+                                                            "</td>
+                                                            <td>
+                                                                <input type='checkbox' class='form-check-input' data-id='" . 
+                                                                    htmlspecialchars($alumno['idAlumno']) . "' $seleccionado>
+                                                            </td>
+                                                        </tr>";
                                                 }
                                             }
                                         ?>
@@ -114,9 +118,8 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
     <script src="js/validacionFecha.js"></script>
-        <script src="js/modificarAsistencia.js"></script>
+    <script src="js/modificarAsistencia.js"></script>
     </body>
 </html>
 

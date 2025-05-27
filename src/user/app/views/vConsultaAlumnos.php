@@ -75,7 +75,7 @@
                                         <?php 
                                             foreach($datos['alumnos'] as $alumno) {
                                                 echo '<tr>';
-                                                echo '<td>' . $alumno['nombreAlumno'] . '</td>';
+                                                echo '<td>' . $alumno['nombreAlumno']. ' ' . $alumno['apellidosAlumno'] .  '</td>';
                                                 echo '<td>' . $alumno['telefono'] . '</td>';
                                                 echo '<td>';
                                                 echo '<button class="btn btn-sm btn-detalles ver-detalles" data-id="' . $alumno['idAlumno'] . '">';

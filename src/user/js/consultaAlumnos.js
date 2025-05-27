@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     const alumno = data.alumno;
                     document.getElementById('detallesAlumno').innerHTML = `
                         <div class="mb-3">
-                            <strong>Nombre del Alumno:</strong> ${alumno.nombreAlumno}
+                            <strong>Nombre del Alumno:</strong> ${ (alumno.nombreAlumno) + ' ' + (alumno.apellidosAlumno)}
                         </div>
                         <div class="mb-3">
                             <strong>Clase:</strong> ${alumno.clase}
