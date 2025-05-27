@@ -1,6 +1,4 @@
 <?php
-<<<<<<< HEAD
-=======
 /**
  * Modelo MAlumnos
  * 
@@ -8,7 +6,6 @@
  * e información relacionada con ellos.
  * 
  */
->>>>>>> b4d2b36cb88c356ef6feddce79abd2a29cdcaa71
     class MAlumnos{
         private $conexion;
 
@@ -18,21 +15,6 @@
             $this->conexion = $objConexion->conexion;
         }
 
-<<<<<<< HEAD
-        public function insertarAlumno($nombreAlumno, $telefono, $fechaMandato){
-            $sql = "INSERT INTO inscripciones (telefono, fechaMandato, completada) VALUES (?, ?, 0)";
-            $stmt = $this->conexion->prepare($sql);
-            $stmt->bind_param("ss", $telefono, $fechaMandato);
-            $stmt->execute();
-            $idInscripcion = $this->conexion->insert_id; //devuelve el id de la ultima insercion
-
-            $sql = "INSERT INTO alumno (nombreAlumno, idInscripcion) VALUES (?, ?)";
-            $stmt = $this->conexion->prepare($sql);
-            $stmt->bind_param("si", $nombreAlumno, $idInscripcion);
-            return $stmt->execute();
-        }
-
-=======
         /**
          * Metodo para obtener todas las clases disponibles.
          *
@@ -78,7 +60,6 @@
          * @param int $idAlumno ID del alumno.
          * @return array Lista de alumnos.
          */
->>>>>>> b4d2b36cb88c356ef6feddce79abd2a29cdcaa71
         public function obtenerAlumnos(){
             $sql = "SELECT alumno.idAlumno, alumno.nombreAlumno, 
                            inscripciones.telefono 
@@ -87,25 +68,11 @@
                     ORDER BY alumno.nombreAlumno";
             
             $resultado = $this->conexion->query($sql);
-<<<<<<< HEAD
-            if ($resultado === false) {
-=======
             if (!$resultado){
->>>>>>> b4d2b36cb88c356ef6feddce79abd2a29cdcaa71
                 return [];
             }
             return $resultado->fetch_all(MYSQLI_ASSOC);
         }
-<<<<<<< HEAD
-
-        public function obtenerDetallesAlumno($idAlumno){
-            $sql = "SELECT inscripciones.nombrePadre, inscripciones.telefono, 
-                           alumno.nombreAlumno
-                    FROM inscripciones 
-                    INNER JOIN alumno ON inscripciones.idInscripcion = alumno.idInscripcion 
-                    WHERE alumno.idAlumno = ?";
-            
-=======
         /**
          * Metodo para obtener detalles de un alumno especifico.
          * 
@@ -119,23 +86,10 @@
                     INNER JOIN alumno ON inscripciones.idInscripcion = alumno.idInscripcion 
                     INNER JOIN clases ON alumno.idClase = clases.idClase
                     WHERE alumno.idAlumno = ? ";
->>>>>>> b4d2b36cb88c356ef6feddce79abd2a29cdcaa71
             $stmt = $this->conexion->prepare($sql);
             $stmt->bind_param("i", $idAlumno);
             $stmt->execute();
             $result = $stmt->get_result();
             return $result->fetch_assoc();
         }
-<<<<<<< HEAD
-
-        public function obtenerDetallesAlumnos($idAlumno){
-            $sql = "SELECT inscripciones.nombrePadre, inscripciones.telefono, alumno.no mbreAlumno, clases.clase FROM inscripciones INNER JOIN alumno ON inscripciones.idInscripcion = alumno.idInscripcion INNER JOIN clases ON alumno.idClase = clases.idClase WHERE alumno.idAlumno = ?";
-            $stmt = $this->conexion->prepare($sql);
-            $stmt->bind_param("i", $idAlumno);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            return $result->fetch_all(MYSQLI_ASSOC);
-        }
-=======
->>>>>>> b4d2b36cb88c356ef6feddce79abd2a29cdcaa71
     }
