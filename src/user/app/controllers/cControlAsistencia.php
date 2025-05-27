@@ -43,9 +43,18 @@
                 header('Content-Type: application/json');
                 
                 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    $idAlumno = isset($_POST['idAlumno']) ? intval($_POST['idAlumno']) : null;
-                    $asiste = isset($_POST['asiste']) ? intval($_POST['asiste']) : null;
-                    
+                    if (isset($_POST['idAlumno'])) {
+                        $idAlumno = $_POST['idAlumno']; 
+                    } else {
+                        $idAlumno = null;
+                    }
+                
+                    if (isset($_POST['asiste'])) {
+                        $asiste = $_POST['asiste']; 
+                    } else {
+                        $asiste = null;
+                    }
+                
                     if ($idAlumno !== null && $asiste !== null) {
                         $resultado = $this->objModelo->registrarAsistencia($idAlumno, $asiste === 1);
                         echo json_encode(['success' => $resultado]);

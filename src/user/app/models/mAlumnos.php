@@ -71,7 +71,7 @@
             if (!$resultado){
                 return [];
             }
-            return $resultado->fetch_all(MYSQLI_ASSOC);
+            return $resultado->fetch_all(MYSQLI_ASSOC); 
         }
         /**
          * Metodo para obtener detalles de un alumno especifico.
