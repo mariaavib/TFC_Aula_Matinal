@@ -22,18 +22,15 @@
                     if (isset($datos['error'])) {
                         echo '<div class="alert alert-danger text-center">'.$datos['error'].'</div>';
                     }
-                    if(isset($datos['correcto'])) {
-                        echo '<div class="alert alert-success text-center">'.$datos['correcto'].'</div>';
-                    }
                 ?>
                 <form class="mt-4" method="POST" action="../admin/index.php?c=DiasNoLectivos&m=insertar">
                     <div class="mb-4">
                         <label for="dia" class="form-label">DÍA NO LECTIVO</label>
-                        <input type="date" class="form-control bg-light" id="dia" name="fecha" value="<?php echo $valorFecha; ?>">
+                        <input type="date" class="form-control bg-light" id="dia" name="fecha" value="<?php echo $datos['fecha']; ?>">
                     </div>
                     <div class="mb-4">
                         <label for="motivo" class="form-label">MOTIVO</label>
-                        <input type="text" class="form-control bg-light" id="motivo" name="motivo" value="<?php echo $valorMotivo; ?>">
+                        <input type="text" class="form-control bg-light" id="motivo" name="motivo" value="<?php echo $datos['motivo']; ?>">
                     </div>
                     <div class="text-center mt-5">
                         <a href="../admin/index.php?c=DiasNoLectivos&m=listar" class="btn form-button me-2">CANCELAR</a>

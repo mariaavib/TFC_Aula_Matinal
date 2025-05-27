@@ -12,13 +12,22 @@
             $objConexion = new Conexion();
             $this->conexion = $objConexion->conexion;
         }
-
+        /**
+         * Metodo que lista los dias no lectivos
+         *
+         * @return array
+         */
         public function listarDias(){
             $sql = "SELECT * FROM dias_no_lectivos";
             $resultado = $this->conexion->query($sql);
             return $resultado;
         }  
-
+        /**
+         * Metodo que obtiene un dia no lectivo por su id
+         *
+         * @param int $id
+         * @return array
+         */
         public function obtenerPorId($id) {
             $sql = "SELECT * FROM dias_no_lectivos WHERE idDia = ?";
             $stmt = $this->conexion->prepare($sql);
@@ -30,7 +39,13 @@
             //var_dump($fila);
             return $fila;
         }
-
+        /**
+         * Metodo que da de alta un dia no lectivo
+         *
+         * @param string $fecha
+         * @param string $motivo
+         * @return boolean
+         */
         public function altaDias($fecha, $motivo){
             $sql = "INSERT INTO dias_no_lectivos (fecha, motivo) VALUES (?, ?)";
             $stmt = $this->conexion->prepare($sql);
@@ -39,7 +54,14 @@
             $stmt->close();
             return $resultado;
         }
-
+        /**
+         * Metodo que modifica un dia no lectivo
+         *
+         * @param int $id
+         * @param string $fecha
+         * @param string $motivo
+         * @return boolean
+         */
         public function updateDias($id, $fecha, $motivo){
             $sql = "UPDATE dias_no_lectivos SET fecha = ?, motivo = ? WHERE idDia = ?";
             $stmt = $this->conexion->prepare($sql);
@@ -49,7 +71,12 @@
             return $resultado; 
             
         }
-
+        /**
+         * Metodo que elimina un dia no lectivo
+         *
+         * @param int $id
+         * @return boolean
+         */
         public function eliminarDias($id){
             $sql = "DELETE FROM dias_no_lectivos WHERE idDia =?";
             $stmt = $this->conexion->prepare($sql);

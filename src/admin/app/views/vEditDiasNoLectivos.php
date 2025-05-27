@@ -27,23 +27,23 @@
                     <div class="mb-4">
                         <label for="dia" class="form-label">DÍA NO LECTIVO</label>
                         <input type="date" class="form-control bg-light" id="dia" name="fecha" 
-                                value="<?php echo $datos['fecha'] ?? ''; ?>">  <!-- se muestra la fecha del día no lectivo si existe si no vacio -->
-                        <input type="hidden" name="id" value="<?php echo $datos['idDia'] ?? ''; ?>">
+                                value="<?php echo $datos['fecha']; ?>"> 
+                        <input type="hidden" name="id" value="<?php echo $datos['idDia']; ?>">
                     </div>
                     <div class="mb-4">
                         <label for="motivo" class="form-label">MOTIVO</label>
                         <input type="text" class="form-control bg-light" id="motivo" name="motivo" 
-                               value="<?php echo $datos['motivo'] ?? ''; ?>">
+                               value="<?php echo $datos['motivo']; ?>">
                     </div>
                     <div class="text-center mt-5">
                         <a href="../admin/index.php?c=DiasNoLectivos&m=listar" class="btn form-button me-2">CANCELAR</a>
-                        <button type="submit" class="btn form-button">GUARDAR</button>
+                        <button type="submit" class="btn form-button">MODIFICAR</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="module" src="js/views/vModificarDia.js"></script>
+    <!-- <script type="module" src="js/views/vModificarDia.js"></script> -->
 </body>
 </html>
