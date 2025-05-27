@@ -12,6 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Monitor - Consulta Alumnos</title>
+    <link rel="icon" href="assets/img/favicon-img.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link href="assets/css/style.css" rel="stylesheet">
@@ -77,7 +78,7 @@
                                         <?php 
                                             foreach($datos['alumnos'] as $alumno) {
                                                 echo '<tr>';
-                                                echo '<td>' . $alumno['nombreAlumno'] . '</td>';
+                                                echo '<td>' . $alumno['nombreAlumno']. ' ' . $alumno['apellidosAlumno'] .  '</td>';
                                                 echo '<td>' . $alumno['telefono'] . '</td>';
                                                 echo '<td>';
                                                 echo '<button class="btn btn-sm btn-detalles ver-detalles" data-id="' . $alumno['idAlumno'] . '">';

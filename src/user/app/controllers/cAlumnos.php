@@ -26,12 +26,43 @@ class CAlumnos {
      */
     public function insertar() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $nombreAlumno = $_POST['nombreAlumno'];
-            $apellidosAlumno = $_POST['apellidosAlumno'];
-            $nombrePadre = $_POST['nombrePadre'];
-            $apellidosPadre = $_POST['apellidosPadre'];
-            $telefono = $_POST['telefono'];
-            $idClase = $_POST['idClase'];
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                if (isset($_POST['nombreAlumno'])) {
+                    $nombreAlumno = $_POST['nombreAlumno'];
+                } else {
+                    $nombreAlumno = '';
+                }
+            
+                if (isset($_POST['apellidosAlumno'])) {
+                    $apellidosAlumno = $_POST['apellidosAlumno'];
+                } else {
+                    $apellidosAlumno = '';
+                }
+            
+                if (isset($_POST['nombrePadre'])) {
+                    $nombrePadre = $_POST['nombrePadre'];
+                } else {
+                    $nombrePadre = '';
+                }
+            
+                if (isset($_POST['apellidosPadre'])) {
+                    $apellidosPadre = $_POST['apellidosPadre'];
+                } else {
+                    $apellidosPadre = '';
+                }
+            
+                if (isset($_POST['telefono'])) {
+                    $telefono = $_POST['telefono'];
+                } else {
+                    $telefono = '';
+                }
+            
+                if (isset($_POST['idClase'])) {
+                    $idClase = $_POST['idClase'];
+                } else {
+                    $idClase = '';
+                }
+            }
 
             if (empty($nombreAlumno) || empty($apellidosAlumno) || empty($nombrePadre) || empty($apellidosPadre) || empty($telefono) || empty($idClase)) {
                 $this->vista = 'vAltaAlumno';

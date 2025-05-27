@@ -14,18 +14,33 @@
                 require_once(RUTA_MODELOS.'DiasNoLectivos.php');
                 $this->objModelo = new MDiasNoLectivos(); 
             }
-        
+            /**
+             * Muestra la vista de los días no lectivos.
+             *
+             * @return array Los datos de los días no lectivos.
+             */
             public function listar(){
                 $this->vista = 'vDiasNoLectivos';    
                 $datos = $this->objModelo->listarDias();
                 return $datos;
             }
-
+            /**
+             * Muestra el formulario de alta de días no lectivos.
+             *
+             * @return array Los datos iniciales para el formulario de alta.
+             */
             public function alta(){
                 $this->vista = 'vAltaDiasNoLectivos';
-                return [];
+                return [
+                    'fecha' => '',
+                    'motivo' => ''
+                ];
             }
-
+            /**
+             * Inserta un nuevo día no lectivo.
+             *
+             * @return array Los datos resultantes después de la inserción.
+             */
             public function insertar(){
                 if(!empty($_POST['fecha']) && !empty($_POST['motivo'])) {
                     $fecha = $_POST['fecha'];
@@ -39,9 +54,17 @@
                 }
 
                 $this->vista = 'vAltaDiasNoLectivos';
-                return ['error' => 'Todos los campos son obligatorios.'];
+                return [
+                    'error' => 'Todos los campos son obligatorios.',
+                    'fecha' => $_POST['fecha'],
+                    'motivo' => $_POST['motivo']
+                ];
             }
-
+            /**
+             * Muestra el formulario de modificar de días no lectivos.
+             * 
+             * @return array Los datos del día no lectivo a editar.
+             */
             public function formEdit(){
                 $this->vista = 'vEditDiasNoLectivos';
                 $datos = [];
@@ -61,7 +84,11 @@
 
                 return $datos;
             }
-
+            /**
+             * Edita un día no lectivo.
+             *
+             * @return array El resultado después de la edición.
+             */
             public function editar(){
                 $this->vista = 'vEditDiasNoLectivos';
 
@@ -97,7 +124,11 @@
                     ];
                 }
             }
-
+            /** 
+             * Elimina un día no lectivo.
+             *
+             * @return array El resultado después de eliminar.
+             */
             public function eliminar(){
                 if (isset($_GET['id'])) {
                     $id = $_GET['id'];

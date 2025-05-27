@@ -15,9 +15,18 @@ document.addEventListener('DOMContentLoaded', function(){
         buttonText:{
             today: 'Hoy'
         },
-        selectable: false, 
+        selectable: false,
         events: 'index.php?c=DiasNoLectivos&m=obtenerDiasNoLectivos',
         eventColor: '#006EA4',
+
+        // Mostrar el motivo al hacer clic en el evento
+        eventClick: function(info) {
+            // Previene que el navegador siga el enlace si lo hubiera
+            info.jsEvent.preventDefault();
+
+            // Muestra el motivo (title) en un alert, o puedes personalizar con modal, etc.
+            alert('Motivo: ' + info.event.title);
+        }
     });
     calendar.render();
 });
