@@ -52,7 +52,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8 col-sm-12">
                 <?php
-                if ($datos['esDiaLectivo'] && !empty($datos['alumnos'])) {
+                    if ($datos['esDiaLectivo'] && !empty($datos['alumnos'])) {
                 ?>
                 <div class="text-center mb-4">
                     <h3 class="d-inline-block bg-custom-secondary text-white px-4 py-2 rounded w-auto">
