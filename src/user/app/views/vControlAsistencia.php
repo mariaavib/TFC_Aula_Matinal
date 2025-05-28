@@ -91,9 +91,9 @@
                     </table>
                 </div>
                     <?php
-                    } else {
-                        echo '<div class="alert alert-info text-center">Hoy no es un día lectivo</div>';
-                    }
+                        }else{
+                            echo '<div class="alert alert-info text-center">Hoy no es un día lectivo</div>';
+                        }
                     ?>
             </div>
         </div>
