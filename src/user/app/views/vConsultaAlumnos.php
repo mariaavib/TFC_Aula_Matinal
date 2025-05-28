@@ -68,9 +68,7 @@
                                     <thead class="bg-light">
                                         <tr>
                                             <th>NOMBRE ALUMNO</th>
-                                            <th>TELÉFONO TUTOR</th>
                                             <th>TELÉFONO PADRE/MADRE O TUTOR</th>
-                                            <th>TELÉFONO TUTOR</th>
                                             <th>ACCIONES</th>
                                         </tr>
                                     </thead>

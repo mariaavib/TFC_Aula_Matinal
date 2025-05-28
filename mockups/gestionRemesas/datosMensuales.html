@@ -61,16 +61,16 @@
     <div class="container datos-mensuales-container">
         <div class="d-flex flex-column align-items-center mb-4">
             <div class="section-header">
-                DATOS MENSUALES MAYO
+                DATOS MENSUALES ABRIL 2025
             </div>
         </div>
         <div class="mb-3 d-flex justify-content-between">
             <a href="" class="btn add-button d-flex align-items-center px-3" style="width: fit-content; font-size: 0.9rem;">
-                <i class="bi bi-arrow-left me-2"></i> Consultar recibo mes anterior
+                <i class="bi bi-arrow-left me-2"></i> Ver datos mes anterior
             </a>
-            <a href="gestionRemesas.html" class="btn add-button d-flex align-items-center px-3" style="width: fit-content; font-size: 0.9rem;">
-                <i class="bi bi-clipboard-check me-2"></i> Generar remesa mes anterior
-            </a>
+            <button class="btn add-button d-flex align-items-center px-3" id="generarRemesa" style="width: fit-content; font-size: 0.9rem;">
+                <i class="bi bi-file-earmark-spreadsheet me-2"></i> Generar Remesa
+            </button>
         </div>
         <div class="table-responsive">
             <div class="table-responsive">
@@ -134,7 +134,7 @@
             </div>
         </div>
     </div>
-    <!-- Modal estático para ver detalles -->
+    <!-- Modal para ver detalles -->
     <div class="modal fade" id="detallesModal" tabindex="-1" aria-labelledby="detallesModalLabel" aria-hidden="true">
         <div class="modal-dialog">
         <div class="modal-content">
@@ -161,6 +161,34 @@
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div>
+        </div>
+    </div>
+    <!-- Modal para generar nueva remesa -->
+    <div class="modal fade" id="generarRemesaModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Generar Nueva Remesa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Fecha de Remesa</label>
+                        <input type="date" class="form-control" id="fechaRemesa">
+                    </div>
+                    <div class="alert alert-info">
+                        Este proceso generará:
+                        <ul>
+                            <li>Archivo Q19 para el banco</li>
+                            <li>Excel con el detalle de los recibos</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="confirmarGeneracion">Generar</button>
+                </div>
+            </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

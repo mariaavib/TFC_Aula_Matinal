@@ -27,16 +27,20 @@ export class CModificarDia {
         if (!fecha) {
             errores.push("El campo fecha es obligatorio.");
         }
-        if (!motivo || motivo.trim() === "") {
+    
+        const motivoTrim = motivo.trim();
+    
+        if (!motivoTrim) {
             errores.push("El campo motivo es obligatorio.");
-        } else if (motivo.length < 3) {
+        } else if (motivoTrim.length < 3) {
             errores.push("El campo motivo debe tener al menos 3 caracteres.");
-        } else if (motivo.length > 100) {
+        } else if (motivoTrim.length > 100) {
             errores.push("El campo motivo no puede tener más de 100 caracteres.");
         }
     
         return errores;
     }
+    
     /**
      * Procesa el formulario, valida los datos y, si son correctos, envía la información al modelo.
      *
