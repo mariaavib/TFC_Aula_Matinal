@@ -45,9 +45,6 @@
          * @return array Un array con los datos de los alumnos inscritos.
          */
         public function listarAlumnos(){
-            if (!$this->esDiaLectivo(date('Y-m-d'))){
-                return [];
-            }
             $sql = "SELECT alumno.idAlumno, alumno.nombreAlumno  
                     FROM alumno 
                     INNER JOIN inscripciones ON alumno.idInscripcion = inscripciones.idInscripcion 
