@@ -89,7 +89,6 @@
                     echo '</tr>';
                     echo '</thead>';
                     echo '<tbody>';
-
                     if (isset($datos['alumnos']) && is_array($datos['alumnos'])) {
                         foreach ($datos['alumnos'] as $alumno) {
                             $seleccionado = '';
@@ -98,14 +97,13 @@
                             }
 
                             echo '<tr>';
-                            echo '<td class="py-1 pe-0 columna-nombre">' . $alumno['nombreAlumno'] . '</td>';
+                            echo '<td class="py-1 pe-0 columna-nombre">'.$alumno['apellidosAlumno']. ' ' .$alumno['nombreAlumno'].'</td>';
                             echo '<td class="text-center py-1 ps-2 columna-asiste">';
                             echo '<input type="checkbox" class="form-check-input" data-id="' . $alumno['idAlumno'] . '" ' . $seleccionado . '>';
                             echo '</td>';
                             echo '</tr>';
                         }
                     }
-
                     echo '</tbody>';
                     echo '</table>';
                     echo '</div>'; 
