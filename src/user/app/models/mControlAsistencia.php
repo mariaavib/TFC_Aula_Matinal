@@ -45,10 +45,10 @@
          * @return array Un array con los datos de los alumnos inscritos.
          */
         public function listarAlumnos(){
-            $sql = "SELECT alumno.idAlumno, alumno.nombreAlumno  
+            $sql = "SELECT alumno.idAlumno,alumno.apellidosAlumno,alumno.nombreAlumno 
                     FROM alumno 
                     INNER JOIN inscripciones ON alumno.idInscripcion = inscripciones.idInscripcion 
-                    ORDER BY alumno.nombreAlumno";
+                    ORDER BY alumno.apellidosAlumno";
             $resultado = $this->conexion->query($sql);
             
             $alumnos = [];

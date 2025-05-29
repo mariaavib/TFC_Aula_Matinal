@@ -57,10 +57,10 @@
                 <div class="text-center mb-4">
                     <h3 class="d-inline-block bg-custom-secondary text-white px-4 py-2 rounded w-auto">
                         <?php
-                        $diasSemana = ['DOMINGO', 'LUNES', 'MARTES', 'MIÉRCOLES', 'JUEVES', 'VIERNES', 'SÁBADO'];
-                        $meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
-                        $fecha = new DateTime();
-                        echo $diasSemana[$fecha->format('w')] . ' ' . $fecha->format('d') . ' DE ' . $meses[$fecha->format('n') - 1] . ' ' . $fecha->format('Y');
+                            $diasSemana = ['DOMINGO', 'LUNES', 'MARTES', 'MIÉRCOLES', 'JUEVES', 'VIERNES', 'SÁBADO'];
+                            $meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE'];
+                            $fecha = new DateTime();
+                            echo $diasSemana[$fecha->format('w')].' '.$fecha->format('d').' DE '.$meses[$fecha->format('n') - 1].' '. $fecha->format('Y');
                         ?>
                     </h3>
                 </div>
@@ -77,7 +77,7 @@
                             <?php
                             foreach ($datos['alumnos'] as $alumno) {
                                 echo '<tr>';
-                                echo '<td class="py-1 pe-0 columna-nombre">' . htmlspecialchars($alumno['nombreAlumno']) . '</td>';
+                                echo '<td class="py-1 pe-0 columna-nombre">'.$alumno['apellidosAlumno']. ' ' .$alumno['nombreAlumno'].'</td>';
                                 echo '<td class="text-center py-1 ps-2 columna-asiste">';
                                 echo '<input type="checkbox" class="form-check-input control-asistencia"';
                                 echo ' data-id="' . $alumno['idAlumno'] . '"';
