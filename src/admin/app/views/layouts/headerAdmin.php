@@ -24,9 +24,15 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">GESTIÓN DÍA A DÍA</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">DATOS MENSUALES</a>
-                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="index.php?c=Remesas&m=listarRemesas" id="gestionRemesasDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                               GESTIÓN REMESAS
+                           </a>
+                           <ul class="dropdown-menu" aria-labelledby="gestionRemesasDropdown">
+                                <li><a class="dropdown-item" href="index.php?c=Remesas&m=listarRemesas">REMESAS</a></li>
+                                <li><a class="dropdown-item" href="index.php?c=Remesas&m=datosMensuales">DATOS MENSUALES</a></li>
+                           </ul>
+                       </li>
                         <li class="nav-item">
                             <a class="nav-link" href="index.php?c=Tarifas&m=tarifas">TARIFAS</a>
                         </li>
