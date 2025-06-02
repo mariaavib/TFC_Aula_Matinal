@@ -1,18 +1,29 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alumnos Inscritos</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link href="assets/css/style.css" rel="stylesheet">
 </head>
 <body>
     <?php
         include_once('layouts/headerAdmin.php');
     ?>
-
+    <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: var(--azul-principal); color: white;">
+                    <h5 class="modal-title" id="ModalLabel">Aviso</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <?php if(isset($datos['errores']) && !empty($datos['errores'])): ?>
+                        <i class="bi bi-exclamation-triangle-fill text-warning" style="font-size: 3rem;"></i>
+                        <h4 class="mt-3" style="color: red;">¡Atención!</h4>
+                        <p class="lead"><strong><?php echo $datos['errores']; ?></strong></p>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container dias-no-lectivos-container">
         <div class="d-flex flex-column align-items-center mb-4">
             <div class="section-header">
@@ -23,6 +34,9 @@
         <a href="index.php?c=GestionInscripciones&m=alta" class="btn add-button d-flex align-items-center px-3" style="width: fit-content; font-size: 0.9rem;">
             <i class="bi bi-person-plus me-2"></i> Añadir nuevo alumno
         </a>
+        <a href="index.php?c=GenerarPdf&m=generarpdf" class="btn add-button d-flex align-items-center px-3" style="width: fit-content; font-size: 0.9rem;">
+            <i class="bi bi-printer me-2"></i> Imprimir
+        </a>
         <a href="index.php?c=GestionInscripciones&m=inscripcionesincompletas" class="btn add-button d-flex align-items-center px-3" style="width: fit-content; font-size: 0.9rem;">
             <i class="bi bi-clipboard-check me-2"></i> Completar Inscripciones
         </a>
@@ -30,7 +44,7 @@
     <div class="table-responsive">
 
         <div class="table-responsive">
-            <table class="table mb-0 text-center">
+            <table class="table mb-5 text-center">
                 <thead>
                     <tr>
                         <th>Nombre</th>
@@ -40,8 +54,9 @@
                 </thead>
                 <tbody>
                     <?php
-                    if(is_string($datos)){
-                        echo "<tr><td colspan='3'><p class='text-danger fw-bold'>{$datos}</p></td></tr>";
+                
+                    if(isset($datos['noalumnos'])){
+                        echo "<tr><td colspan='3'><p class='text-danger fw-bold'>{$datos['noalumnos']}</p></td></tr>";
                     }else{
                         foreach($datos as $dato){
                         echo '<tr class="align-middle">';
@@ -65,5 +80,14 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            <?php if(isset($datos['errores'])): ?>
+                let Modal = new bootstrap.Modal(document.getElementById('Modal'));
+                Modal.show();
+            <?php endif; ?>
+        });
+    </script>            
 </body>
 </html>

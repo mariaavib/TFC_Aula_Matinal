@@ -36,12 +36,12 @@
                 </div>
             </div>
             <div class="mb-3">
-                <a href="../admin/index.php?c=DiasNoLectivos&m=alta" class="btn rounded-circle d-flex align-items-center justify-content-center add-button">
+                <a href="../admin/index.php?c=DiasNoLectivos&m=alta" class="btn d-flex align-items-center justify-content-center add-button">
                     <i class="bi bi-plus"></i>
                 </a>
             </div>
             <div class="table-responsive">
-                <table class="table mb-0">
+                <table class="table mb-0 text-center">
                     <thead>
                         <tr>
                             <th class="border-bottom text-center">Día</th>

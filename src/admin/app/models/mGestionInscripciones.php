@@ -26,13 +26,14 @@ class MGestionInscripciones{
         
         try {
             // Primero insertamos en la tabla inscripciones
-            $sqlInscripcion = "INSERT INTO inscripciones (nombrePadre, DNI, IBAN, titularCuenta, 
-                              fechaMandato, telefono, completada, correo) 
-                              VALUES (?, ?, ?, ?, ?, ?, 1, ?)";
+            $sqlInscripcion = "INSERT INTO inscripciones (nombrePadre,apellidosPadre, DNI, IBAN, titularCuenta, 
+                              fechaMandato, telefono, correo,completada) 
+                              VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1)";
             
             $stmtInscripcion = $this->conexion->prepare($sqlInscripcion);
-            $stmtInscripcion->bind_param("sssssss", 
-                $datos['nombre_apellidos_tutor'],
+            $stmtInscripcion->bind_param("ssssssss", 
+                $datos['nombre_tutor'],
+                $datos['apellidos_tutor'],
                 $datos['dni'],
                 $datos['iban'],
                 $datos['titular'],
@@ -46,12 +47,13 @@ class MGestionInscripciones{
             $stmtInscripcion->close();
             
             // Luego insertamos en la tabla alumno
-            $sqlAlumno = "INSERT INTO alumno (nombreAlumno, idClase, idInscripcion) 
-                         VALUES (?, ?, ?)";
+            $sqlAlumno = "INSERT INTO alumno (nombreAlumno, apellidosAlumno, idClase, idInscripcion) 
+                         VALUES (?, ?, ?, ?)";
             
             $stmtAlumno = $this->conexion->prepare($sqlAlumno);
-            $stmtAlumno->bind_param("sii", 
-                $datos['nombre_apellidos_alumno'],
+            $stmtAlumno->bind_param("ssii", 
+                $datos['nombre_alumno'],
+                $datos['apellidos_alumno'],
                 $datos['clase'],
                 $idInscripcion
             );
@@ -138,7 +140,8 @@ class MGestionInscripciones{
         $resultado = $this->conexion->query($sql);
 
         if ($resultado->num_rows === 0) {
-            return 'No hay alumnos inscritos';
+            $datos['noalumnos'] = 'No hay alumnos inscritos';
+            return $datos;
         }else{
             $alumnos = [];
             while($fila = $resultado->fetch_assoc()){

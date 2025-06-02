@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modificar Inscripciones</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link href="assets/css/style.css" rel="stylesheet">
 </head>
 <body>
     <?php
@@ -108,8 +103,8 @@
                     </div>
                     <div class="text-center mt-4 mb-4">
                         <?php if(isset($_SESSION['vista_origen']) && $_SESSION['vista_origen'] === 'inscritos'): ?>
-                            <a href="index.php?c=GestionInscripciones&m=alumnosinscritos" class="btn me-2" style="background-color: #006EA4; color: white;">CANCELAR</a>
                             <button type="submit" name="accion" value="guardar" class="btn" style="background-color: #006EA4; color: white;">GUARDAR CAMBIOS</button>
+                            <a href="index.php?c=GestionInscripciones&m=alumnosinscritos" class="btn me-2" style="background-color: #006EA4; color: white;">CANCELAR</a>
                         <?php else: ?>
                             <a href="index.php?c=GestionInscripciones&m=inscripcionesincompletas" class="btn me-2" style="background-color: #006EA4; color: white;">CANCELAR</a>
                             <button type="submit" name="accion" value="completar" class="btn me-2" style="background-color: #006EA4; color: white;">COMPLETAR INSCRIPCIÓN</button>

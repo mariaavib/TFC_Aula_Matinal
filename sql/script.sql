@@ -8,7 +8,6 @@ CREATE TABLE dias_no_lectivos(
     CONSTRAINT pk_dias_no_lectivos PRIMARY KEY(idDia)
 );
 
-<<<<<<< HEAD
 -- Tabla: CLASES
 CREATE TABLE clases (
     idClase TINYINT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -148,15 +147,14 @@ DELETE FROM inscripciones;
 
 -- Volvemos a activar la verificación de claves foráneas
 SET FOREIGN_KEY_CHECKS = 1;
-=======
 CREATE TABLE inscripciones (
     idInscripcion SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
     nombrePadre VARCHAR(100) NOT NULL,
-    DNI CHAR(9) NULL,
+    DNI CHAR(20) NULL,
     IBAN CHAR(34) NULL,
     titularCuenta VARCHAR(100) NULL,
     fechaMandato DATE NOT NULL,
-    telefono CHAR(9) NOT NULL,
+    telefono CHAR(20) NOT NULL,
     correo VARCHAR(255) NULL,
     completada BIT NOT NULL,
     CONSTRAINT pk_idInscripcion PRIMARY KEY (idInscripcion)
@@ -180,4 +178,3 @@ CREATE TABLE asistencia(
     CONSTRAINT pk_idAsistencia PRIMARY KEY(idAsistencia),
     CONSTRAINT fk_idAlumno FOREIGN KEY(idAlumno) REFERENCES alumno(idAlumno)
 );
->>>>>>> 398c4ef5b00897bcce55d64877027387f24df8c3
