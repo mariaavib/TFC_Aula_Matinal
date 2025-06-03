@@ -1,4 +1,17 @@
-export class MModificarDia {
+/**
+ * Clase MModificarDia
+ *
+ * Modelo responsable de enviar al servidor los datos para modificar un día no lectivo.
+ */
+export class MModificarDia {ç
+    /**
+     * Envía los datos del formulario de modificación al servidor mediante una solicitud POST.
+     * Redirige al listado de días no lectivos si la operación es exitosa.
+     * Si ocurre un error, muestra un mensaje en pantalla.
+     *
+     * @param {FormData} formData - Datos del formulario a enviar.
+     * @returns {Promise<void>}
+     */
     async enviarFormulario(formData) {
         try {
             const response = await fetch('index.php?c=DiasNoLectivos&m=editar', {
@@ -6,29 +19,15 @@ export class MModificarDia {
                 body: formData
             });
 
-            if (response.redirected) {
-                window.location.href = response.url;
-                return;
+            if (!response.ok) {
+                throw new Error('Error en la respuesta del servidor');
             }
 
-            const contentType = response.headers.get("content-type");
-            if (contentType && contentType.indexOf("application/json") !== -1) {
-                const resultado = await response.json();
-                if (resultado.error) {
-                    const errorDiv = document.querySelector('.errorMensaje');
-                    errorDiv.innerText = resultado.error;
-                    errorDiv.style.display = 'block';
-                } else {
-                    window.location.href = "index.php?c=DiasNoLectivos&m=listar";
-                }
-            } else {
-                window.location.href = "index.php?c=DiasNoLectivos&m=listar";
-            }
+            window.location.href = "index.php?c=DiasNoLectivos&m=listar";
 
         } catch (error) {
-            console.error('Error al enviar el formulario:', error);
             const errorDiv = document.querySelector('.errorMensaje');
-            errorDiv.innerText = 'Error de conexión con el servidor.';
+            errorDiv.innerText = 'Error al procesar la solicitud';
             errorDiv.style.display = 'block';
         }
     }

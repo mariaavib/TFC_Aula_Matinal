@@ -1,12 +1,8 @@
 <!DOCTYPE html>
     <html lang="es">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Panel Administrador - Días no lectivos</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-        <link href="assets/css/style.css" rel="stylesheet">
+        <link rel="icon" href="assets/img/favicon-img.png" type="image/x-icon">
     </head>
     <body>   
         <?php
@@ -59,7 +55,7 @@
                                         <a href="index.php?c=DiasNoLectivos&m=formEdit&id='.$valor['idDia'].'" class="btn btn-sm me-2 action-button">
                                             <i class="bi bi-pencil"></i>
                                         </a>
-                                        <a class="btn btn-sm action-button" data-bs-toggle="modal" data-bs-target="#modalBorrado" data-id="' . $valor['idDia'] . '">
+                                        <a class="btn btn-sm action-button" data-bs-toggle="modal" data-bs-target="#modalBorrado" data-id="'.$valor['idDia'].'">
                                             <i class="bi bi-trash"></i>
                                         </a>
                                     </td>
