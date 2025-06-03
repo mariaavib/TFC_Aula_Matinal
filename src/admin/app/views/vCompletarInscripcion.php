@@ -29,7 +29,7 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <h4 class="text-center mb-4 form-header">
-                    MODIFICAR DATOS DE INSCRIPCIÓN
+                    COMPLETAR INSCRIPCIÓN
                     <hr>
                 </h4>
                 <form action="index.php?c=GestionInscripciones&m=procesosCompletado&id=<?php echo $datos['id_inscripcion']; ?>" method="post">
@@ -104,9 +104,9 @@
                         </div>
                     </div>
                     <div class="text-center mt-4 mb-4">
-                        <a href="index.php?c=GestionInscripciones&m=inscripcionesincompletas" class="btn me-2" style="background-color: #006EA4; color: white;">CANCELAR</a>
                         <button type="submit" name="accion" value="completar" class="btn me-2" style="background-color: #006EA4; color: white;">COMPLETAR INSCRIPCIÓN</button>
                         <button type="submit" name="accion" value="guardar_pendiente" class="btn" style="background-color: #006EA4; color: white;">GUARDAR CON DATOS PENDIENTES</button>
+                        <a href="index.php?c=GestionInscripciones&m=inscripcionesincompletas" class="btn me-2" style="background-color: #006EA4; color: white;">CANCELAR</a>
                     </div>
                 </form>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

@@ -16,8 +16,9 @@ class CGestionInscripciones{
      */
     public function alta(){
         $this->vista = 'vAltaInscripcion';
-        $datos = $this->obj_modelo->listarclases();
-        return $datos;
+        $clases = $this->obj_modelo->listarclases();
+
+        return ['clases' => $clases];
     }
 
     public function alumnosinscritos(){

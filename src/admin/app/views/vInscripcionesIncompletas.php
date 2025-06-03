@@ -53,7 +53,7 @@
                 <tbody>
                 <?php
                     if(isset($datos['noincompletas'])){
-                        echo "<tr><td colspan='3'><p class='text-danger fw-bold'>{$datos['noalumnos']}</p></td></tr>";
+                        echo "<tr><td colspan='3'><p class='text-danger fw-bold'>{$datos['noincompletas']}</p></td></tr>";
                     }
 
                     if (isset($datos['datos'])){
