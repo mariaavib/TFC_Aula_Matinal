@@ -8,6 +8,10 @@ class MGestionInscripciones{
         $this->conexion = $objConexion->conexion;
     }
 
+    /**
+     * Método que devuelve las clases para los selects de los formularios de inscripción
+     * @return array
+     */
     public function listarclases(){
         $sql = "SELECT * FROM clases";
         $resultado = $this->conexion->query($sql);
@@ -20,6 +24,11 @@ class MGestionInscripciones{
         return $clases;
     }
 
+    /**
+     * Inserta los datos de la inscripciones que se realicen en el formulario de inscripción
+     * @param mixed $datos
+     * @return bool
+     */
     public function guardarInscripcion($datos){
         // Iniciar transacción
         $this->conexion->begin_transaction();
@@ -79,43 +88,57 @@ class MGestionInscripciones{
     try {
         // Actualizar tabla inscripciones
         $sqlInscripcion = "UPDATE inscripciones 
-                            SET nombrePadre = ?, 
-                                DNI = ?, 
-                                IBAN = ?, 
-                                titularCuenta = ?, 
-                                fechaMandato = ?, 
-                                correo = ?
-                            WHERE idInscripcion = ?";
+                        SET nombrePadre = ?, 
+                            apellidosPadre = ?, 
+                            DNI = ?, 
+                            IBAN = ?, 
+                            titularCuenta = ?, 
+                            fechaMandato = ?, 
+                            telefono = ?, 
+                            correo = ?, 
+                            completada = ? 
+                        WHERE idInscripcion = ?";
         
         $stmtInscripcion = $this->conexion->prepare($sqlInscripcion);
-        $stmtInscripcion->bind_param("ssssssi", 
-            $datos['nombrePadre'],
-            $datos['DNI'],
-            $datos['IBAN'],
-            $datos['titularCuenta'],
-            $datos['fechaMandato'],
-            $datos['correo'],
-            $datos['idInscripcion']
+        if(!$stmtInscripcion) {
+            throw new Exception($this->conexion->error);
+        }
+        $fechaMandato = !empty($datos['fechamandato']) ? $datos['fechamandato'] : null;
+
+        $stmtInscripcion->bind_param("ssssssssii",
+            $datos['nombre_tutor'],
+            $datos['apellidos_tutor'],
+            $datos['dni'],
+            $datos['iban'],
+            $datos['titular'],
+            $fechaMandato,
+            $datos['telefono'],
+            $datos['email'],
+            $datos['completada'],
+            $datos['id']
         );
         
         $stmtInscripcion->execute();
+        if ($stmtInscripcion->errno) {
+            throw new Exception($stmtInscripcion->error);
+        }
         $stmtInscripcion->close();
-        
         // Actualizar tabla alumno
         $sqlAlumno = "UPDATE alumno 
-                        SET nombreAlumno = ?, 
+                        SET nombreAlumno = ?,
+                            apellidosAlumno =?, 
                             idClase = ?
                         WHERE idInscripcion = ?";
         
         $stmtAlumno = $this->conexion->prepare($sqlAlumno);
-        $stmtAlumno->bind_param("sii", 
-            $datos['nombreAlumno'],
-            $datos['idClase'],
-            $datos['idInscripcion']
+        $stmtAlumno->bind_param("ssii", 
+            $datos['nombre_alumno'],
+            $datos['apellidos_alumno'],
+            $datos['clase'],
+            $datos['id']
         );
         
         $stmtAlumno->execute();
-        $stmtAlumno->close();
         
         // Confirmar transacción
         $this->conexion->commit();
@@ -123,6 +146,7 @@ class MGestionInscripciones{
         
     } catch (Exception $e) {
         // Revertir en caso de error
+        echo $e->getMessage();
         $this->conexion->rollback();
         return false;
     }
@@ -147,7 +171,6 @@ class MGestionInscripciones{
             while($fila = $resultado->fetch_assoc()){
                 $alumnos[] = $fila;
             }
-
             return $alumnos;
         }
     }
@@ -157,30 +180,29 @@ class MGestionInscripciones{
                 FROM alumno a
                 INNER JOIN clases c ON a.idClase = c.idClase
                 INNER JOIN inscripciones i ON a.idInscripcion = i.idInscripcion
-                WHERE a.idAlumno = ?;";
+                WHERE a.idInscripcion = ?;";
 
         $stmt = $this->conexion->prepare($sql);
         $stmt->bind_param("i", $id);
 
         if (!$stmt->execute()) {
             $stmt->close();
-            return 'Error en la base de datos';
+            $datos['errores'] = 'Error en la base de datos';
+            return $datos;
         }
 
         $resultado = $stmt->get_result();
         
         if ($resultado->num_rows === 0) {
             $stmt->close();
-            return 'Alumno no encontrado';
+            $datos['errores'] = 'Alumno no encontrado';
+            return $datos;
         }else{
             $fila = $resultado->fetch_assoc();
             $stmt->close();
-        
             return $fila;
         }
     }
-
-    
 
     public function inscripcionesincompletas(){
         $sql = "SELECT a.idAlumno,
@@ -193,7 +215,8 @@ class MGestionInscripciones{
         $resultado = $this->conexion->query($sql);
 
         if ($resultado->num_rows === 0) {
-            return 'No hay inscripciones por completar';
+            $datos['noincompletas'] = 'No hay inscripciones incompletas';
+            return $datos;
         }else{
             $alumnos = [];
             while($fila = $resultado->fetch_assoc()){

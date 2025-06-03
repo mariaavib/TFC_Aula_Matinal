@@ -30,7 +30,7 @@
                     <div class="card-body">
                         <div class="mb-3">
                             <p class="form-label fw-bold mb-1">NOMBRE Y APELLIDOS</p>
-                            <?php echo "<p class='ps-2'>{$datos['nombrePadre']}</p>" ?>
+                            <?php echo "<p class='ps-2'>{$datos['nombrePadre']} {$datos['apellidosPadre']}</p>"; ?>
                             
                         </div>
                         <div class="mb-3">
@@ -53,7 +53,7 @@
                     <div class="card-body">
                         <div class="mb-3">
                             <p class="form-label fw-bold mb-1">NOMBRE Y APELLIDOS</p>
-                            <?php echo "<p class='ps-2'>{$datos['nombreAlumno']}</p>" ?>
+                            <?php echo "<p class='ps-2'>{$datos['nombreAlumno']} {$datos['apellidosAlumno']}</p>" ?>
                         </div>
                         <div class="mb-3">
                             <p class="form-label fw-bold mb-1">CLASE</p>

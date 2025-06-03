@@ -20,6 +20,11 @@
                         <h4 class="mt-3" style="color: red;">¡Atención!</h4>
                         <p class="lead"><strong><?php echo $datos['errores']; ?></strong></p>
                     <?php endif; ?>
+                    <?php if (isset($datos['mensaje_exito'])): ?>
+                        <i class="bi bi-check-circle-fill text-success" style="font-size: 3rem;"></i>
+                        <h4 class="mt-3" style="color: green;">¡Éxito!</h4>
+                        <p class="lead"><strong><?php echo $datos['mensaje_exito']; ?></strong></p>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -54,11 +59,11 @@
                 </thead>
                 <tbody>
                     <?php
-                
                     if(isset($datos['noalumnos'])){
                         echo "<tr><td colspan='3'><p class='text-danger fw-bold'>{$datos['noalumnos']}</p></td></tr>";
-                    }else{
-                        foreach($datos as $dato){
+                    }
+                    if (isset($datos['datos'])){
+                        foreach($datos['datos'] as $dato){
                         echo '<tr class="align-middle">';
                         echo "<td>{$dato['nombreAlumno']}</td>";
                         echo "<td>{$dato['clase']}</td>";
@@ -66,7 +71,7 @@
                         echo "<a href='index.php?c=GestionInscripciones&m=consultardatos&id={$dato['idInscripcion']}' class='btn btn-sm action-button me-2'>
                                 <i class='bi bi-info-circle'></i>
                             </a>";
-                        echo "<a href='index.php?c=GestionInscripciones&m=modificacion&id={$dato['idInscripcion']}&origen=inscritos' class='btn btn-sm action-button'>
+                        echo "<a href='index.php?c=GestionInscripciones&m=modificacionInscripcion&id={$dato['idInscripcion']}' class='btn btn-sm action-button'>
                                 <i class='bi bi-pencil'></i>
                             </a>";
                         echo '</td>';
@@ -83,7 +88,7 @@
     <script>
 
         document.addEventListener('DOMContentLoaded', function() {
-            <?php if(isset($datos['errores'])): ?>
+            <?php if(isset($datos['errores']) || isset($datos['mensaje_exito'])): ?>
                 let Modal = new bootstrap.Modal(document.getElementById('Modal'));
                 Modal.show();
             <?php endif; ?>
