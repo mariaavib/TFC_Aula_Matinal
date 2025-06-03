@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <title>Inscripciones Incompletas</title>
+    <link rel="icon" href="assets/img/favicon-img.png" type="image/x-icon">
 </head>
 <body>
     <?php

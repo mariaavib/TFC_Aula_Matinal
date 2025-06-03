@@ -153,6 +153,7 @@ class MGestionInscripciones{
     public function alumnosinscritos(){
         $sql = "SELECT a.idAlumno,
                     a.nombreAlumno,
+                    a.apellidosAlumno,
                     c.clase,
                     i.idInscripcion
                 FROM alumno a

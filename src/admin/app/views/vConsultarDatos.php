@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <title>Consultar Datos</title>
+    <link rel="icon" href="assets/img/favicon-img.png" type="image/x-icon">
 </head>
 <body>
     <?php

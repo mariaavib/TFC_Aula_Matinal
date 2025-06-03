@@ -48,9 +48,13 @@ class CGenerarPdf{
             $pdf->Cell(43, 8, 'Correo', 1,0,'C', true);
             $pdf->Ln();
         
+            $pdf->SetAutoPageBreak(true, 15); // Margen inferior de 15mm
             // Table body
             $pdf->SetFont('Arial', '', 8);
             foreach ($resultado as $alumno) {
+                // Guardar posición Y inicial
+                $y = $pdf->GetY();
+
                 $pdf->Cell(41, 8, mb_convert_encoding($alumno['nombreAlumno'] . ' ' . $alumno['apellidosAlumno'], 'ISO-8859-1', 'UTF-8'), 1);
                 $pdf->Cell(41, 8, mb_convert_encoding($alumno['nombrePadre'] . ' ' . $alumno['apellidosPadre'], 'ISO-8859-1', 'UTF-8'), 1);
                 $pdf->Cell(13, 8, mb_convert_encoding($alumno['clase'], 'ISO-8859-1', 'UTF-8'), 1);

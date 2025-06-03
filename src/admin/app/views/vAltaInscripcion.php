@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <title>Añadir Nuevo Alumno</title>
+    <link rel="icon" href="assets/img/favicon-img.png" type="image/x-icon">
 </head>
 <body>
     <?php
