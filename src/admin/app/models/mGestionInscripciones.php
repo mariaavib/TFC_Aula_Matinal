@@ -145,8 +145,6 @@ class MGestionInscripciones{
         return true;
         
     } catch (Exception $e) {
-        // Revertir en caso de error
-        echo $e->getMessage();
         $this->conexion->rollback();
         return false;
     }
