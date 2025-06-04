@@ -52,6 +52,7 @@ class MGestionInscripciones{
             );
             
             $stmtInscripcion->execute();
+            // Obtener el id de la inscripción
             $idInscripcion = $this->conexion->insert_id;
             $stmtInscripcion->close();
             
@@ -81,75 +82,86 @@ class MGestionInscripciones{
         }
     }
 
+    /**
+     * Método que modifica inscripciones
+     * @param mixed $datos
+     * @throws \Exception
+     * @return bool
+     */
     public function modificarInscripcion($datos){
-    // Iniciar transacción
-    $this->conexion->begin_transaction();
-    
-    try {
-        // Actualizar tabla inscripciones
-        $sqlInscripcion = "UPDATE inscripciones 
-                        SET nombrePadre = ?, 
-                            apellidosPadre = ?, 
-                            DNI = ?, 
-                            IBAN = ?, 
-                            titularCuenta = ?, 
-                            fechaMandato = ?, 
-                            telefono = ?, 
-                            correo = ?, 
-                            completada = ? 
-                        WHERE idInscripcion = ?";
+        // Iniciar transacción
+        $this->conexion->begin_transaction();
         
-        $stmtInscripcion = $this->conexion->prepare($sqlInscripcion);
-        if(!$stmtInscripcion) {
-            throw new Exception($this->conexion->error);
-        }
-        $fechaMandato = !empty($datos['fechamandato']) ? $datos['fechamandato'] : null;
+        try {
+            // Actualizar tabla inscripciones
+            $sqlInscripcion = "UPDATE inscripciones 
+                            SET nombrePadre = ?, 
+                                apellidosPadre = ?, 
+                                DNI = ?, 
+                                IBAN = ?, 
+                                titularCuenta = ?, 
+                                fechaMandato = ?, 
+                                telefono = ?, 
+                                correo = ?, 
+                                completada = ? 
+                            WHERE idInscripcion = ?";
+            
+            $stmtInscripcion = $this->conexion->prepare($sqlInscripcion);
+            if(!$stmtInscripcion) {
+                throw new Exception($this->conexion->error);
+            }
+            // Si no se ha introducido fecha de mandato, se pone null, para evitar errores de bbdd
+            $fechaMandato = !empty($datos['fechamandato']) ? $datos['fechamandato'] : null;
 
-        $stmtInscripcion->bind_param("ssssssssii",
-            $datos['nombre_tutor'],
-            $datos['apellidos_tutor'],
-            $datos['dni'],
-            $datos['iban'],
-            $datos['titular'],
-            $fechaMandato,
-            $datos['telefono'],
-            $datos['email'],
-            $datos['completada'],
-            $datos['id']
-        );
-        
-        $stmtInscripcion->execute();
-        if ($stmtInscripcion->errno) {
-            throw new Exception($stmtInscripcion->error);
+            $stmtInscripcion->bind_param("ssssssssii",
+                $datos['nombre_tutor'],
+                $datos['apellidos_tutor'],
+                $datos['dni'],
+                $datos['iban'],
+                $datos['titular'],
+                $fechaMandato,
+                $datos['telefono'],
+                $datos['email'],
+                $datos['completada'],
+                $datos['id']
+            );
+            
+            $stmtInscripcion->execute();
+            if ($stmtInscripcion->errno) {
+                throw new Exception($stmtInscripcion->error);
+            }
+            $stmtInscripcion->close();
+            // Actualizar tabla alumno
+            $sqlAlumno = "UPDATE alumno 
+                            SET nombreAlumno = ?,
+                                apellidosAlumno =?, 
+                                idClase = ?
+                            WHERE idInscripcion = ?";
+            
+            $stmtAlumno = $this->conexion->prepare($sqlAlumno);
+            $stmtAlumno->bind_param("ssii", 
+                $datos['nombre_alumno'],
+                $datos['apellidos_alumno'],
+                $datos['clase'],
+                $datos['id']
+            );
+            
+            $stmtAlumno->execute();
+            
+            // Confirmar transacción
+            $this->conexion->commit();
+            return true;
+            
+        } catch (Exception $e) {
+            $this->conexion->rollback();
+            return false;
         }
-        $stmtInscripcion->close();
-        // Actualizar tabla alumno
-        $sqlAlumno = "UPDATE alumno 
-                        SET nombreAlumno = ?,
-                            apellidosAlumno =?, 
-                            idClase = ?
-                        WHERE idInscripcion = ?";
-        
-        $stmtAlumno = $this->conexion->prepare($sqlAlumno);
-        $stmtAlumno->bind_param("ssii", 
-            $datos['nombre_alumno'],
-            $datos['apellidos_alumno'],
-            $datos['clase'],
-            $datos['id']
-        );
-        
-        $stmtAlumno->execute();
-        
-        // Confirmar transacción
-        $this->conexion->commit();
-        return true;
-        
-    } catch (Exception $e) {
-        $this->conexion->rollback();
-        return false;
     }
-}
 
+    /**
+     * Método que devuelve los alumnos con inscripciones completadas
+     * @return array
+     */
     public function alumnosinscritos(){
         $sql = "SELECT a.idAlumno,
                     a.nombreAlumno,
@@ -162,9 +174,12 @@ class MGestionInscripciones{
                 WHERE i.completada = 1;";
         $resultado = $this->conexion->query($sql);
 
+        //Si no hay alumnos inscritos, devolver un array con el mensaje de error
         if ($resultado->num_rows === 0) {
             $datos['noalumnos'] = 'No hay alumnos inscritos';
             return $datos;
+
+        //Si hay alumnos inscritos, devolver un array con los datos de los alumnos
         }else{
             $alumnos = [];
             while($fila = $resultado->fetch_assoc()){
@@ -174,6 +189,10 @@ class MGestionInscripciones{
         }
     }
     
+    /**
+     * Método que devuelve los datos de un alumno con un id en concreto.
+     * @param mixed $id
+     */
     public function datosAlumnosinscritos($id){
         $sql = "SELECT *
                 FROM alumno a
@@ -192,10 +211,13 @@ class MGestionInscripciones{
 
         $resultado = $stmt->get_result();
         
+        //Si no se encuentra al alumno, devolver un array con el mensaje de error
         if ($resultado->num_rows === 0) {
             $stmt->close();
             $datos['errores'] = 'Alumno no encontrado';
             return $datos;
+        
+        //Si se encuentra al alumno, devolver un array con los datos del alumno
         }else{
             $fila = $resultado->fetch_assoc();
             $stmt->close();
@@ -203,6 +225,10 @@ class MGestionInscripciones{
         }
     }
 
+    /**
+     * Método que devuelve los alumnos con inscripciones incompletas
+     * @return array
+     */
     public function inscripcionesincompletas(){
         $sql = "SELECT a.idAlumno,
                     a.nombreAlumno,
@@ -213,9 +239,12 @@ class MGestionInscripciones{
                 WHERE i.completada = 0;";
         $resultado = $this->conexion->query($sql);
 
+        //Si no hay inscripciones incompletas, devolver un array con el mensaje de error
         if ($resultado->num_rows === 0) {
             $datos['noincompletas'] = 'No hay inscripciones incompletas';
             return $datos;
+
+        //Si hay inscripciones incompletas, devolver un array con los datos de los alumnos
         }else{
             $alumnos = [];
             while($fila = $resultado->fetch_assoc()){
