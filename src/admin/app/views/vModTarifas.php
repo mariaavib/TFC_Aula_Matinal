@@ -10,19 +10,21 @@
     ?>  
     <div class="container-sm mt-5">
         <?php if (isset($datos['mensaje_exito'])): ?>
-            <div class="alert alert-success mx-auto" style="max-width: 650px;" role="alert">
+            <div class="alert alert-success alert-dismissible fade show mx-auto" style="max-width: 650px;" role="alert">
                 <?php echo htmlspecialchars($datos['mensaje_exito']); ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
             </div>
         <?php endif; ?>
 
         <?php if (isset($datos['errores']) && !empty($datos['errores'])): ?>
-            <div class="alert alert-danger mx-auto" style="max-width: 650px;" role="alert">
+            <div class="alert alert-danger alert-dismissible fade show mx-auto" style="max-width: 650px;" role="alert">
                 <strong>Por favor, corrija los siguientes errores:</strong>
                 <ul>
                     <?php foreach ($datos['errores'] as $error): ?>
                         <li><?php echo htmlspecialchars($error); ?></li>
                     <?php endforeach; ?>
                 </ul>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
             </div>
         <?php endif; ?>
 
@@ -63,5 +65,6 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/views/vModificarTarifas.js"></script>
 </body>
 </html>
