@@ -9,7 +9,7 @@
     class CDiasNoLectivos{
             private $objModelo;
             public $vista;    
-    
+
             function __construct(){
                 require_once(RUTA_MODELOS.'DiasNoLectivos.php');
                 $this->objModelo = new MDiasNoLectivos(); 
@@ -32,15 +32,15 @@
                     'message' => ''
                 ];
             
-                if (isset($_GET['status'])) {
+                if (isset($_GET['status'])){
                     $datos['status'] = $_GET['status'];
                 }
             
-                if (isset($_GET['message'])) {
+                if (isset($_GET['message'])){
                     $datos['message'] = $_GET['message'];
                 }
                 
-                if (isset($_GET['msg'])) {
+                if (isset($_GET['msg'])){
                     if ($_GET['msg'] === 'ok') {
                         $datos['message'] = 'Día no lectivo eliminado correctamente.';
                     } elseif ($_GET['msg'] === 'error') {
