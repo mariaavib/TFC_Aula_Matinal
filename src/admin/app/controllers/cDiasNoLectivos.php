@@ -19,9 +19,35 @@
              *
              * @return array Los datos de los días no lectivos.
              */
-            public function listar(){
-                $this->vista = 'vDiasNoLectivos';    
-                $datos = $this->objModelo->listarDias();
+            public function listar() {
+                $this->vista = 'vDiasNoLectivos';
+                $hoy = date('m-d');
+                if ($hoy == '01-01') {
+                    $this->objModelo->actualizarAnioDiasNoLectivos();
+                }
+                $dias = $this->objModelo->listarDias();
+                $datos = [
+                    'datos' => $dias,
+                    'status' => '',
+                    'message' => ''
+                ];
+            
+                if (isset($_GET['status'])) {
+                    $datos['status'] = $_GET['status'];
+                }
+            
+                if (isset($_GET['message'])) {
+                    $datos['message'] = $_GET['message'];
+                }
+                
+                if (isset($_GET['msg'])) {
+                    if ($_GET['msg'] === 'ok') {
+                        $datos['message'] = 'Día no lectivo eliminado correctamente.';
+                    } elseif ($_GET['msg'] === 'error') {
+                        $datos['message'] = 'Error al eliminar el día no lectivo.';
+                    }
+                }
+            
                 return $datos;
             }
             /**
@@ -41,25 +67,44 @@
              *
              * @return array Los datos resultantes después de la inserción.
              */
-            public function insertar(){
-                if(!empty($_POST['fecha']) && !empty($_POST['motivo'])) {
+            public function insertar() {
+                header('Content-Type: application/json');
+            
+                if (!empty($_POST['fecha']) && !empty($_POST['motivo'])) {
                     $fecha = $_POST['fecha'];
-                    $motivo = $_POST['motivo'];      
+                    $motivo = $_POST['motivo'];
+
+                    if ($this->objModelo->comprobar($fecha)) {
+                        echo json_encode([
+                            "error" => "Ya existe un día no lectivo con esa fecha."
+                        ]);
+                        exit;
+                    }
+            
                     $resultado = $this->objModelo->altaDias($fecha, $motivo);
-                    
-                    if($resultado) {
-                        $this->vista = 'vDiasNoLectivos';
-                        return $this->listar();
+            
+                    if ($resultado) {
+                        echo json_encode([
+                            'status' => 'ok',
+                            'message' => 'Día no lectivo insertado correctamente.'
+                        ]);
+                        exit;
+                    } else {
+                        echo json_encode([
+                            'status' => 'error',
+                            'message' => 'Error al insertar el día no lectivo.'
+                        ]);
+                        exit;
                     }
                 }
-
-                $this->vista = 'vAltaDiasNoLectivos';
-                return [
+            
+                echo json_encode([
                     'error' => 'Todos los campos son obligatorios.',
                     'fecha' => $_POST['fecha'],
                     'motivo' => $_POST['motivo']
-                ];
-            }
+                ]);
+                exit;
+            }            
             /**
              * Muestra el formulario de modificar de días no lectivos.
              * 
@@ -91,7 +136,7 @@
              */
             public function editar(){
                 $this->vista = 'vEditDiasNoLectivos';
-
+            
                 if(!isset($_POST['id']) || !isset($_POST['fecha']) || !isset($_POST['motivo'])) {
                     $this->vista = 'vDiasNoLectivos';
                     return $this->listar();
@@ -104,6 +149,15 @@
                 if(empty($fecha) || empty($motivo)) {
                     return [
                         'error' => 'Todos los campos son obligatorios.',
+                        'fecha' => $fecha,
+                        'motivo' => $motivo,
+                        'idDia' => $id
+                    ];
+                }
+            
+                if ($this->objModelo->comprobar($fecha, $id)) { 
+                    return [
+                        'error' => 'Ya existe un día no lectivo con esa fecha.',
                         'fecha' => $fecha,
                         'motivo' => $motivo,
                         'idDia' => $id
@@ -124,6 +178,7 @@
                     ];
                 }
             }
+            
             /** 
              * Elimina un día no lectivo.
              *
@@ -133,11 +188,15 @@
                 if (isset($_GET['id'])) {
                     $id = $_GET['id'];
                     $resultado = $this->objModelo->eliminarDias($id);
-                    if($resultado) {
+            
+                    if ($resultado) {
                         $this->vista = 'vDiasNoLectivos';
                         return $this->listar();
                     }
                 }
             }
+            
+            
+            
         
     }

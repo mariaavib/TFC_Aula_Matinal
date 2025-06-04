@@ -1,4 +1,7 @@
 <?php
+/**
+ * Modelo que gestiona las remesas
+ */
     class mRemesas{
         private $conexion;
 
@@ -7,147 +10,301 @@
             $objConexion = new Conexion();
             $this->conexion = $objConexion->conexion;
         }
-
-        public function obtenerTarifa() {
-            $sql = "SELECT precioDia, precioMes, numDias FROM datos_aplicacion";
-            $resultado = $this->conexion->query($sql);
-            $tarifa = $resultado->fetch_assoc();
-            return $tarifa;
-        }
-
-        private function obtenerAlumnosConAsistenciaPendiente($mes, $anio) {
-            $sql = "SELECT alumno.idAlumno, nombreAlumno, apellidosAlumno, clase, COUNT(asistencia.idAsistencia) AS num_dias_asistidos
-                    FROM alumno
-                    INNER JOIN asistencia ON alumno.idAlumno = asistencia.idAlumno
-                    INNER JOIN clases ON alumno.idClase = clases.idClase
-                    WHERE MONTH(asistencia.fecha) = ? AND YEAR(asistencia.fecha) = ? AND asistencia.pagado = 0
-                    GROUP BY alumno.idAlumno, nombreAlumno, apellidosAlumno, clase";
-    
-            $stmt = $this->conexion->prepare($sql);
-            $stmt->bind_param("ii", $mes, $anio);
-            $stmt->execute();
-            $resultado = $stmt->get_result();
+        /**
+         * Metodo que genera una nueva remesa
+         */
+        public function generarNuevaRemesa($fechaRemesa) {
+            $fecha = strtotime($fechaRemesa);
+            $mes = date('m', strtotime('-1 month', $fecha));
+            $anio = date('Y', strtotime('-1 month', $fecha));
         
-            $alumnos = [];
-            while ($fila = $resultado->fetch_assoc()) {
-                $alumnos[] = $fila;
+            if ($this->existeRemesa($mes, $anio)) {
+                return ['status' => 'error', 'message' => "Ya existe una remesa para $mes/$anio"];
             }
         
+            $alumnos = $this->obtenerAlumnos();
+        
+            $totalAsistencias = 0;
+            foreach ($alumnos as $idAlumno) {
+                $totalAsistencias += $this->contarAsistencias($idAlumno, $mes, $anio);
+            }
+        
+            if ($totalAsistencias === 0) {
+                return ['status' => 'error', 'message' => "No hay asistencias para $mes/$anio. No se puede generar la remesa."];
+            }
+        
+            $idRemesa = $this->crearRemesa($mes, $anio);
+            if (!$idRemesa) {
+                return ['status' => 'error', 'message' => "No se pudo crear la remesa."];
+            }
+        
+            [$precioDia, $precioMes, $numDias] = $this->obtenerTarifas();
+        
+            $alumnosFacturados = [];
+        
+            foreach ($alumnos as $idAlumno) {
+                $dias = $this->contarAsistencias($idAlumno, $mes, $anio);
+                if ($dias > 0) {
+                    $precioFinal = ($dias >= $numDias) ? $precioMes : $dias * $precioDia;
+        
+                    $this->crearRecibo($idAlumno, $idRemesa, $dias, $precioFinal, $mes, $anio);
+                    $this->marcarAsistenciasComoFacturadas($idAlumno, $mes, $anio);
+        
+                    $infoAlumno = $this->obtenerInfoAlumno($idAlumno);
+                    $alumnosFacturados[] = [
+                        'idAlumno' => $idAlumno,
+                        'nombre' => $infoAlumno['nombreAlumno'] . ' ' . $infoAlumno['apellidosAlumno'],
+                        'clase' => $infoAlumno['clase'],
+                        'diasAsistidos' => $dias,
+                        'importe' => $precioFinal
+                    ];
+                }
+            }
+            return [
+                'status' => 'ok',
+                'message' => 'Remesa generada correctamente',
+                'alumnos' => $alumnosFacturados
+            ];
+        }
+        /**
+         * Metodo privado que obtiene la información de un alumno para la remes
+         */
+        private function obtenerInfoAlumno($idAlumno) {
+            $sql = "SELECT nombreAlumno,apellidosAlumno,clase 
+                    FROM alumno 
+                    INNER JOIN clases  ON alumno.idClase = clases.idClase
+                    WHERE alumno.idAlumno = $idAlumno
+                    LIMIT 1";
+            $res = mysqli_query($this->conexion, $sql);
+            return mysqli_fetch_assoc($res);
+        }
+        /**
+         * Metodo privado que comprueba si existe una remesa para el mes y año dados
+         */
+        private function existeRemesa($mes, $anio) {
+            $sql = "SELECT COUNT(*) AS total FROM remesas WHERE mes = $mes AND anio = $anio";
+            $res = mysqli_query($this->conexion, $sql);
+            $row = mysqli_fetch_assoc($res);
+            return $row['total'] > 0;
+        }
+        /**
+         * Metodo privado que crea una nueva remesa
+         */
+        private function crearRemesa($mes, $anio) {
+            $sql = "INSERT INTO remesas (fechaGenerada, mes, anio) VALUES (NOW(), $mes, $anio)";
+            mysqli_query($this->conexion, $sql);
+            return mysqli_insert_id($this->conexion);
+        }
+        /**
+         * Metodo privado que obtiene las tarifas de la aplicación
+         */
+        private function obtenerTarifas()
+        {
+            $sql = "SELECT precioDia, precioMes, numDias 
+                FROM datos_aplicacion 
+                WHERE precioDia IS NOT NULL 
+                AND precioMes IS NOT NULL 
+                AND numDias IS NOT NULL 
+                LIMIT 1;";
+            $resultado = mysqli_query($this->conexion, $sql);
+
+            if ($fila = mysqli_fetch_assoc($resultado)) {
+                return [$fila['precioDia'], $fila['precioMes'], $fila['numDias']];
+            }
+            return [0, 0, 0]; // Valor por defecto en caso de error
+        }
+        /**
+         * Metodo privado que obtiene los alumnos
+         */
+        private function obtenerAlumnos() {
+            $alumnos = [];
+            $sql = "SELECT idAlumno FROM alumno";
+            $res = mysqli_query($this->conexion, $sql);
+            while ($row = mysqli_fetch_assoc($res)) {
+                $alumnos[] = $row['idAlumno'];
+            }
             return $alumnos;
         }
-
-        private function calcularTotalPrecioRecibo($diasAsistidos) {
-            // Si el alumno asistió al menos el número mínimo de días para el precio mensual,
-            // se cobra el precio mensual fijo.
-            if ($diasAsistidos >= $this->tarifaActual['numDias']) {
-                return $this->tarifaActual['precioMes'];
-            }
-            
-            // Si asistió menos días, se cobra el precio por día multiplicado por los días asistidos.
-            return $diasAsistidos * $this->tarifaActual['precioDia'];
+        /**
+         * Metodo privado que cuenta las asistencias de un alumno para un mes y año dados
+         */
+        private function contarAsistencias($idAlumno, $mes, $anio) {
+            $sql = "SELECT COUNT(*) AS total FROM asistencia 
+                    WHERE idAlumno = $idAlumno 
+                    AND MONTH(fecha) = $mes 
+                    AND YEAR(fecha) = $anio 
+                    AND reciboEmitido = 0";
+            $res = mysqli_query($this->conexion, $sql);
+            $row = mysqli_fetch_assoc($res);
+            return $row['total'];
         }
-        
-        private function obtenerDiasNoLectivosMes($mes, $anio) {
-            $sql = "SELECT fecha FROM dias_no_lectivos WHERE MONTH(fecha) = ? AND YEAR(fecha) = ?";
-            $stmt = $this->conexion->prepare($sql);
-            $stmt->bind_param("ii", $mes, $anio);
-            $stmt->execute();
-            $resultado = $stmt->get_result();
-            $fechasNoLectivas = [];
-            while ($fila = $resultado->fetch_assoc()) {
-                $fechasNoLectivas[] = $fila['fecha'];
-            }
-            $stmt->close();
-            return $fechasNoLectivas;
+        /**
+         * Metodo privado que crea un nuevo recibo
+         */
+        private function crearRecibo($idAlumno, $idRemesa, $dias, $precioFinal, $mes, $anio) {
+            $sql = "INSERT INTO recibos (diasAsistidos, anio, mes, totalDias, totalPrecio, idAlumno, idRemesa)
+                    VALUES ($dias, $anio, $mes, $dias, $precioFinal, $idAlumno, $idRemesa)";
+            mysqli_query($this->conexion, $sql);
         }
-
-        public function generarNuevaRemesa($fechaRemesaStr) {
-            // Iniciar la transacción
-            $this->conexion->begin_transaction();
+        /**
+         * Metodo privado que marca las asistencias como facturadas
+         */
+        private function marcarAsistenciasComoFacturadas($idAlumno, $mes, $anio) {
+            $sql = "UPDATE asistencia SET reciboEmitido = 1 
+                    WHERE idAlumno = $idAlumno 
+                    AND MONTH(fecha) = $mes 
+                    AND YEAR(fecha) = $anio 
+                    AND reciboEmitido = 0";
+            mysqli_query($this->conexion, $sql);
+        }
+        /**
+         * Metodo que lista las remesas
+         */
+        public function listarRemesas() {
+            $remesas = [];
+            $sql = "SELECT * FROM remesas";
+            $res = mysqli_query($this->conexion, $sql);
+            while ($row = mysqli_fetch_assoc($res)) {
+                $remesas[] = $row;
+            }
+            return $remesas;
+        }
+        /**
+         * Metodo que obtiene los detalles de un alumno
+         */
+        public function obtenerDetallesAlumno($idAlumno, $mes, $anio) {
+            $sql = "SELECT 
+                asistencia.fecha, 
+                alumno.nombreAlumno, 
+                alumno.apellidosAlumno, 
+                inscripciones.nombrePadre,
+                inscripciones.apellidosPadre,
+                inscripciones.telefono
+            FROM asistencia
+            INNER JOIN alumno ON asistencia.idAlumno = alumno.idAlumno
+            INNER JOIN inscripciones ON alumno.idInscripcion = inscripciones.idInscripcion
+            WHERE asistencia.idAlumno = $idAlumno
+            AND MONTH(asistencia.fecha) = $mes
+            AND YEAR(asistencia.fecha) = $anio
+            AND asistencia.reciboEmitido = 1
+            ORDER BY asistencia.fecha ASC;";
         
-            // Validar formato de fecha simple
-            if (strlen($fechaRemesaStr) != 10 || $fechaRemesaStr[4] != '-' || $fechaRemesaStr[7] != '-') {
-                $this->conexion->rollback();
-                return ['status' => 'error', 'message' => 'Fecha inválida. Usa formato YYYY-MM-DD'];
+            $res = mysqli_query($this->conexion, $sql);
+            $detalles = [];
+            while ($row = mysqli_fetch_assoc($res)) {
+                $detalles[] = $row;
             }
         
-            // Extraer año y mes con substr
-            $anio = (int)substr($fechaRemesaStr, 0, 4);
-            $mes = (int)substr($fechaRemesaStr, 5, 2);
-        
-            // Restar un mes manualmente (sin usar modify)
-            $mesRecibos = $mes - 1;
-            $anioRecibos = $anio;
-            if ($mesRecibos == 0) {
-                $mesRecibos = 12;
-                $anioRecibos = $anio - 1;
+            return $detalles;
+        }
+        /**
+         * Metodo que obtiene los datos mensuales de los alumnos
+         */
+        public function obtenerDatosMensuales($mes, $anio) {
+            if (!$this->existeRemesa($mes, $anio)) {
+                return [];  
             }
         
-            // Convertir mesRecibos a cadena con cero delante si es menor a 10 (sin operador ternario)
-            if ($mesRecibos < 10) {
-                $mesConCero = "0" . $mesRecibos;
-            } else {
-                $mesConCero = (string)$mesRecibos;
+            [$precioDia, $precioMes, $numDias] = $this->obtenerTarifas();
+            $datos = [];
+        
+            $sql = "SELECT DISTINCT alumno.idAlumno, alumno.nombreAlumno, alumno.apellidosAlumno, clases.clase
+                    FROM alumno
+                    INNER JOIN clases ON alumno.idClase = clases.idClase
+                    INNER JOIN recibos ON alumno.idAlumno = recibos.idAlumno
+                    INNER JOIN remesas ON recibos.idRemesa = remesas.idRemesa
+                    WHERE remesas.mes = $mes AND remesas.anio = $anio
+                    ORDER BY alumno.nombreAlumno ASC";
+        
+            $res = mysqli_query($this->conexion, $sql);
+            if (!$res) {
+                die("Error en consulta obtenerDatosMensuales: " . mysqli_error($this->conexion));
             }
         
-            // Obtener nombre del mes
-            $nombreMes = $this->getNombreMes($mesConCero) . " " . $anioRecibos;
+            while ($row = mysqli_fetch_assoc($res)) {
+                $idAlumno = $row['idAlumno'];
         
-            // Crear registro remesa
-            $idRemesa = $this->crearRegistroRemesa($fechaRemesaStr);
-            if (!$idRemesa) {
-                $this->conexion->rollback();
-                return ['status' => 'error', 'message' => 'Error al crear la remesa'];
-            }
+                $sqlAsistencias = "SELECT COUNT(*) AS total 
+                                   FROM asistencia 
+                                   WHERE idAlumno = $idAlumno 
+                                     AND MONTH(fecha) = $mes 
+                                     AND YEAR(fecha) = $anio
+                                     AND reciboEmitido = 1";
         
-            // Obtener alumnos con asistencia pendiente
-            $alumnos = $this->obtenerAlumnosConAsistenciaPendiente($mesRecibos, $anioRecibos);
-        
-            if (empty($alumnos)) {
-                $this->conexion->commit();
-                return [
-                    'status' => 'success',
-                    'message' => "Remesa creada pero no hay alumnos con asistencia pendiente para $nombreMes.",
-                    'recibos' => [],
-                    'mesAnioRecibos' => $nombreMes,
-                    'idRemesa' => $idRemesa
-                ];
-            }
-        
-            $recibos = [];
-        
-            foreach ($alumnos as $alumno) {
-                $resultado = $this->insertarReciboYActualizarAsistencia($alumno, $idRemesa, $mesRecibos, $anioRecibos);
-                if ($resultado === false) {
-                    $this->conexion->rollback();
-                    return ['status' => 'error', 'message' => 'Error al crear recibo para alumno ID ' . $alumno['idAlumno']];
+                $resAsistencias = mysqli_query($this->conexion, $sqlAsistencias);
+                if (!$resAsistencias) {
+                    die("Error en consulta contar asistencias: " . mysqli_error($this->conexion));
                 }
-                $recibos[] = $resultado;
+        
+                $asistenciaData = mysqli_fetch_assoc($resAsistencias);
+                $dias = $asistenciaData['total'];
+        
+                if ($dias >= $numDias) {
+                    $importe = $precioMes;
+                } else {
+                    $importe = $dias * $precioDia;
+                }
+        
+                if ($dias > 0) {
+                    $datos[] = [
+                        'idAlumno' => $idAlumno,
+                        'nombre' => $row['nombreAlumno'].' '.$row['apellidosAlumno'],
+                        'clase' => $row['clase'],
+                        'diasAsistidos' => $dias,
+                        'importe' => $importe
+                    ];
+                }
             }
         
-            // Terminar transacción
-            $this->conexion->commit();
-        
-            return [
-                'status' => 'success',
-                'message' => "Remesa generada correctamente para $nombreMes.",
-                'recibos' => $recibos,
-                'mesAnioRecibos' => $nombreMes,
-                'idRemesa' => $idRemesa
-            ];
+            return $datos;
         }
+        /**
+         * Metodo que elimina una remesa
+         */
+        public function eliminarRemesa($idRemesa) {
+            $sql = "SELECT idAlumno, mes, anio 
+                    FROM recibos 
+                    WHERE idRemesa = $idRemesa";
+            $resultado = mysqli_query($this->conexion, $sql);
         
-        private function getNombreMes($numeroMes) {
-            $meses = [
-                '01' => 'Enero', '02' => 'Febrero', '03' => 'Marzo', '04' => 'Abril',
-                '05' => 'Mayo', '06' => 'Junio', '07' => 'Julio', '08' => 'Agosto',
-                '09' => 'Septiembre', '10' => 'Octubre', '11' => 'Noviembre', '12' => 'Diciembre'
-            ];
-            if (isset($meses[$numeroMes])) {
-                return $meses[$numeroMes];
+            while ($fila = mysqli_fetch_assoc($resultado)) {
+                $idAlumno = $fila['idAlumno'];
+                $mes = $fila['mes'];
+                $anio = $fila['anio'];
+        
+                $actualizar = "UPDATE asistencia 
+                               SET reciboEmitido = 0 
+                               WHERE idAlumno = $idAlumno 
+                               AND MONTH(fecha) = $mes 
+                               AND YEAR(fecha) = $anio";
+                mysqli_query($this->conexion, $actualizar);
+            }
+        
+            $borrarRemesa = "DELETE FROM remesas WHERE idRemesa = $idRemesa";
+            $resultadoBorrarRemesa = mysqli_query($this->conexion, $borrarRemesa);
+        
+            if ($resultadoBorrarRemesa) {
+                return ['status' => 'ok', 'message' => 'Remesa eliminada correctamente.'];
             } else {
-                return 'Mes Desconocido';
+                return ['status' => 'error', 'message' => 'Error al eliminar la remesa.'];
             }
         }
         
+        /**
+         * Metodo que coge los datos para el excel de remesas
+         */
+        public function cogerDatosExcelRemesas($mes, $anio) {
+            $sql = "SELECT titularCuenta, IBAN, fechaMandato,totalPrecio, DNI
+                    FROM inscripciones
+                    INNER JOIN alumno ON alumno.idInscripcion = inscripciones.idInscripcion
+                    INNER JOIN recibos ON recibos.idAlumno = alumno.idAlumno
+                    INNER JOIN remesas ON remesas.idRemesa = recibos.idRemesa
+                    WHERE remesas.mes = $mes AND remesas.anio = $anio AND completada = 1;";
+            $resultado = mysqli_query($this->conexion, $sql);
+            $datos = [];
+            while ($row = mysqli_fetch_assoc($resultado)) {
+                $datos[] = $row;
+            }
+            return $datos;
+        }
     }

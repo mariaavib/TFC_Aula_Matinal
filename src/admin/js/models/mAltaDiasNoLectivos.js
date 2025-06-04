@@ -17,16 +17,24 @@ export class MAltaDiasNoLectivos {
                 method: 'POST',
                 body: formData
             });
-
+            const result = await response.json();
+            console.log(result);
+            if(result.error) {
+                const errorDiv = document.querySelector('.alert-danger');
+                errorDiv.innerText = result.error;
+                errorDiv.style.display = 'block';
+                return;
+            }
+            
             if (!response.ok) {
                 throw new Error('Error en la respuesta del servidor');
             }
 
-            window.location.href = "index.php?c=DiasNoLectivos&m=listar";
+            // window.location.href = "index.php?c=DiasNoLectivos&m=listar";
 
         } catch (error) {
             const errorDiv = document.querySelector('.alert-danger');
-            errorDiv.innerText = 'Error al procesar la solicitud';
+            errorDiv.innerText = 'Error no se puede insertar ese dia no lectivo';
             errorDiv.style.display = 'block';
         }
     }

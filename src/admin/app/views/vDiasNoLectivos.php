@@ -36,6 +36,20 @@
                     <i class="bi bi-plus"></i>
                 </a>
             </div>
+            <?php
+                if (!empty($datos['status']) && $datos['status'] === 'ok') {
+                    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">'
+                        . $datos['message'] .
+                        '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>';
+                }
+                if (!empty($datos['status']) && $datos['status'] === 'error') {
+                    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">'
+                        . $datos['message'] .
+                        '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>';
+                }
+            ?>
             <div class="table-responsive">
                 <table class="table mb-0 text-center">
                     <thead>
@@ -47,9 +61,10 @@
                     </thead>
                     <tbody>
                         <?php 
-                            foreach ($datos as $valor)  {
+                            foreach ($datos['datos'] as $valor)  {
+                                $fechaModificada = date('d-m-Y', strtotime($valor['fecha']));
                                 echo '<tr class="align-middle">
-                                    <td class="border-bottom">' . $valor['fecha'] . '</td>
+                                    <td class="border-bottom">' . $fechaModificada . '</td>
                                     <td class="border-bottom">' . $valor['motivo'] . '</td>
                                     <td class="border-bottom">
                                         <a href="index.php?c=DiasNoLectivos&m=formEdit&id='.$valor['idDia'].'" class="btn btn-sm me-2 action-button">

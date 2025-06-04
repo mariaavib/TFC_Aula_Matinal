@@ -18,11 +18,18 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">INSCRIPCIONES</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="inicioCursoDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                INSCRIPCIONES
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="inicioCursoDropdown">
+                                <li><a class="dropdown-item" href="index.php?c=GestionInscripciones&m=alta">AÑADIR ALUMNO</a></li>
+                                <li><a class="dropdown-item" href="index.php?c=GestionInscripciones&m=alumnosinscritos">ALUMNOS INSCRITOS</a></li>
+                                <li><a class="dropdown-item" href="index.php?c=GestionInscripciones&m=inscripcionesincompletas">INSCRIPCIONES INCOMPLETAS</a></li>
+                            </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">GESTIÓN DÍA A DÍA</a>
+                            <a class="nav-link" href="../user/index.php?c=ControlAsistencia&m=gestionar">GESTIÓN DÍA A DÍA</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="index.php?c=Remesas&m=listarRemesas" id="gestionRemesasDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
