@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function mostrarErrores(errores) {
         const alertDiv = document.createElement('div');
-        alertDiv.className = 'alert alert-danger mx-auto';
+        alertDiv.className = 'alert alert-danger alert-dismissible fade show mx-auto';
         alertDiv.style.maxWidth = '650px';
         alertDiv.role = 'alert';
 
@@ -67,9 +67,9 @@ document.addEventListener('DOMContentLoaded', function () {
             <ul>
                 ${errores.map(e => `<li>${e}</li>`).join('')}
             </ul>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
         `;
 
-        // Insertar el mensaje antes del formulario
         form.parentNode.insertBefore(alertDiv, form);
     }
 });
