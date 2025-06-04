@@ -91,6 +91,7 @@
     font-size: 0.9rem;
     padding: 0.5rem;
 }
+
 /* BUSCADOR */
 .input-group {
     max-width: 300px;
@@ -163,16 +164,8 @@
 .fc .fc-button-group {
     display: flex;
     gap: 10px;
-}
-
-/* Botón HOY */
-.fc .fc-today-button {
-    background-color: var(--verde-detalles);
-    padding: 10px 20px;
-}
-
-.fc .fc-today-button:hover {
-    background-color: #145c39;
+    justify-content: center;
+    width: 100%;
 }
 
 /* Cabecera días de la semana */
@@ -186,7 +179,7 @@
     font-weight: bold;
 }
 
-/* Botones de navegación */
+/* Botones de izquierda y derecha del calendario */
 .fc .fc-button-primary {
     background-color: var(--azul-principal);
     border-color: var(--azul-principal);
@@ -197,12 +190,16 @@
     border-color: var(--azul-secundario);
 }
 
-/* Botón Hoy */
+/* Botón Hoy del calendario */
 .fc .fc-today-button {
     background-color: var(--verde-detalles)!important;
     border-color: var(--verde-detalles)!important;
+    margin-top: 10px;
 }
 
+.fc .fc-today-button:hover {
+    background-color: #145c39;
+}
 
 .fc .fc-daygrid-day-number {
     font-size: 0.9em;
@@ -219,34 +216,27 @@
     font-size: 0.85rem;
 }
 
-/* MEDIA QUERIES */
-@media (max-width: 991px) {
-    /* Calendario */
-    #calendar {
-        padding: 10px;
-        margin: 10px;
-    }
-    
-    .fc .fc-toolbar {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .fc .fc-toolbar-chunk:nth-child(2) {
-        order: -1;
-    }
-
-    .fc .fc-today-button {
-        padding: 6px 12px;
-        font-size: 0.9rem;
-        margin-top: 5px;
-    }
+/*Modal para mostrar día no lectivo*/
+.modal-header-custom {
+    background-color: var(--azul-principal);
+    border-bottom: none;
 }
 
-/* TABLET ESPECÍFICO */
-@media (max-width: 991px) and (min-width: 768px) {
+.modal-footer .btn-secondary {
+    background-color: var(--azul-secundario);
+    border: none;
+    color: var(--blanco);
+    transition: background-color 0.3s ease;
+}
+
+.modal-footer .btn-secondary:hover {
+    background-color: var(--azul-principal);
+}
+
+/* MEDIA QUERIES */
+
+/* TABLET (768px a 991px) */
+@media (min-width: 768px) and (max-width: 991px) {
     /* Navegación */
     .navbar-nav .nav-item {
         padding: 5px 0;
@@ -289,7 +279,7 @@
     .btn-lg.bg-custom-secondary {
         height: 45px;
         padding: 0.5rem 2rem;
-        margin: 0 0 0 5px;
+        margin-left: 5px;
     }
 
     /* Contenedores y tablas */
@@ -311,9 +301,32 @@
     .columna-asiste {
         min-width: 70px;
     }
+
+    /* Calendario ajustes tablet */
+    #calendar {
+        padding: 10px;
+        margin: 10px;
+    }
+
+    .fc .fc-toolbar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .fc .fc-toolbar-chunk:nth-child(2) {
+        order: -1;
+    }
+
+    .fc .fc-today-button {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+        margin-top: 5px;
+    }
 }
 
-/* RESPONSIVE MÓVIL */
+/* MÓVIL (max-width: 767px) */
 @media (max-width: 767px) {
     /* Barra de navegación móvil */
     .navbar-nav .nav-item {
@@ -360,6 +373,10 @@
     }
 
     /* Calendario */
+    #calendar {
+        min-height: 650px;
+    }
+
     .fc .fc-toolbar-chunk:first-child {
         display: flex;
         justify-content: center;
@@ -369,9 +386,15 @@
     .fc .fc-today-button {
         min-width: 80px;
         margin: 0 4px;
+        font-size: 0.75rem;
+        padding: 6px 12px;
+        margin: 10px auto;
+        display: block;
     }
 
     .fc .fc-button-group {
         margin-bottom: 8px;
+        justify-content: center;
+        width: 100%;
     }
 }
