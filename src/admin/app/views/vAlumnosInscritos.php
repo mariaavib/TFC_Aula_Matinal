@@ -48,7 +48,7 @@
 
         <div class="mb-3 d-flex justify-content-between">
             <a href="index.php?c=GestionInscripciones&m=alta" class="btn add-button d-flex align-items-center px-3" style="width: fit-content; font-size: 0.9rem;">
-                <i class="bi bi-person-plus me-2"></i> Añadir nuevo alumno
+                <i class="bi bi-person-plus me-2"></i> Añadir alumno
             </a>
             <a href="index.php?c=GenerarPdf&m=generarpdf" target = _blank class="btn add-button d-flex align-items-center px-3" style="width: fit-content; font-size: 0.9rem;">
                 <i class="bi bi-printer me-2"></i> Imprimir
