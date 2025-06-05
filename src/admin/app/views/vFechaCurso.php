@@ -56,7 +56,8 @@
                         <input type="date" value="<?php echo isset($datos['finCurso']) ? $datos['finCurso'] : ''; ?>" name="fecha_fin" class="form-control bg-light" id="fecha_fin">
                     </div>
                     <div class="text-center mt-5">
-                        <button type="submit" class="btn form-button">MODIFICAR FECHAS</button>
+                        <button type="submit" style="background-color: #006EA4; color: white;" class="btn form-button">MODIFICAR FECHAS</button>
+                        <a href="index.php?c=PanelAdmin&m=inicio" class="btn me-2" style="background-color: #006EA4; color: white;">CANCELAR</a>
                     </div>
                 </form>
             </div>
