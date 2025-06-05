@@ -131,7 +131,7 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="fechaRemesa" class="form-label">Fecha de Remesa</label>
-                        <input type="date" class="form-control" id="fechaRemesa" name="fechaRemesa" max="<?= date('Y-m-d') ?>" required>
+                        <input type="date" class="form-control" id="fechaRemesa" name="fechaRemesa" required>
                     </div>
                     <div class="alert alert-info">
                         Este proceso generará:

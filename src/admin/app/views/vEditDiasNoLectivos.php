@@ -32,8 +32,8 @@
                                value="<?php echo $datos['motivo']; ?>">
                     </div>
                     <div class="text-center mt-5">
-                        <a href="../admin/index.php?c=DiasNoLectivos&m=listar" class="btn form-button me-2">CANCELAR</a>
                         <button type="submit" class="btn form-button">MODIFICAR</button>
+                        <a href="../admin/index.php?c=DiasNoLectivos&m=listar" class="btn form-button me-2">CANCELAR</a>
                     </div>
                 </form>
             </div>

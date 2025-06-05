@@ -30,7 +30,6 @@ class CRemesas {
             'anio' => $anio
         ];
     }
-    
     /**
      * Metodo que muestra la vista de la lista de remesas
      */
@@ -56,11 +55,20 @@ class CRemesas {
             $fecha->modify('first day of last month'); 
             $mes = (int)$fecha->format('m');
             $anio = (int)$fecha->format('Y');
+            if ($this->objModelo->existeRemesa($mes, $anio)) {
+                $alumnos = $this->objModelo->obtenerDatosMensuales($mes, $anio);
+                return [
+                    'status' => 'error',
+                    'message' => "Ya existe una remesa para la fecha $mes/$anio.",
+                    'mes' => $mes,
+                    'anio' => $anio,
+                    'alumnos' => $alumnos
+                ];
+            }
 
             $alumnos = $this->objModelo->obtenerDatosMensuales($mes, $anio);
             /////////////////////////////////////////////////////////////////
             if(!$this->cogerDatosExcelRemesas($mes, $anio)){
-                // No hay datos, retornamos error para mostrar mensaje en la vista
                 return array_merge($resultado, [
                     'status' => 'error',
                     'message' => 'No hay datos para generar la remesa en ese periodo.',

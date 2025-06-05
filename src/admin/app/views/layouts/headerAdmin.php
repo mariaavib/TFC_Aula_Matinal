@@ -29,16 +29,13 @@
                                 <li><a class="dropdown-item" href="index.php?c=GestionInscripciones&m=inscripcionesincompletas">INSCRIPCIONES INCOMPLETAS</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../user/index.php?c=ControlAsistencia&m=gestionar">GESTIÓN DÍA A DÍA</a>
-                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="index.php?c=Remesas&m=listarRemesas" id="gestionRemesasDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                GESTIÓN REMESAS
                            </a>
                            <ul class="dropdown-menu" aria-labelledby="gestionRemesasDropdown">
-                                <li><a class="dropdown-item" href="index.php?c=Remesas&m=listarRemesas">REMESAS</a></li>
-                                <li><a class="dropdown-item" href="index.php?c=Remesas&m=datosMensuales">DATOS MENSUALES</a></li>
+                                <li><a class="dropdown-item" href="index.php?c=Remesas&m=listarRemesas">CONSULTAR REMESAS</a></li>
+                                <li><a class="dropdown-item" href="index.php?c=Remesas&m=datosMensuales">GENERAR REMESAS</a></li>
                            </ul>
                        </li>
                         <li class="nav-item">
@@ -54,6 +51,11 @@
                             </ul>
                         </li>
                     </ul>
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="../user/index.php?c=ControlAsistencia&m=gestionar" target="_blank">GESTIÓN DEL DÍA A DÍA</a>
+                        </li>
+                    </ul>  
                 </div>
             </div>
         </div>
