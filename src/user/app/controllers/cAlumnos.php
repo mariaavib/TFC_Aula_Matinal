@@ -66,17 +66,35 @@ class CAlumnos {
 
             if (empty($nombreAlumno) || empty($apellidosAlumno) || empty($nombrePadre) || empty($apellidosPadre) || empty($telefono) || empty($idClase)) {
                 $this->vista = 'vAltaAlumno';
-                return ['error' => 'Todos los campos son obligatorios'];
+                $clases = $this->objModelo->obtenerClases();
+                return [
+                    'error' => 'Todos los campos son obligatorios',
+                    'clases' => $clases,
+                    'datosForm' => $_POST
+                ];
             }
-
+    
+            if (!preg_match('/^\+?[1-9][0-9]{7,14}$/', $telefono) || strlen($telefono) > 24) {
+                $this->vista = 'vAltaAlumno';
+                $clases = $this->objModelo->obtenerClases();
+                return [
+                    'error' => 'El teléfono no es válido',
+                    'clases' => $clases,
+                    'datosForm' => $_POST
+                ];
+            }
             $resultado = $this->objModelo->insertarAlumno($nombreAlumno, $apellidosAlumno, $nombrePadre, $apellidosPadre, $telefono, $idClase);
-
-            if($resultado) {
-                header('Location: index.php?c=ControlAsistencia&m=gestionar');
+            if ($resultado) {
+                header('Location: index.php?c=ControlAsistencia&m=gestionar&mens=b');
                 exit();
             } else {
                 $this->vista = 'vAltaAlumno';
-                return ['error' => 'Error al insertar el alumno'];
+                $clases = $this->objModelo->obtenerClases();
+                return [
+                    'error' => 'Error al insertar el alumno',
+                    'clases' => $clases,
+                    'datosForm' => $_POST
+                ];
             }
         }
     }

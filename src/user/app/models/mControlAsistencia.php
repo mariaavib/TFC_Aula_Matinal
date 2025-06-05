@@ -27,7 +27,7 @@
             if($diaSemana >= 6){
                 return false;
             }
-            //Verificar si es día no lectivo
+            
             $sql = "SELECT COUNT(*) as total FROM dias_no_lectivos WHERE fecha = ?";
             $stmt = $this->conexion->prepare($sql);
   
@@ -45,13 +45,10 @@
          * @return array Un array con los datos de los alumnos inscritos.
          */
         public function listarAlumnos(){
-            if (!$this->esDiaLectivo(date('Y-m-d'))){
-                return [];
-            }
-            $sql = "SELECT alumno.idAlumno, alumno.nombreAlumno  
+            $sql = "SELECT alumno.idAlumno,alumno.apellidosAlumno,alumno.nombreAlumno 
                     FROM alumno 
                     INNER JOIN inscripciones ON alumno.idInscripcion = inscripciones.idInscripcion 
-                    ORDER BY alumno.nombreAlumno";
+                    ORDER BY alumno.apellidosAlumno";
             $resultado = $this->conexion->query($sql);
             
             $alumnos = [];
@@ -75,17 +72,23 @@
             $fecha = date('Y-m-d');
             
             if($asiste) {
-                $sql = "INSERT INTO asistencia (fecha, pagado, idAlumno) VALUES (?, 0, ?)";
+                $sql = "INSERT INTO asistencia (fecha, reciboEmitido, idAlumno) VALUES (?, 0, ?)";
             } else {
                 $sql = "DELETE FROM asistencia WHERE fecha = ? AND idAlumno = ?";
             }
             $stmt = $this->conexion->prepare($sql);
+            
+            if(!$stmt){
+                die("Error en prepare(): " . $this->conexion->error);
+            }
+            
             $stmt->bind_param('si', $fecha, $idAlumno);
             $resultado = $stmt->execute();
             $stmt->close();
             
             return $resultado;
         }
+        
         /**
          * Obtiene la lista de alumnos que asistieron hoy.
          * 
@@ -134,7 +137,7 @@
          */
         public function modificarAsistencia($idAlumno, $fecha, $asiste){
             if($asiste){
-                $sql = "INSERT INTO asistencia (fecha, pagado, idAlumno) VALUES (?, 0, ?)";
+                $sql = "INSERT INTO asistencia (fecha, reciboEmitido, idAlumno) VALUES (?, 0, ?)";
             } else {
                 $sql = "DELETE FROM asistencia WHERE fecha = ? AND idAlumno = ?";
             }
@@ -177,7 +180,6 @@
                 return $resultado;
             }
         
-            // Verificar si es día no lectivo en la base de datos
             $sql = "SELECT motivo FROM dias_no_lectivos WHERE fecha = ?";
             $stmt = $this->conexion->prepare($sql);
         
@@ -198,6 +200,5 @@
             $stmt->close();
             return $resultado;
         }
-        
     }
 ?>

@@ -26,13 +26,22 @@
              */
             public function gestionar(){
                 $this->vista = 'vControlAsistencia';    
-                $datos ['alumnos'] = $this->objModelo->listarAlumnos();
-                $datos ['asistencias'] = $this->objModelo->asistenciaHoy();
-                $datos ['fecha'] = date('d/m/Y');
-                $datos ['esDiaLectivo'] = $this->objModelo->esDiaLectivo(date('Y-m-d'));
+                $alumnos = $this->objModelo->listarAlumnos();
+                $asistencias = $this->objModelo->asistenciaHoy();
+                $fecha = date('d/m/Y');
+                $esDiaLectivo = $this->objModelo->esDiaLectivo(date('Y-m-d'));
+            
+                $datos = [
+                    'alumnos' => $alumnos,
+                    'asistencias' => $asistencias,
+                    'fecha' => $fecha,
+                    'esDiaLectivo' => $esDiaLectivo,
+                    'sinAlumnos' => empty($alumnos) 
+                ];
 
                 return $datos;
             }
+            
             /**
              * Registra la asistencia de un alumno
              *
@@ -85,9 +94,14 @@
                 if (isset($_POST['fecha']) && !empty($_POST['fecha'])) {
                     $fecha = $_POST['fecha'];
             
-                    //Convertir la fecha al formato deseado (DD DE MES YYYY)
-                    $fechaFormateada = date('d \d\e F Y', strtotime($fecha));
-                    $fechaFormateada = mb_strtoupper($fechaFormateada);
+                    $meses = [
+                        '01' => 'enero','02' => 'febrero','03' => 'marzo','04' => 'abril','05' => 'mayo','06' => 'junio','07' => 'julio',
+                        '08' => 'agosto','09' => 'septiembre','10' => 'octubre','11' => 'noviembre','12' => 'diciembre',
+                    ];
+
+                    list($anio, $mes, $dia) = explode('-', $fecha);
+                    $fechaFormateada = $dia.' de '.$meses[$mes].' de '.$anio;
+
             
                     $alumnos = $this->objModelo->listarAlumnos();
                     $asistencias = $this->objModelo->asistenciaFecha($fecha);
@@ -110,13 +124,18 @@
             public function modificarAsistencia(){
                 header('Content-Type: application/json');
                 
-                $idAlumno = $_POST['idAlumno'] ?? null;
-                $fecha = $_POST['fecha'] ?? null;
-                $asiste = $_POST['asiste'] ?? null;
-            
-                // Debug
-                error_log("Datos recibidos - ID: $idAlumno, Fecha: $fecha, Asiste: $asiste");
-            
+                if (isset($_POST['idAlumno'])) {
+                    $idAlumno = $_POST['idAlumno'];
+                }
+
+                if (isset($_POST['fecha'])) {
+                    $fecha = $_POST['fecha'];
+                }
+
+                if (isset($_POST['asiste'])) {
+                    $asiste = $_POST['asiste'];
+                }
+
                 if ($idAlumno === null || $fecha === null || $asiste === null) {
                     echo json_encode(['success' => false, 'error' => 'Datos incompletos']);
                     exit;

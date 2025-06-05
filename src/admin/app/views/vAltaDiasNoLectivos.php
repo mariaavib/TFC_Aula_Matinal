@@ -13,10 +13,15 @@
                     ALTA DÍA NO LECTIVO
                     <hr>
                 </h4>
-                <div class="alert alert-danger" style="display: none;"></div>
+                <div class="alert alert-danger alert-dismissible fade show" style="display: none;" role="alert">
+                    <span id="mensaje-error"></span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
                 <?php 
                     if (isset($datos['error'])) {
-                        echo '<div class="alert alert-danger text-center">'.$datos['error'].'</div>';
+                        echo '<div class="alert alert-danger alert-dismissible fade show text-center" role="alert">'. $datos['error'] .
+                                '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>';
                     }
                 ?>
                 <form class="mt-4" method="POST" action="../admin/index.php?c=DiasNoLectivos&m=insertar">
@@ -29,8 +34,8 @@
                         <input type="text" class="form-control bg-light" id="motivo" name="motivo" value="<?php echo $datos['motivo']; ?>">
                     </div>
                     <div class="text-center mt-5">
-                        <a href="../admin/index.php?c=DiasNoLectivos&m=listar" class="btn form-button me-2">CANCELAR</a>
                         <button type="submit" class="btn form-button">GUARDAR</button>
+                        <a href="../admin/index.php?c=DiasNoLectivos&m=listar" class="btn form-button me-2">CANCELAR</a>
                     </div>
                 </form> 
             </div>

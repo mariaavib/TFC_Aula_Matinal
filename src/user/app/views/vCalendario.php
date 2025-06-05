@@ -10,48 +10,15 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Monitor - Días No Lectivos</title>
     <link rel="icon" href="assets/img/favicon-img.png" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link href="assets/css/style.css" rel="stylesheet">
-    <!-- FullCalendar Bundle -->
+    <!-- FullCalendar Bundle libreria para mostrar el calendario-->
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.js'></script>
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales/es.js'></script>
     <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.css' rel='stylesheet'>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark mb-4">
-        <div class="container-fluid">
-            <div class="d-flex align-items-center">
-                <img src="assets/img/logoEscuela.png" alt="Logo Escuela" class="navbar-logo">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.php?c=ControlAsistencia&m=gestionar">CONTROL ASISTENCIA</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.php?c=Alumnos&m=alta">ALTA ALUMNO</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.php?c=ControlAsistencia&m=modificar">MODIFICAR ASISTENCIA</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.php?c=Alumnos&m=consultar">CONSULTAR ALUMNOS</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="index.php?c=DiasNoLectivos&m=verCalendario">DIAS NO LECTIVOS</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <?php require_once('layouts/headerUser.php'); ?>
     <div class="container mt-4">
         <div class="row justify-content-center mb-4">
             <div class="col-auto">
@@ -62,7 +29,25 @@
         </div>
         <div id='calendar'></div>
     </div>
-    <script src="js/diasNoLectivos.js"></script>
+    <!-- Modal para mostrar detalles del día no lectivo -->
+    <div class="modal fade" id="detalleDiaModal" tabindex="-1" aria-labelledby="detalleDiaModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header modal-header-custom text-white">
+                    <h5 class="modal-title" id="detalleDiaModalLabel">Detalle Día No Lectivo</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="detalleMotivo"></p>
+                    <p><strong>Fecha:</strong> <span id="detalleFecha"></span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/views/diasNoLectivos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

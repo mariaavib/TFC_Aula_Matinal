@@ -1,120 +1,78 @@
-<?php
-    /**
-     * Vista del panel de control de asistencia para dar de alta a un alumno
-     *
-     * Muestra un formulario para dar de alta a un nuevo alumno
-     * 
-     */
-?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Monitor - Control Asistencia</title>
-    <link rel="icon" href="assets/img/favicon-img.png" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link rel="icon" href="assets/img/favicon-img.png" type="image/x-icon" />
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark mb-4">
-            <div class="container-fluid">
-                <div class="d-flex align-items-center">
-                    <img src="assets/img/logoEscuela.png" alt="Logo Escuela" class="navbar-logo">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="index.php?c=ControlAsistencia&m=gestionar">CONTROL ASISTENCIA</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" href="index.php?c=Alumnos&m=alta">ALTA ALUMNO</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="index.php?c=ControlAsistencia&m=modificar">MODIFICAR ASISTENCIA</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="index.php?c=Alumnos&m=consultar">CONSULTAR ALUMNOS</a>
-                            </li>
-                            <li class="nav-item active">
-                                <a class="nav-link" href="index.php?c=DiasNoLectivos&m=verCalendario">DIAS NO LECTIVOS</a>
-                            </li>
-                        </ul>
+<?php require_once('layouts/headerUser.php'); ?>
+<div class="container mt-3">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h4 class="text-center mb-4 form-header" style="color: #006EA4;">
+                NUEVO ALUMNO
+                <hr style="color: #006EA4;"/>
+            </h4>
+            <?php
+                if (!empty($datos['error'])) {
+                    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">';
+                    echo $datos['error'];
+                    echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>';
+                    echo '</div>';
+                }
+            ?>
+            <div class="alert alert-danger d-none" role="alert"></div>
+            <form action="index.php?c=Alumnos&m=insertar" method="POST">
+                <div class="card mb-4">
+                    <div class="card-header text-white" style="background-color: #006EA4;">
+                        <h5 class="mb-0">DATOS DEL ALUMNO</h5>
+                    </div>
+                    <div class="card-body" style="background-color:  #bcd7e4;">
+                        <div class="mb-3">
+                            <label class="form-label" style="color:rgb(44, 100, 151);">NOMBRE DEL ALUMNO</label>
+                            <input type="text" name="nombreAlumno" class="form-control bg-light" value="<?php echo (isset($datos['datosForm']['nombreAlumno'])) ? $datos['datosForm']['nombreAlumno'] : '';?>" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" style="color:rgb(44, 100, 151)">APELLIDOS DEL ALUMNO</label>
+                            <input type="text" name="apellidosAlumno" class="form-control bg-light" value="<?php echo (isset($datos['datosForm']['apellidosAlumno'])) ? $datos['datosForm']['apellidosAlumno'] : '';?>" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" style="color:rgb(44, 100, 151)">NOMBRE PADRE/MADRE O TUTOR LEGAL</label>
+                            <input type="text" name="nombrePadre" class="form-control bg-light" value="<?php echo (isset($datos['datosForm']['nombrePadre'])) ? $datos['datosForm']['nombrePadre'] : '';?>" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" style="color:rgb(44, 100, 151)">APELLIDOS PADRE/MADRE O TUTOR LEGAL</label>
+                            <input type="text" name="apellidosPadre" class="form-control bg-light" value="<?php echo (isset($datos['datosForm']['apellidosPadre'])) ? $datos['datosForm']['apellidosPadre'] : '';?>" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" style="color:rgb(44, 100, 151)">TELÉFONO PADRE/MADRE O TUTOR LEGAL</label>
+                            <input type="text" name="telefono" class="form-control bg-light" value="<?php echo (isset($datos['datosForm']['telefono'])) ? $datos['datosForm']['telefono'] : ''; ?>" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" style="color:rgb(44, 100, 151)">CLASE</label>
+                            <select name="idClase" class="form-control bg-light">
+                                <option value="" disabled <?php echo (!isset($datos['datosForm']['idClase'])) ? 'selected' : ''; ?>>Seleccione una clase</option>
+                                <?php
+                                if (!empty($datos['clases'])) {
+                                    foreach ($datos['clases'] as $clase) {
+                                        $selected = (isset($datos['datosForm']['idClase']) && $datos['datosForm']['idClase'] == $clase['idClase']) ? 'selected' : '';
+                                        echo '<option value="' . $clase['idClase'] . '" ' . $selected . '>' . $clase['clase'] . '</option>';
+                                    }
+                                }
+                                ?>
+                            </select>
+                        </div>
                     </div>
                 </div>
-            </div>
-    </nav>
-    <div class="container mt-3"> 
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <h4 class="text-center mb-4 form-header">
-                    NUEVO ALUMNO
-                    <hr>
-                </h4>
-                <div class="alert alert-danger" style="display: none;"></div>
-                <?php 
-                    if (isset($datos['error'])) {
-                        echo '<div class="alert alert-danger">'.$datos['error'].'</div>';
-                    }
-                ?>
-                <form action="index.php?c=Alumnos&m=insertar" method="POST">
-                    <div class="card mb-4">
-                        <div class="card-header text-white" style="background-color: #006EA4;">
-                            <h5 class="mb-0">DATOS DEL ALUMNO</h5>
-                        </div>
-                        <div class="card-body" style="background-color:  #bcd7e4;">
-                            <div class="mb-3">
-                                <label class="form-label">NOMBRE Y APELLIDOS</label>
-                                <input type="text" name="nombreAlumno" class="form-control bg-light">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">TELÉFONO PADRE/MADRE O TUTOR LEGAL</label>
-                                <input type="text" name="telefono" class="form-control bg-light">
-                            </div>
-                                <label class="form-label">NOMBRE DEL ALUMNO</label>
-                                <input type="text" name="nombreAlumno" class="form-control bg-light">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">APELLIDOS DEL ALUMNO</label>
-                                <input type="text" name="apellidosAlumno" class="form-control bg-light">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">NOMBRE PADRE/MADRE O TUTOR LEGAL</label>
-                                <input type="text" name="nombrePadre" class="form-control bg-light">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">APELLIDOS PADRE/MADRE O TUTOR LEGAL</label>
-                                <input type="text" name="apellidosPadre" class="form-control bg-light">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">TELÉFONO PADRE/MADRE O TUTOR LEGAL</label>
-                                <input type="text" name="telefono" class="form-control bg-light">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">CLASE</label>
-                                <select name="idClase" class="form-control bg-light">
-                                    <option value="" disabled selected>Seleccione una clase</option>
-                                    <?php
-                                        foreach ($datos['clases'] as $clase) {
-                                            echo '<option value="'.$clase['idClase'].'">'.$clase['clase'].'</option>';
-                                        }
-                                    ?>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-center mt-4 mb-4">
-                        <a href="index.php?c=ControlASistencia&m=gestionar" class="btn me-2" style="background-color: #006EA4; color: white;">CANCELAR</a>
-                        <button type="submit" class="btn" style="background-color: #006EA4; color: white;">GUARDAR</button>
-                    </div>
-                </form>
-            </div>
+                <div class="text-center mt-4 mb-4">
+                    <button type="submit" class="btn" style="background-color: #006EA4; color: white;">GUARDAR</button>
+                    <a href="index.php?c=ControlAsistencia&m=gestionar" class="btn me-2" style="background-color: #006EA4; color: white;">CANCELAR</a>
+                </div>
+            </form>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/altaAlumno.js"></script>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script type="module" src="js/views/vAltaAlumnos.js"></script>
 </body>
 </html>
