@@ -28,39 +28,6 @@
         
             return $dias;
         }
-        /***
-         * Metodo para actualizar el año de los dias no lectivos
-         */
-        public function actualizarAnioDiasNoLectivos(){
-            $añoActual = date('Y');
-            $sql = "SELECT idDia, fecha, motivo FROM dias_no_lectivos;";
-            $resultado = $this->conexion->query($sql);
-
-            if ($resultado && $resultado->num_rows > 0) {
-                while ($dia = $resultado->fetch_assoc()) {
-                    $fecha = new DateTime($dia['fecha']);
-                    $anio = $fecha->format('Y');
-                    $mesDia = $fecha->format('m-d');
-        
-                    // Si el año no es el actual
-                    if ($anio != $añoActual) {
-                        $nuevaFecha = "$añoActual-$mesDia";
-        
-                        // Verificamos si ya existe esa fecha en la base de datos
-                        $sqlExiste = "SELECT COUNT(*) as total FROM dias_no_lectivos WHERE fecha = '$nuevaFecha'";
-                        $resExiste = $this->conexion->query($sqlExiste);
-                        $filaExiste = $resExiste->fetch_assoc();
-        
-                        if ($filaExiste['total'] == 0) {
-                            // Actualizamos la fecha
-                            $id = $dia['idDia'];
-                            $sqlUpdate = "UPDATE dias_no_lectivos SET fecha = '$nuevaFecha' WHERE idDia = $id";
-                            $this->conexion->query($sqlUpdate);
-                        }
-                    }
-                }
-            }
-        }
         /**
          * Metodo que obtiene un dia no lectivo por su id
          *
@@ -148,5 +115,13 @@
             $stmt->close();
         
             return $fila['total'] > 0;
+        }
+
+        public function eliminarTodosDias(){
+            $sql = "DELETE FROM dias_no_lectivos";
+            $stmt = $this->conexion->prepare($sql);
+            $resultado = $stmt->execute();
+            $stmt->close();
+            return $resultado;
         }
     }

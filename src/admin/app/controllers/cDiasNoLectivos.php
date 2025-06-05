@@ -22,9 +22,6 @@
             public function listar() {
                 $this->vista = 'vDiasNoLectivos';
                 $hoy = date('m-d');
-                if ($hoy == '01-01') {
-                    $this->objModelo->actualizarAnioDiasNoLectivos();
-                }
                 $dias = $this->objModelo->listarDias();
                 $datos = [
                     'datos' => $dias,
@@ -196,7 +193,13 @@
                 }
             }
             
-            
-            
-        
+            public function eliminarTodos(){
+                $resultado = $this->objModelo->eliminarTodosDias();
+                if ($resultado) {
+                    header('Location: index.php?c=DiasNoLectivos&m=listar&status=ok&message=Se han borrado correctamente todos los días no lectivos.');
+                } else {
+                    header('Location: index.php?c=DiasNoLectivos&m=listar&status=error&message=Error al borrar los días no lectivos.');
+                }
+                exit; 
+            }
     }

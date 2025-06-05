@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function () {
     if (fechaRemesa) {
         const hoy = new Date();
         fechaRemesa.value = hoy.toISOString().split('T')[0];
-        fechaRemesa.max = hoy.toISOString().split('T')[0];
     }
 
     const form = document.getElementById('formGenerarRemesa');

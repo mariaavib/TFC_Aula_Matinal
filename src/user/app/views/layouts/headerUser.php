@@ -1,8 +1,7 @@
 <?php
-$controladorActual = isset($_GET['c']) ? $_GET['c'] : '';
-$metodoActual = isset($_GET['m']) ? $_GET['m'] : '';
+    $controladorActual = $_GET['c'];
+    $metodoActual = $_GET['m'];
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>

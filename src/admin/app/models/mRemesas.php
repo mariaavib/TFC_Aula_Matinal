@@ -81,7 +81,7 @@
         /**
          * Metodo privado que comprueba si existe una remesa para el mes y año dados
          */
-        private function existeRemesa($mes, $anio) {
+        public function existeRemesa($mes, $anio) {
             $sql = "SELECT COUNT(*) AS total FROM remesas WHERE mes = $mes AND anio = $anio";
             $res = mysqli_query($this->conexion, $sql);
             $row = mysqli_fetch_assoc($res);
