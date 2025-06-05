@@ -58,7 +58,8 @@
                         <input type="text" name="numDias" value="<?php echo isset($datos['numDias']) ? $datos['numDias'] : ''; ?>" class="form-control bg-light" id="diasMes" placeholder="Día a partir del cual, (este inclusive), se cobra la tarifa mensual">
                     </div>
                     <div class="text-center mt-5">
-                        <button type="submit" class="btn form-button">MODIFICAR</button>    
+                        <button type="submit" style="background-color: #006EA4; color: white;" class="btn form-button">MODIFICAR</button>
+                        <a href="index.php?c=PanelAdmin&m=inicio" class="btn me-2" style="background-color: #006EA4; color: white;">CANCELAR</a>    
                     </div>
                 </form>
             </div>

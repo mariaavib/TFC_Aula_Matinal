@@ -48,21 +48,21 @@
                                 </a>
                             </div>
                             <div class="col-md-6">
-                                <a href="index.php?c=Tarifas&m=tarifas" class="btn btn-lg w-100 py-3" style="background-color: var(--azul-principal); color: white;">
-                                    <i class="bi bi-cash-coin me-2"></i>
-                                    Modificar Tarifas
+                                <a href="index.php?c=GestionInscripciones&m=alumnosinscritos" class="btn btn-lg w-100 py-3" style="background-color: var(--azul-principal); color: white;">
+                                    <i class="bi bi-clipboard-check me-2"></i>
+                                    Inscripciones Completas
                                 </a>
                             </div>
                             <div class="col-md-6 mt-4">
-                                <a href="index.php?c=DiasNoLectivos&m=listar" class="btn btn-lg w-100 py-3" style="background-color: var(--azul-principal); color: white;">
-                                    <i class="bi bi-calendar-x me-2"></i>
-                                    Días No Lectivos
+                                <a href="index.php?c=GestionInscripciones&m=alta" class="btn btn-lg w-100 py-3" style="background-color: var(--azul-principal); color: white;">
+                                    <i class="bi bi-person-plus me-2"></i>
+                                    Añadir Alumno
                                 </a>
                             </div>
                             <div class="col-md-6 mt-4">
-                                <a href="index.php?c=FechaCurso&m=fechaCurso" class="btn btn-lg w-100 py-3" style="background-color: var(--azul-principal); color: white;">
+                                <a href="index.php?c=Remesas&m=datosMensuales" class="btn btn-lg w-100 py-3" style="background-color: var(--azul-principal); color: white;">
                                     <i class="bi bi-calendar-date me-2"></i>
-                                    Fecha del Curso
+                                    Generar Remesas
                                 </a>
                             </div>
                         </div>
