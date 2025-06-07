@@ -54,7 +54,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">TELÉFONO</label>
-                                <input type="number" name="telefono" value="<?php echo isset($datos['datos']['telefono']) ? htmlspecialchars($datos['datos']['telefono']) : ''; ?>" class="form-control bg-light" placeholder="Teléfono del tutor">
+                                <input type="text" name="telefono" value="<?php echo isset($datos['datos']['telefono']) ? htmlspecialchars($datos['datos']['telefono']) : ''; ?>" class="form-control bg-light" placeholder="Teléfono del tutor">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">CORREO</label>
@@ -110,5 +110,6 @@
                     </div>
                 </form>                
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
+                <script src="js/views/vAltaInscripcion.js"></script>
+            </body>
 </html>

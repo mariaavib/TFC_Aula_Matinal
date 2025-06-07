@@ -171,7 +171,8 @@ class MGestionInscripciones{
                 FROM alumno a
                 INNER JOIN clases c ON a.idClase = c.idClase
                 INNER JOIN inscripciones i ON a.idInscripcion = i.idInscripcion
-                WHERE i.completada = 1;";
+                WHERE i.completada = 1
+                ORDER BY a.nombreAlumno ASC;";
         $resultado = $this->conexion->query($sql);
 
         //Si no hay alumnos inscritos, devolver un array con el mensaje de error
@@ -236,7 +237,8 @@ class MGestionInscripciones{
                     i.idInscripcion
                 FROM alumno a
                 INNER JOIN inscripciones i ON a.idInscripcion = i.idInscripcion
-                WHERE i.completada = 0;";
+                WHERE i.completada = 0
+                ORDER BY a.nombreAlumno ASC;";
         $resultado = $this->conexion->query($sql);
 
         //Si no hay inscripciones incompletas, devolver un array con el mensaje de error
