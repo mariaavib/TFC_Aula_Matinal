@@ -1,3 +1,7 @@
+/**
+ * JavaScript para manejar la inserción de tarifas
+ * y validar los campos de tarifas.
+ */
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.querySelector('form[action*="insertarTarifas"]');
     if (!form) return;

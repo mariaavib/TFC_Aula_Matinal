@@ -1,3 +1,7 @@
+/**
+ * JavaScript para manejar la inserción de fechas de curso
+ * y validar los campos de fecha.
+ */
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.querySelector('form[action*="insertarFechaCurso"]');
     if (!form) return;

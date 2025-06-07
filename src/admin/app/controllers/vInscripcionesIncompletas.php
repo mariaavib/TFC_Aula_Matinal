@@ -52,14 +52,11 @@
                 </thead>
                 <tbody>
                 <?php
-                    
-                    if(isset($datos['datos']['noincompletas'])){
-                        
-                        echo "<tr><td colspan='3'><p class='text-danger fw-bold'>{$datos['datos']['noincompletas']}</p></td></tr>";
+                    if(isset($datos['noincompletas'])){
+                        echo "<tr><td colspan='3'><p class='text-danger fw-bold'>{$datos['noincompletas']}</p></td></tr>";
                     }
 
-                    //$datos['datos']
-                    if (isset($datos['0']['idAlumno']) && !empty($datos['0']['idAlumno'])) {
+                    if (isset($datos['datos'])){
                         foreach($datos['datos'] as $dato){
                         echo '<tr class="align-middle">';
                         echo "<td>{$dato['nombreAlumno']}</td>";

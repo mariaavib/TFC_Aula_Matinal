@@ -374,11 +374,11 @@ class CGestionInscripciones{
         $clase = $_POST['idClase'] ?? '';
 
         //Valida los campos
-        $this->validarRequerido($nombre_tutor, 'Nombre del tutor', $errores);
-        $this->validarRequerido($apellidos_tutor, 'Apellidos del tutor', $errores);
+        $this->validarRequerido($nombre_tutor, 'Nombre del tutor', $errores)&& $this->validarSoloLetras($nombre_tutor, 'Nombre del tutor', $errores);
+        $this->validarRequerido($apellidos_tutor, 'Apellidos del tutor', $errores)&& $this->validarSoloLetras($apellidos_tutor, 'Apellidos del tutor', $errores);
         $this->validarRequerido($telefono, 'Teléfono', $errores) && $this->validarTelefono($telefono, $errores);
-        $this->validarRequerido($nombre_alumno, 'Nombre del alumno', $errores);
-        $this->validarRequerido($apellidos_alumno, 'Apellidos del alumno', $errores);
+        $this->validarRequerido($nombre_alumno, 'Nombre del alumno', $errores)&& $this->validarSoloLetras($nombre_alumno, 'Nombre del alumno', $errores);
+        $this->validarRequerido($apellidos_alumno, 'Apellidos del alumno', $errores)&& $this->validarSoloLetras($apellidos_alumno, 'Apellidos del alumno', $errores);
         $this->validarRequerido($clase, 'Clase', $errores);
 
         //Si se rellena el DNI, validarlo
@@ -420,8 +420,8 @@ class CGestionInscripciones{
         $fechamandato = $_POST['fechaMandato'] ?? '';
 
         // Validar datos del tutor
-        $this->validarRequerido($nombre_tutor, 'Nombre del tutor', $errores);
-        $this->validarRequerido($apellidos_tutor, 'Apellidos del tutor', $errores);
+        $this->validarRequerido($nombre_tutor, 'Nombre del tutor', $errores)&& $this->validarSoloLetras($nombre_tutor, 'Nombre del tutor', $errores);
+        $this->validarRequerido($apellidos_tutor, 'Apellidos del tutor', $errores)&& $this->validarSoloLetras($apellidos_tutor, 'Apellidos del tutor', $errores);
         $this->validarRequerido($dni, 'DNI', $errores) && $this->validarDocumentoIdentidad($dni, $errores);
         $this->validarRequerido($telefono, 'Teléfono', $errores) && $this->validarTelefono($telefono, $errores);
         $this->validarRequerido($correo, 'Correo', $errores) && $this->validarCorreo($correo, $errores);
@@ -435,8 +435,8 @@ class CGestionInscripciones{
         $clase = $_POST['idClase'] ?? '';
 
         // Validar datos del alumno
-        $this->validarRequerido($nombre_alumno, 'Nombre del alumno', $errores);
-        $this->validarRequerido($apellidos_alumno, 'Apellidos del alumno', $errores);
+        $this->validarRequerido($nombre_alumno, 'Nombre del alumno', $errores)&& $this->validarSoloLetras($nombre_alumno, 'Nombre del alumno', $errores);
+        $this->validarRequerido($apellidos_alumno, 'Apellidos del alumno', $errores)&& $this->validarSoloLetras($apellidos_alumno, 'Apellidos del alumno', $errores);
         $this->validarRequerido($clase, 'Clase', $errores);
 
         return $errores;
@@ -459,16 +459,33 @@ class CGestionInscripciones{
     }
 
     /**
+     * Función que valida si un campo contiene solo letras y espacios.
+     * @param mixed $campo
+     * @param mixed $nombreCampo
+     * @param mixed $errores
+     * @return bool
+     */
+    private function validarSoloLetras($campo, $nombreCampo, &$errores) {
+        if (!preg_match('/^[\p{L}\s\-]+$/u', $campo)) {
+            $errores[] = "El campo '{$nombreCampo}' solo puede contener letras y espacios.";
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * Función que valida si un campo es un DNI o NIE válido.
      * @param mixed $documento
      * @param mixed $errores
      * @return bool
      */
     private function validarDocumentoIdentidad($documento, &$errores) {
+        $documento = trim($documento);
+        
         // Valida tanto DNI como NIE
         $dniNieRegex = '/^([0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]|[XYZ][0-9]{7}[TRWAGMYFPDXBNJZSQVHLCKE])$/i';
         // Valida pasaporte
-        $pasaporteRegex = '/^[A-Z0-9]{6,20}$/i';
+        $pasaporteRegex = '/^(?=.*[A-Z])[A-Z0-9]{6,20}$/i';
 
         //preg_match() realiza una búsqueda de una expresión regular en una cadena. 
         //Devuelve true si la expresión regular ( pattern ) se encuentra en la cadena ( subject ), 
@@ -506,7 +523,7 @@ class CGestionInscripciones{
      */
     private function validarTelefono($telefono, &$errores) {
         if (!preg_match('/^\+?[1-9][0-9]{7,14}$/', $telefono) || strlen($telefono) > 24) {
-            $errores[] = "El teléfono no es válido (puede contener '+' al inicio, de 1 a 3 dígitos del código del país, 4 a 14 dígitos de número nacional, SIN espacios).";
+            $errores[] = "El teléfono no es válido (puede contener '+' al inicio, de 1 a 3 dígitos del código del país, 5 a 12 dígitos de número nacional, SIN espacios).";
             return false;   
         }
         return true;
