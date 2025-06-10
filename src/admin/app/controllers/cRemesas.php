@@ -43,11 +43,10 @@ class CRemesas {
      */
     public function generarRemesa() {
         $this->vista = 'vDatosMensuales';
-
+    
         if (isset($_POST['fechaRemesa']) && !empty($_POST['fechaRemesa'])) {
             $fechaRemesa = $_POST['fechaRemesa'];
-            $resultado = $this->objModelo->generarNuevaRemesa($fechaRemesa);
-
+    
             $fecha = DateTime::createFromFormat('Y-m-d', $fechaRemesa);
             if (!$fecha) {
                 $fecha = new DateTime();
@@ -55,6 +54,8 @@ class CRemesas {
             $fecha->modify('first day of last month'); 
             $mes = (int)$fecha->format('m');
             $anio = (int)$fecha->format('Y');
+    
+            // PRIMERO comprobamos si ya existe la remesa
             if ($this->objModelo->existeRemesa($mes, $anio)) {
                 $alumnos = $this->objModelo->obtenerDatosMensuales($mes, $anio);
                 return [
@@ -65,8 +66,11 @@ class CRemesas {
                     'alumnos' => $alumnos
                 ];
             }
-
+    
+            // SOLO SI NO EXISTE, la generamos
+            $resultado = $this->objModelo->generarNuevaRemesa($fechaRemesa);
             $alumnos = $this->objModelo->obtenerDatosMensuales($mes, $anio);
+    
             /////////////////////////////////////////////////////////////////
             if(!$this->cogerDatosExcelRemesas($mes, $anio)){
                 return array_merge($resultado, [
@@ -86,7 +90,7 @@ class CRemesas {
                 'alumnos' => $alumnos
             ]);
         }
-
+    
         $hoy = new DateTime();
         return [
             'status' => 'error',
@@ -96,6 +100,7 @@ class CRemesas {
             'alumnos' => []
         ];
     }
+    
     
     /**
      * Metodo que muestra la vista de los datos mensuales y los alumnos que pertenecen a cada uno de ellos
